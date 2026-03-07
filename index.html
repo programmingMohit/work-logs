@@ -109,6 +109,17 @@
   .trend-wrap { margin-bottom: 32px; }
   .trend-chart { width: 100%; }
   .trend-dot { cursor: crosshair; }
+  .trend-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .trend-header .section-title { margin-bottom: 0; }
+  .toggle-group { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .toggle-btn {
+    background: none; border: none; color: var(--muted);
+    font-size: 11px; padding: 4px 10px; cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+  }
+  .toggle-btn:not(:last-child) { border-right: 1px solid var(--border); }
+  .toggle-btn:hover { background: var(--border); color: var(--text); }
+  .toggle-btn.active { background: var(--border); color: var(--text); font-weight: 600; }
 
   .repos-wrap { margin-bottom: 32px; }
   .repo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
@@ -238,7 +249,13 @@
       </div>
     </div>
     <div class="trend-wrap">
-      <div class="section-title">Commits per Week</div>
+      <div class="trend-header">
+        <div class="section-title">Weekly Trend</div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="btn-commits" onclick="setTrendMetric('commits')">Commits</button>
+          <button class="toggle-btn" id="btn-lines" onclick="setTrendMetric('lines')">Lines</button>
+        </div>
+      </div>
       <div id="trend-chart" class="trend-chart"></div>
     </div>
     <div class="repos-wrap">
@@ -291,7 +308,7 @@ function render() {
   ].map(s => `<div class="stat"><div class="val">${s.val}</div><div class="lbl">${s.lbl}</div></div>`).join('');
 
   renderHeatmap(days);
-  renderTrendChart(days);
+  renderTrendChart(days, 'commits');
   renderRepoBars(days);
   renderRecentLogs(days);
 }
@@ -356,8 +373,17 @@ function renderHeatmap(days) {
   });
 }
 
-function renderTrendChart(days) {
-  // Group commits by Monday-anchored week
+let _trendDays = null;
+
+function setTrendMetric(metric) {
+  document.getElementById('btn-commits').classList.toggle('active', metric === 'commits');
+  document.getElementById('btn-lines').classList.toggle('active', metric === 'lines');
+  if (_trendDays) renderTrendChart(_trendDays, metric);
+}
+
+function renderTrendChart(days, metric) {
+  _trendDays = days;
+
   function weekKey(dateStr) {
     const d = new Date(dateStr);
     const monday = new Date(d);
@@ -365,31 +391,27 @@ function renderTrendChart(days) {
     return monday.toLocaleDateString('en-CA');
   }
 
-  const weeks = new Map();
-  days.forEach(d => { weeks.set(weekKey(d.date), (weeks.get(weekKey(d.date)) || 0) + d.commits); });
-  const entries = [...weeks.entries()].sort(([a], [b]) => a.localeCompare(b));
+  // Group by week
+  const weekMap = new Map();
+  days.forEach(d => {
+    const wk = weekKey(d.date);
+    if (!weekMap.has(wk)) weekMap.set(wk, { commits: 0, added: 0, deleted: 0 });
+    const w = weekMap.get(wk);
+    w.commits += d.commits;
+    w.added   += d.added   || 0;
+    w.deleted += d.deleted || 0;
+  });
+  const entries = [...weekMap.entries()].sort(([a], [b]) => a.localeCompare(b));
   if (entries.length < 2) return;
 
-  const values  = entries.map(([, v]) => v);
-  const maxVal  = Math.max(...values) || 1;
   const W = 800, H = 100;
-  const PAD = { top: 12, right: 12, bottom: 22, left: 28 };
+  const PAD = { top: 12, right: 12, bottom: 22, left: 36 };
   const cW = W - PAD.left - PAD.right;
   const cH = H - PAD.top  - PAD.bottom;
 
   const px = i => PAD.left + (i / (entries.length - 1)) * cW;
-  const py = v => PAD.top  + cH - (v / maxVal) * cH;
 
-  // Grid lines at 25/50/75/100%
-  const grid = [0.25, 0.5, 0.75, 1].map(f => {
-    const yv = PAD.top + cH - f * cH;
-    const label = Math.round(f * maxVal);
-    return `
-      <line x1="${PAD.left}" y1="${yv}" x2="${W - PAD.right}" y2="${yv}" stroke="#30363d" stroke-width="0.5"/>
-      <text x="${PAD.left - 4}" y="${yv + 3.5}" fill="#8b949e" font-size="8" text-anchor="end">${label}</text>`;
-  }).join('');
-
-  // X-axis month labels — one per ~8 weeks
+  // X-axis labels
   const interval = Math.max(1, Math.ceil(entries.length / 10));
   const xLabels = entries.map(([wk], i) => {
     if (i % interval !== 0) return '';
@@ -398,39 +420,81 @@ function renderTrendChart(days) {
     return `<text x="${px(i)}" y="${H - 4}" fill="#8b949e" font-size="9" text-anchor="middle">${lbl}</text>`;
   }).join('');
 
-  const linePoints = values.map((v, i) => `${px(i)},${py(v)}`).join(' ');
-  const areaPoints = `${px(0)},${PAD.top + cH} ${linePoints} ${px(entries.length - 1)},${PAD.top + cH}`;
+  let svgContent = '';
 
-  // Hover dots (transparent, activate tooltip)
-  const dots = entries.map(([wk, v], i) =>
-    `<circle class="trend-dot" cx="${px(i)}" cy="${py(v)}" r="5" fill="transparent"
-      data-week="${wk}" data-commits="${v}"/>`
-  ).join('');
+  if (metric === 'commits') {
+    const values  = entries.map(([, w]) => w.commits);
+    const maxVal  = Math.max(...values) || 1;
+    const py = v => PAD.top + cH - (v / maxVal) * cH;
 
-  // Visible dots only for peaks (top 15%)
-  const threshold = maxVal * 0.85;
-  const peakDots = entries.map(([, v], i) =>
-    v >= threshold ? `<circle cx="${px(i)}" cy="${py(v)}" r="2.5" fill="var(--green-4)" pointer-events="none"/>` : ''
-  ).join('');
+    const grid = [0.5, 1].map(f => {
+      const yv = PAD.top + cH - f * cH;
+      return `<line x1="${PAD.left}" y1="${yv}" x2="${W - PAD.right}" y2="${yv}" stroke="#30363d" stroke-width="0.5"/>
+        <text x="${PAD.left - 4}" y="${yv + 3.5}" fill="#8b949e" font-size="8" text-anchor="end">${Math.round(f * maxVal)}</text>`;
+    }).join('');
 
-  const svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" id="trend-svg">
-    <defs>
-      <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#26a641" stop-opacity="0.35"/>
-        <stop offset="100%" stop-color="#26a641" stop-opacity="0"/>
-      </linearGradient>
-    </defs>
-    ${grid}
-    <polygon points="${areaPoints}" fill="url(#trendGrad)"/>
-    <polyline points="${linePoints}" fill="none" stroke="#26a641" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
-    ${peakDots}
-    ${dots}
-    ${xLabels}
-  </svg>`;
+    const linePoints = values.map((v, i) => `${px(i)},${py(v)}`).join(' ');
+    const areaPoints = `${px(0)},${PAD.top + cH} ${linePoints} ${px(entries.length - 1)},${PAD.top + cH}`;
+    const threshold  = maxVal * 0.85;
+    const peakDots   = entries.map(([, w], i) =>
+      w.commits >= threshold ? `<circle cx="${px(i)}" cy="${py(w.commits)}" r="2.5" fill="var(--green-4)" pointer-events="none"/>` : ''
+    ).join('');
+    const dots = entries.map(([wk, w], i) =>
+      `<circle class="trend-dot" cx="${px(i)}" cy="${py(w.commits)}" r="5" fill="transparent" data-week="${wk}" data-commits="${w.commits}"/>`
+    ).join('');
 
-  document.getElementById('trend-chart').innerHTML = svg;
+    svgContent = `
+      <defs>
+        <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#26a641" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#26a641" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      ${grid}
+      <polygon points="${areaPoints}" fill="url(#trendGrad)"/>
+      <polyline points="${linePoints}" fill="none" stroke="#26a641" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${peakDots}${dots}${xLabels}`;
 
-  // Tooltip
+  } else {
+    const addedVals   = entries.map(([, w]) => w.added);
+    const deletedVals = entries.map(([, w]) => w.deleted);
+    const maxVal      = Math.max(...addedVals, ...deletedVals) || 1;
+    const py = v => PAD.top + cH - (v / maxVal) * cH;
+
+    const grid = [0.5, 1].map(f => {
+      const yv  = PAD.top + cH - f * cH;
+      const lbl = f * maxVal >= 1000 ? (f * maxVal / 1000).toFixed(1) + 'k' : Math.round(f * maxVal);
+      return `<line x1="${PAD.left}" y1="${yv}" x2="${W - PAD.right}" y2="${yv}" stroke="#30363d" stroke-width="0.5"/>
+        <text x="${PAD.left - 4}" y="${yv + 3.5}" fill="#8b949e" font-size="8" text-anchor="end">${lbl}</text>`;
+    }).join('');
+
+    const addedPoints   = addedVals.map((v, i)   => `${px(i)},${py(v)}`).join(' ');
+    const deletedPoints = deletedVals.map((v, i)  => `${px(i)},${py(v)}`).join(' ');
+    const areaPoints    = `${px(0)},${PAD.top + cH} ${addedPoints} ${px(entries.length - 1)},${PAD.top + cH}`;
+
+    // Transparent hover dots carrying both values
+    const dots = entries.map(([wk, w], i) =>
+      `<circle class="trend-dot" cx="${px(i)}" cy="${py(w.added)}" r="5" fill="transparent"
+        data-week="${wk}" data-added="${w.added}" data-deleted="${w.deleted}"/>`
+    ).join('');
+
+    svgContent = `
+      <defs>
+        <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3fb950" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#3fb950" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      ${grid}
+      <polygon points="${areaPoints}" fill="url(#trendGrad)"/>
+      <polyline points="${addedPoints}"   fill="none" stroke="#3fb950" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <polyline points="${deletedPoints}" fill="none" stroke="#f85149" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3,2"/>
+      ${dots}${xLabels}`;
+  }
+
+  document.getElementById('trend-chart').innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" id="trend-svg">${svgContent}</svg>`;
+
   const tooltip = document.getElementById('tooltip');
   document.getElementById('trend-svg').addEventListener('mousemove', e => {
     const dot = e.target.closest('.trend-dot');
@@ -438,7 +502,9 @@ function renderTrendChart(days) {
     tooltip.style.display = 'block';
     tooltip.style.left = (e.clientX + 12) + 'px';
     tooltip.style.top  = (e.clientY - 28) + 'px';
-    tooltip.textContent = `w/c ${dot.dataset.week} · ${dot.dataset.commits} commits`;
+    tooltip.textContent = metric === 'commits'
+      ? `w/c ${dot.dataset.week} · ${dot.dataset.commits} commits`
+      : `w/c ${dot.dataset.week} · +${Number(dot.dataset.added).toLocaleString()} / -${Number(dot.dataset.deleted).toLocaleString()}`;
   });
   document.getElementById('trend-svg').addEventListener('mouseleave', () => {
     tooltip.style.display = 'none';
