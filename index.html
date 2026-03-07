@@ -42,6 +42,8 @@
   }
   header h1 { font-size: 16px; font-weight: 600; }
   header .sub { color: var(--muted); font-size: 13px; }
+  header .staleness { font-size: 11px; margin-left: auto; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--muted); }
+  header .staleness.stale { border-color: #f85149; color: #f85149; }
 
   .layout {
     display: grid;
@@ -109,8 +111,14 @@
   .trend-wrap { margin-bottom: 32px; }
   .trend-chart { width: 100%; }
   .trend-dot { cursor: crosshair; }
-  .trend-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .trend-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
   .trend-header .section-title { margin-bottom: 0; }
+  .trend-legend { display: none; align-items: center; gap: 12px; font-size: 11px; color: var(--muted); }
+  .trend-legend.visible { display: flex; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-line { width: 18px; height: 2px; border-radius: 1px; }
+  .legend-line.added { background: #3fb950; }
+  .legend-line.deleted { background: #f85149; border-top: 2px dashed #f85149; height: 0; }
   .toggle-group { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .toggle-btn {
     background: none; border: none; color: var(--muted);
@@ -228,6 +236,7 @@
   <svg width="20" height="20" viewBox="0 0 16 16" fill="#58a6ff"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8z"/></svg>
   <h1>Work Log</h1>
   <span class="sub" id="subtitle">Loading...</span>
+  <span class="staleness" id="staleness" style="display:none"></span>
 </header>
 
 <div class="layout">
@@ -251,6 +260,10 @@
     <div class="trend-wrap">
       <div class="trend-header">
         <div class="section-title">Weekly Trend</div>
+        <div class="trend-legend" id="trend-legend">
+          <div class="legend-item"><div class="legend-line added"></div> Added</div>
+          <div class="legend-item"><div class="legend-line deleted"></div> Deleted</div>
+        </div>
         <div class="toggle-group">
           <button class="toggle-btn active" id="btn-commits" onclick="setTrendMetric('commits')">Commits</button>
           <button class="toggle-btn" id="btn-lines" onclick="setTrendMetric('lines')">Lines</button>
@@ -299,6 +312,18 @@ function render() {
 
   document.getElementById('subtitle').textContent =
     `${days[0].date} → ${days[days.length - 1].date}`;
+
+  // Staleness indicator
+  if (data.updated) {
+    const daysSince = Math.floor((Date.now() - new Date(data.updated)) / 86400000);
+    const label = daysSince === 0 ? 'Updated today'
+      : daysSince === 1 ? 'Updated yesterday'
+      : `Updated ${daysSince} days ago`;
+    const el = document.getElementById('staleness');
+    el.textContent = label;
+    el.style.display = '';
+    if (daysSince >= 3) el.classList.add('stale');
+  }
 
   document.getElementById('stats-row').innerHTML = [
     { val: days.length,             lbl: 'Active Days' },
@@ -378,6 +403,7 @@ let _trendDays = null;
 function setTrendMetric(metric) {
   document.getElementById('btn-commits').classList.toggle('active', metric === 'commits');
   document.getElementById('btn-lines').classList.toggle('active', metric === 'lines');
+  document.getElementById('trend-legend').classList.toggle('visible', metric === 'lines');
   if (_trendDays) renderTrendChart(_trendDays, metric);
 }
 
