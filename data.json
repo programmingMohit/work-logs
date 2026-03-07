@@ -1,0 +1,4390 @@
+{
+  "updated": "2026-03-07T05:51:11.312Z",
+  "days": [
+    {
+      "date": "2023-12-27",
+      "commits": 1,
+      "added": 41,
+      "deleted": 0,
+      "firstCommit": "01:15 pm",
+      "lastCommit": "01:15 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 41,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-01-11",
+      "commits": 4,
+      "added": 809,
+      "deleted": 29,
+      "firstCommit": "12:46 pm",
+      "lastCommit": "07:05 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 809,
+          "deleted": 29
+        }
+      ]
+    },
+    {
+      "date": "2024-01-12",
+      "commits": 2,
+      "added": 217,
+      "deleted": 35,
+      "firstCommit": "01:48 am",
+      "lastCommit": "03:07 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 217,
+          "deleted": 35
+        }
+      ]
+    },
+    {
+      "date": "2024-01-14",
+      "commits": 4,
+      "added": 222,
+      "deleted": 175,
+      "firstCommit": "02:06 am",
+      "lastCommit": "10:56 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 222,
+          "deleted": 175
+        }
+      ]
+    },
+    {
+      "date": "2024-01-15",
+      "commits": 1,
+      "added": 6,
+      "deleted": 6,
+      "firstCommit": "11:34 am",
+      "lastCommit": "11:34 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 6,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2024-01-16",
+      "commits": 3,
+      "added": 12,
+      "deleted": 14,
+      "firstCommit": "12:08 am",
+      "lastCommit": "09:43 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 12,
+          "deleted": 14
+        }
+      ]
+    },
+    {
+      "date": "2024-01-17",
+      "commits": 6,
+      "added": 709,
+      "deleted": 225,
+      "firstCommit": "12:04 am",
+      "lastCommit": "05:02 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 6,
+          "added": 709,
+          "deleted": 225
+        }
+      ]
+    },
+    {
+      "date": "2024-01-18",
+      "commits": 6,
+      "added": 214,
+      "deleted": 193,
+      "firstCommit": "11:40 am",
+      "lastCommit": "07:36 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 6,
+          "added": 214,
+          "deleted": 193
+        }
+      ]
+    },
+    {
+      "date": "2024-01-19",
+      "commits": 8,
+      "added": 417,
+      "deleted": 93,
+      "firstCommit": "07:15 am",
+      "lastCommit": "10:33 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 8,
+          "added": 417,
+          "deleted": 93
+        }
+      ]
+    },
+    {
+      "date": "2024-01-20",
+      "commits": 1,
+      "added": 92,
+      "deleted": 46,
+      "firstCommit": "11:46 am",
+      "lastCommit": "11:46 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 92,
+          "deleted": 46
+        }
+      ]
+    },
+    {
+      "date": "2024-01-21",
+      "commits": 3,
+      "added": 162,
+      "deleted": 6,
+      "firstCommit": "01:12 pm",
+      "lastCommit": "10:45 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 162,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2024-01-22",
+      "commits": 1,
+      "added": 208,
+      "deleted": 9,
+      "firstCommit": "01:26 pm",
+      "lastCommit": "01:26 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 208,
+          "deleted": 9
+        }
+      ]
+    },
+    {
+      "date": "2024-01-23",
+      "commits": 5,
+      "added": 118,
+      "deleted": 27,
+      "firstCommit": "12:12 pm",
+      "lastCommit": "09:52 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 118,
+          "deleted": 27
+        }
+      ]
+    },
+    {
+      "date": "2024-01-24",
+      "commits": 5,
+      "added": 167,
+      "deleted": 54,
+      "firstCommit": "04:37 am",
+      "lastCommit": "11:23 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 167,
+          "deleted": 54
+        }
+      ]
+    },
+    {
+      "date": "2024-01-25",
+      "commits": 4,
+      "added": 75,
+      "deleted": 14,
+      "firstCommit": "10:17 am",
+      "lastCommit": "05:55 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 75,
+          "deleted": 14
+        }
+      ]
+    },
+    {
+      "date": "2024-01-26",
+      "commits": 2,
+      "added": 10,
+      "deleted": 6,
+      "firstCommit": "10:44 am",
+      "lastCommit": "11:14 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 10,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2024-01-28",
+      "commits": 6,
+      "added": 70,
+      "deleted": 51,
+      "firstCommit": "01:05 am",
+      "lastCommit": "06:08 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 6,
+          "added": 70,
+          "deleted": 51
+        }
+      ]
+    },
+    {
+      "date": "2024-01-30",
+      "commits": 3,
+      "added": 32,
+      "deleted": 18,
+      "firstCommit": "01:41 pm",
+      "lastCommit": "03:49 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 32,
+          "deleted": 18
+        }
+      ]
+    },
+    {
+      "date": "2024-02-01",
+      "commits": 1,
+      "added": 220,
+      "deleted": 0,
+      "firstCommit": "09:02 am",
+      "lastCommit": "09:02 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 220,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-02-04",
+      "commits": 1,
+      "added": 98,
+      "deleted": 19,
+      "firstCommit": "02:30 pm",
+      "lastCommit": "02:30 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 98,
+          "deleted": 19
+        }
+      ]
+    },
+    {
+      "date": "2024-02-05",
+      "commits": 5,
+      "added": 454,
+      "deleted": 32,
+      "firstCommit": "09:38 am",
+      "lastCommit": "07:46 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 454,
+          "deleted": 32
+        }
+      ]
+    },
+    {
+      "date": "2024-02-06",
+      "commits": 2,
+      "added": 353,
+      "deleted": 42,
+      "firstCommit": "12:23 pm",
+      "lastCommit": "02:59 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 353,
+          "deleted": 42
+        }
+      ]
+    },
+    {
+      "date": "2024-02-07",
+      "commits": 7,
+      "added": 245,
+      "deleted": 106,
+      "firstCommit": "12:32 am",
+      "lastCommit": "11:41 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 245,
+          "deleted": 106
+        }
+      ]
+    },
+    {
+      "date": "2024-02-08",
+      "commits": 2,
+      "added": 194,
+      "deleted": 38,
+      "firstCommit": "01:26 pm",
+      "lastCommit": "11:09 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 194,
+          "deleted": 38
+        }
+      ]
+    },
+    {
+      "date": "2024-02-09",
+      "commits": 5,
+      "added": 292,
+      "deleted": 71,
+      "firstCommit": "09:58 am",
+      "lastCommit": "08:48 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 292,
+          "deleted": 71
+        }
+      ]
+    },
+    {
+      "date": "2024-02-10",
+      "commits": 4,
+      "added": 496,
+      "deleted": 84,
+      "firstCommit": "12:26 am",
+      "lastCommit": "11:58 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 496,
+          "deleted": 84
+        }
+      ]
+    },
+    {
+      "date": "2024-02-11",
+      "commits": 1,
+      "added": 23,
+      "deleted": 0,
+      "firstCommit": "12:40 pm",
+      "lastCommit": "12:40 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 23,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-02-12",
+      "commits": 9,
+      "added": 50,
+      "deleted": 22,
+      "firstCommit": "08:19 am",
+      "lastCommit": "09:59 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 9,
+          "added": 50,
+          "deleted": 22
+        }
+      ]
+    },
+    {
+      "date": "2024-02-13",
+      "commits": 7,
+      "added": 45,
+      "deleted": 33,
+      "firstCommit": "11:28 am",
+      "lastCommit": "04:15 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 45,
+          "deleted": 33
+        }
+      ]
+    },
+    {
+      "date": "2024-02-14",
+      "commits": 4,
+      "added": 2214,
+      "deleted": 53,
+      "firstCommit": "09:42 am",
+      "lastCommit": "10:20 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 2214,
+          "deleted": 53
+        }
+      ]
+    },
+    {
+      "date": "2024-02-15",
+      "commits": 5,
+      "added": 227,
+      "deleted": 93,
+      "firstCommit": "12:47 pm",
+      "lastCommit": "10:45 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 227,
+          "deleted": 93
+        }
+      ]
+    },
+    {
+      "date": "2024-02-16",
+      "commits": 2,
+      "added": 1323,
+      "deleted": 312,
+      "firstCommit": "03:19 am",
+      "lastCommit": "08:21 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 1323,
+          "deleted": 312
+        }
+      ]
+    },
+    {
+      "date": "2024-02-17",
+      "commits": 6,
+      "added": 1133,
+      "deleted": 209,
+      "firstCommit": "10:50 am",
+      "lastCommit": "05:24 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 6,
+          "added": 1133,
+          "deleted": 209
+        }
+      ]
+    },
+    {
+      "date": "2024-02-18",
+      "commits": 7,
+      "added": 361,
+      "deleted": 46,
+      "firstCommit": "02:05 am",
+      "lastCommit": "09:51 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 361,
+          "deleted": 46
+        }
+      ]
+    },
+    {
+      "date": "2024-02-19",
+      "commits": 5,
+      "added": 264,
+      "deleted": 29,
+      "firstCommit": "12:52 am",
+      "lastCommit": "08:13 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 264,
+          "deleted": 29
+        }
+      ]
+    },
+    {
+      "date": "2024-02-20",
+      "commits": 7,
+      "added": 467,
+      "deleted": 1502,
+      "firstCommit": "06:40 am",
+      "lastCommit": "10:11 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 467,
+          "deleted": 1502
+        }
+      ]
+    },
+    {
+      "date": "2024-02-21",
+      "commits": 13,
+      "added": 79,
+      "deleted": 31,
+      "firstCommit": "07:58 am",
+      "lastCommit": "07:18 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 13,
+          "added": 79,
+          "deleted": 31
+        }
+      ]
+    },
+    {
+      "date": "2024-02-22",
+      "commits": 7,
+      "added": 76,
+      "deleted": 28,
+      "firstCommit": "05:43 am",
+      "lastCommit": "08:56 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 76,
+          "deleted": 28
+        }
+      ]
+    },
+    {
+      "date": "2024-02-23",
+      "commits": 1,
+      "added": 8,
+      "deleted": 21,
+      "firstCommit": "07:22 pm",
+      "lastCommit": "07:22 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 8,
+          "deleted": 21
+        }
+      ]
+    },
+    {
+      "date": "2024-02-24",
+      "commits": 2,
+      "added": 403,
+      "deleted": 190,
+      "firstCommit": "07:09 am",
+      "lastCommit": "09:44 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 403,
+          "deleted": 190
+        }
+      ]
+    },
+    {
+      "date": "2024-02-25",
+      "commits": 2,
+      "added": 458,
+      "deleted": 721,
+      "firstCommit": "12:50 am",
+      "lastCommit": "02:12 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 458,
+          "deleted": 721
+        }
+      ]
+    },
+    {
+      "date": "2024-02-26",
+      "commits": 4,
+      "added": 285,
+      "deleted": 221,
+      "firstCommit": "08:16 am",
+      "lastCommit": "12:14 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 285,
+          "deleted": 221
+        }
+      ]
+    },
+    {
+      "date": "2024-02-27",
+      "commits": 3,
+      "added": 187,
+      "deleted": 68,
+      "firstCommit": "01:14 pm",
+      "lastCommit": "07:31 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 187,
+          "deleted": 68
+        }
+      ]
+    },
+    {
+      "date": "2024-02-28",
+      "commits": 7,
+      "added": 98,
+      "deleted": 42,
+      "firstCommit": "11:30 am",
+      "lastCommit": "10:54 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 98,
+          "deleted": 42
+        }
+      ]
+    },
+    {
+      "date": "2024-02-29",
+      "commits": 3,
+      "added": 362,
+      "deleted": 230,
+      "firstCommit": "12:40 pm",
+      "lastCommit": "01:07 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 362,
+          "deleted": 230
+        }
+      ]
+    },
+    {
+      "date": "2024-03-05",
+      "commits": 1,
+      "added": 61,
+      "deleted": 15,
+      "firstCommit": "03:39 pm",
+      "lastCommit": "03:39 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 61,
+          "deleted": 15
+        }
+      ]
+    },
+    {
+      "date": "2024-03-06",
+      "commits": 9,
+      "added": 78,
+      "deleted": 48,
+      "firstCommit": "08:22 am",
+      "lastCommit": "09:17 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 9,
+          "added": 78,
+          "deleted": 48
+        }
+      ]
+    },
+    {
+      "date": "2024-03-07",
+      "commits": 1,
+      "added": 127,
+      "deleted": 131,
+      "firstCommit": "10:32 pm",
+      "lastCommit": "10:32 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 127,
+          "deleted": 131
+        }
+      ]
+    },
+    {
+      "date": "2024-03-08",
+      "commits": 7,
+      "added": 324,
+      "deleted": 128,
+      "firstCommit": "03:55 am",
+      "lastCommit": "10:59 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 324,
+          "deleted": 128
+        }
+      ]
+    },
+    {
+      "date": "2024-03-11",
+      "commits": 9,
+      "added": 23,
+      "deleted": 12,
+      "firstCommit": "08:41 am",
+      "lastCommit": "11:09 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 9,
+          "added": 23,
+          "deleted": 12
+        }
+      ]
+    },
+    {
+      "date": "2024-03-12",
+      "commits": 4,
+      "added": 88,
+      "deleted": 4,
+      "firstCommit": "05:52 am",
+      "lastCommit": "05:57 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 88,
+          "deleted": 4
+        }
+      ]
+    },
+    {
+      "date": "2024-03-13",
+      "commits": 2,
+      "added": 97,
+      "deleted": 16,
+      "firstCommit": "09:52 am",
+      "lastCommit": "09:58 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 97,
+          "deleted": 16
+        }
+      ]
+    },
+    {
+      "date": "2024-03-15",
+      "commits": 5,
+      "added": 262,
+      "deleted": 43,
+      "firstCommit": "01:50 am",
+      "lastCommit": "11:11 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 262,
+          "deleted": 43
+        }
+      ]
+    },
+    {
+      "date": "2024-03-16",
+      "commits": 4,
+      "added": 41,
+      "deleted": 13,
+      "firstCommit": "12:46 am",
+      "lastCommit": "02:58 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 41,
+          "deleted": 13
+        }
+      ]
+    },
+    {
+      "date": "2024-03-17",
+      "commits": 2,
+      "added": 328,
+      "deleted": 79,
+      "firstCommit": "07:31 pm",
+      "lastCommit": "10:28 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 328,
+          "deleted": 79
+        }
+      ]
+    },
+    {
+      "date": "2024-03-18",
+      "commits": 2,
+      "added": 87,
+      "deleted": 58,
+      "firstCommit": "07:59 am",
+      "lastCommit": "01:51 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 87,
+          "deleted": 58
+        }
+      ]
+    },
+    {
+      "date": "2024-03-19",
+      "commits": 7,
+      "added": 308,
+      "deleted": 255,
+      "firstCommit": "09:46 am",
+      "lastCommit": "07:02 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 308,
+          "deleted": 255
+        }
+      ]
+    },
+    {
+      "date": "2024-03-20",
+      "commits": 6,
+      "added": 119,
+      "deleted": 22,
+      "firstCommit": "04:34 am",
+      "lastCommit": "06:42 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 6,
+          "added": 119,
+          "deleted": 22
+        }
+      ]
+    },
+    {
+      "date": "2024-03-21",
+      "commits": 2,
+      "added": 47,
+      "deleted": 9,
+      "firstCommit": "08:54 am",
+      "lastCommit": "02:04 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 47,
+          "deleted": 9
+        }
+      ]
+    },
+    {
+      "date": "2024-03-22",
+      "commits": 1,
+      "added": 55,
+      "deleted": 21,
+      "firstCommit": "10:12 pm",
+      "lastCommit": "10:12 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 55,
+          "deleted": 21
+        }
+      ]
+    },
+    {
+      "date": "2024-03-25",
+      "commits": 2,
+      "added": 45,
+      "deleted": 21,
+      "firstCommit": "01:15 pm",
+      "lastCommit": "03:08 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 45,
+          "deleted": 21
+        }
+      ]
+    },
+    {
+      "date": "2024-03-26",
+      "commits": 1,
+      "added": 69,
+      "deleted": 13,
+      "firstCommit": "09:00 pm",
+      "lastCommit": "09:00 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 69,
+          "deleted": 13
+        }
+      ]
+    },
+    {
+      "date": "2024-03-27",
+      "commits": 2,
+      "added": 3,
+      "deleted": 4,
+      "firstCommit": "07:37 pm",
+      "lastCommit": "07:38 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 3,
+          "deleted": 4
+        }
+      ]
+    },
+    {
+      "date": "2024-03-29",
+      "commits": 1,
+      "added": 113,
+      "deleted": 25,
+      "firstCommit": "01:30 pm",
+      "lastCommit": "01:30 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 113,
+          "deleted": 25
+        }
+      ]
+    },
+    {
+      "date": "2024-04-01",
+      "commits": 3,
+      "added": 8,
+      "deleted": 5,
+      "firstCommit": "09:47 am",
+      "lastCommit": "09:52 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 8,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2024-04-02",
+      "commits": 9,
+      "added": 110,
+      "deleted": 68,
+      "firstCommit": "10:53 am",
+      "lastCommit": "10:28 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 9,
+          "added": 110,
+          "deleted": 68
+        }
+      ]
+    },
+    {
+      "date": "2024-04-03",
+      "commits": 2,
+      "added": 0,
+      "deleted": 0,
+      "firstCommit": "10:31 am",
+      "lastCommit": "11:05 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 0,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-04-05",
+      "commits": 3,
+      "added": 560,
+      "deleted": 12,
+      "firstCommit": "01:22 pm",
+      "lastCommit": "01:37 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 560,
+          "deleted": 12
+        }
+      ]
+    },
+    {
+      "date": "2024-04-10",
+      "commits": 3,
+      "added": 173,
+      "deleted": 63,
+      "firstCommit": "10:59 am",
+      "lastCommit": "12:23 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 173,
+          "deleted": 63
+        }
+      ]
+    },
+    {
+      "date": "2024-04-12",
+      "commits": 1,
+      "added": 11,
+      "deleted": 5,
+      "firstCommit": "09:35 am",
+      "lastCommit": "09:35 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 11,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2024-04-15",
+      "commits": 3,
+      "added": 95,
+      "deleted": 51,
+      "firstCommit": "01:43 pm",
+      "lastCommit": "04:14 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 95,
+          "deleted": 51
+        }
+      ]
+    },
+    {
+      "date": "2024-04-16",
+      "commits": 4,
+      "added": 564,
+      "deleted": 133,
+      "firstCommit": "08:19 am",
+      "lastCommit": "06:46 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 564,
+          "deleted": 133
+        }
+      ]
+    },
+    {
+      "date": "2024-04-17",
+      "commits": 6,
+      "added": 67,
+      "deleted": 54,
+      "firstCommit": "04:52 am",
+      "lastCommit": "11:46 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 6,
+          "added": 67,
+          "deleted": 54
+        }
+      ]
+    },
+    {
+      "date": "2024-04-18",
+      "commits": 5,
+      "added": 70,
+      "deleted": 33,
+      "firstCommit": "11:06 am",
+      "lastCommit": "07:17 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 70,
+          "deleted": 33
+        }
+      ]
+    },
+    {
+      "date": "2024-04-19",
+      "commits": 2,
+      "added": 1,
+      "deleted": 1,
+      "firstCommit": "05:51 pm",
+      "lastCommit": "05:53 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-04-30",
+      "commits": 2,
+      "added": 3,
+      "deleted": 0,
+      "firstCommit": "09:14 am",
+      "lastCommit": "09:51 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 3,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-05-10",
+      "commits": 1,
+      "added": 1872,
+      "deleted": 10,
+      "firstCommit": "08:25 am",
+      "lastCommit": "08:25 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 1872,
+          "deleted": 10
+        }
+      ]
+    },
+    {
+      "date": "2024-06-12",
+      "commits": 1,
+      "added": 33,
+      "deleted": 3,
+      "firstCommit": "12:22 pm",
+      "lastCommit": "12:22 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 33,
+          "deleted": 3
+        }
+      ]
+    },
+    {
+      "date": "2024-06-13",
+      "commits": 5,
+      "added": 37,
+      "deleted": 10,
+      "firstCommit": "11:58 am",
+      "lastCommit": "06:05 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 37,
+          "deleted": 10
+        }
+      ]
+    },
+    {
+      "date": "2024-06-18",
+      "commits": 3,
+      "added": 1,
+      "deleted": 1,
+      "firstCommit": "01:53 pm",
+      "lastCommit": "04:27 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-06-19",
+      "commits": 2,
+      "added": 7,
+      "deleted": 6,
+      "firstCommit": "10:49 am",
+      "lastCommit": "03:56 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 7,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2024-06-24",
+      "commits": 3,
+      "added": 270,
+      "deleted": 118,
+      "firstCommit": "07:10 pm",
+      "lastCommit": "07:44 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 270,
+          "deleted": 118
+        }
+      ]
+    },
+    {
+      "date": "2024-06-25",
+      "commits": 1,
+      "added": 5,
+      "deleted": 5,
+      "firstCommit": "10:38 am",
+      "lastCommit": "10:38 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 5,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2024-06-26",
+      "commits": 3,
+      "added": 44,
+      "deleted": 26,
+      "firstCommit": "11:29 am",
+      "lastCommit": "03:12 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 44,
+          "deleted": 26
+        }
+      ]
+    },
+    {
+      "date": "2024-06-27",
+      "commits": 1,
+      "added": 0,
+      "deleted": 0,
+      "firstCommit": "10:25 am",
+      "lastCommit": "10:25 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 0,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-06-28",
+      "commits": 1,
+      "added": 20,
+      "deleted": 5,
+      "firstCommit": "07:35 pm",
+      "lastCommit": "07:35 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 20,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2024-07-02",
+      "commits": 1,
+      "added": 62,
+      "deleted": 2,
+      "firstCommit": "06:10 pm",
+      "lastCommit": "06:10 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 62,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-07-04",
+      "commits": 2,
+      "added": 49,
+      "deleted": 7,
+      "firstCommit": "04:03 pm",
+      "lastCommit": "04:34 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 48,
+          "deleted": 6
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-07-08",
+      "commits": 1,
+      "added": 32,
+      "deleted": 6,
+      "firstCommit": "02:25 pm",
+      "lastCommit": "02:25 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 32,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2024-07-09",
+      "commits": 1,
+      "added": 164,
+      "deleted": 63,
+      "firstCommit": "05:06 pm",
+      "lastCommit": "05:06 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 164,
+          "deleted": 63
+        }
+      ]
+    },
+    {
+      "date": "2024-07-17",
+      "commits": 4,
+      "added": 2303,
+      "deleted": 28,
+      "firstCommit": "03:40 am",
+      "lastCommit": "04:36 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 2303,
+          "deleted": 28
+        }
+      ]
+    },
+    {
+      "date": "2024-07-26",
+      "commits": 1,
+      "added": 306,
+      "deleted": 118,
+      "firstCommit": "05:50 pm",
+      "lastCommit": "05:50 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 306,
+          "deleted": 118
+        }
+      ]
+    },
+    {
+      "date": "2024-07-29",
+      "commits": 1,
+      "added": 0,
+      "deleted": 0,
+      "firstCommit": "01:49 pm",
+      "lastCommit": "01:49 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 0,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-07-31",
+      "commits": 4,
+      "added": 14,
+      "deleted": 14,
+      "firstCommit": "10:44 am",
+      "lastCommit": "12:59 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 14,
+          "deleted": 14
+        }
+      ]
+    },
+    {
+      "date": "2024-08-01",
+      "commits": 2,
+      "added": 211,
+      "deleted": 3,
+      "firstCommit": "05:35 pm",
+      "lastCommit": "06:22 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 211,
+          "deleted": 3
+        }
+      ]
+    },
+    {
+      "date": "2024-08-05",
+      "commits": 2,
+      "added": 2,
+      "deleted": 2,
+      "firstCommit": "12:08 pm",
+      "lastCommit": "01:04 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 2,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-08-13",
+      "commits": 3,
+      "added": 2,
+      "deleted": 2,
+      "firstCommit": "10:50 am",
+      "lastCommit": "11:09 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 2,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-08-17",
+      "commits": 1,
+      "added": 258,
+      "deleted": 86,
+      "firstCommit": "10:35 pm",
+      "lastCommit": "10:35 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 258,
+          "deleted": 86
+        }
+      ]
+    },
+    {
+      "date": "2024-08-19",
+      "commits": 2,
+      "added": 2,
+      "deleted": 2,
+      "firstCommit": "03:41 pm",
+      "lastCommit": "05:45 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 2,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-08-20",
+      "commits": 4,
+      "added": 26,
+      "deleted": 5,
+      "firstCommit": "10:40 am",
+      "lastCommit": "09:12 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 26,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2024-08-22",
+      "commits": 3,
+      "added": 2,
+      "deleted": 2,
+      "firstCommit": "11:35 am",
+      "lastCommit": "03:24 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 2,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-08-23",
+      "commits": 1,
+      "added": 17,
+      "deleted": 14,
+      "firstCommit": "08:45 am",
+      "lastCommit": "08:45 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 17,
+          "deleted": 14
+        }
+      ]
+    },
+    {
+      "date": "2024-08-27",
+      "commits": 1,
+      "added": 132,
+      "deleted": 21,
+      "firstCommit": "09:22 am",
+      "lastCommit": "09:22 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 132,
+          "deleted": 21
+        }
+      ]
+    },
+    {
+      "date": "2024-08-28",
+      "commits": 1,
+      "added": 4,
+      "deleted": 2,
+      "firstCommit": "11:13 am",
+      "lastCommit": "11:13 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 4,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-08-29",
+      "commits": 1,
+      "added": 38,
+      "deleted": 105,
+      "firstCommit": "11:04 am",
+      "lastCommit": "11:04 am",
+      "repos": [
+        {
+          "name": "audit-app",
+          "branch": "master",
+          "commits": 1,
+          "added": 38,
+          "deleted": 105
+        }
+      ]
+    },
+    {
+      "date": "2024-09-03",
+      "commits": 3,
+      "added": 18823,
+      "deleted": 10319,
+      "firstCommit": "09:19 am",
+      "lastCommit": "04:50 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 18823,
+          "deleted": 10319
+        }
+      ]
+    },
+    {
+      "date": "2024-09-04",
+      "commits": 5,
+      "added": 737,
+      "deleted": 65,
+      "firstCommit": "10:40 am",
+      "lastCommit": "07:29 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 737,
+          "deleted": 65
+        }
+      ]
+    },
+    {
+      "date": "2024-09-05",
+      "commits": 2,
+      "added": 320,
+      "deleted": 18,
+      "firstCommit": "04:53 pm",
+      "lastCommit": "08:20 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 320,
+          "deleted": 18
+        }
+      ]
+    },
+    {
+      "date": "2024-09-06",
+      "commits": 4,
+      "added": 29,
+      "deleted": 19,
+      "firstCommit": "11:01 am",
+      "lastCommit": "07:29 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 4,
+          "added": 29,
+          "deleted": 19
+        }
+      ]
+    },
+    {
+      "date": "2024-09-09",
+      "commits": 1,
+      "added": 82,
+      "deleted": 24,
+      "firstCommit": "10:24 am",
+      "lastCommit": "10:24 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 82,
+          "deleted": 24
+        }
+      ]
+    },
+    {
+      "date": "2024-09-10",
+      "commits": 3,
+      "added": 1,
+      "deleted": 1,
+      "firstCommit": "10:13 am",
+      "lastCommit": "11:34 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 0,
+          "deleted": 0
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-09-11",
+      "commits": 3,
+      "added": 530,
+      "deleted": 77,
+      "firstCommit": "02:55 pm",
+      "lastCommit": "07:25 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 480,
+          "deleted": 43
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 50,
+          "deleted": 34
+        }
+      ]
+    },
+    {
+      "date": "2024-09-12",
+      "commits": 1,
+      "added": 61,
+      "deleted": 6,
+      "firstCommit": "03:48 pm",
+      "lastCommit": "03:48 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 61,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2024-09-13",
+      "commits": 2,
+      "added": 14,
+      "deleted": 11,
+      "firstCommit": "11:34 am",
+      "lastCommit": "03:01 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 14,
+          "deleted": 11
+        }
+      ]
+    },
+    {
+      "date": "2024-09-17",
+      "commits": 2,
+      "added": 21,
+      "deleted": 4,
+      "firstCommit": "09:12 am",
+      "lastCommit": "03:09 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 20,
+          "deleted": 3
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-09-23",
+      "commits": 3,
+      "added": 418,
+      "deleted": 23,
+      "firstCommit": "08:58 am",
+      "lastCommit": "02:23 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 417,
+          "deleted": 21
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 1,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-09-24",
+      "commits": 4,
+      "added": 19,
+      "deleted": 10,
+      "firstCommit": "02:42 pm",
+      "lastCommit": "05:14 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 5,
+          "deleted": 5
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 14,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2024-09-25",
+      "commits": 2,
+      "added": 13,
+      "deleted": 6,
+      "firstCommit": "12:07 pm",
+      "lastCommit": "05:02 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 13,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2024-10-01",
+      "commits": 1,
+      "added": 4,
+      "deleted": 2,
+      "firstCommit": "05:44 pm",
+      "lastCommit": "05:44 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 4,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-10-03",
+      "commits": 1,
+      "added": 4146,
+      "deleted": 264,
+      "firstCommit": "10:23 am",
+      "lastCommit": "10:23 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 4146,
+          "deleted": 264
+        }
+      ]
+    },
+    {
+      "date": "2024-10-04",
+      "commits": 1,
+      "added": 20,
+      "deleted": 19,
+      "firstCommit": "03:28 pm",
+      "lastCommit": "03:28 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 20,
+          "deleted": 19
+        }
+      ]
+    },
+    {
+      "date": "2024-10-05",
+      "commits": 2,
+      "added": 21,
+      "deleted": 4,
+      "firstCommit": "11:10 am",
+      "lastCommit": "04:39 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 21,
+          "deleted": 4
+        }
+      ]
+    },
+    {
+      "date": "2024-10-06",
+      "commits": 1,
+      "added": 285,
+      "deleted": 237,
+      "firstCommit": "04:41 pm",
+      "lastCommit": "04:41 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 285,
+          "deleted": 237
+        }
+      ]
+    },
+    {
+      "date": "2024-10-07",
+      "commits": 1,
+      "added": 206,
+      "deleted": 146,
+      "firstCommit": "05:14 pm",
+      "lastCommit": "05:14 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 206,
+          "deleted": 146
+        }
+      ]
+    },
+    {
+      "date": "2024-10-08",
+      "commits": 1,
+      "added": 113,
+      "deleted": 49,
+      "firstCommit": "09:02 am",
+      "lastCommit": "09:02 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 113,
+          "deleted": 49
+        }
+      ]
+    },
+    {
+      "date": "2024-10-09",
+      "commits": 3,
+      "added": 906,
+      "deleted": 588,
+      "firstCommit": "08:45 am",
+      "lastCommit": "10:31 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 906,
+          "deleted": 588
+        }
+      ]
+    },
+    {
+      "date": "2024-10-16",
+      "commits": 3,
+      "added": 119,
+      "deleted": 35,
+      "firstCommit": "09:08 am",
+      "lastCommit": "07:57 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 65,
+          "deleted": 3
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 54,
+          "deleted": 32
+        }
+      ]
+    },
+    {
+      "date": "2024-10-17",
+      "commits": 3,
+      "added": 313,
+      "deleted": 279,
+      "firstCommit": "02:29 pm",
+      "lastCommit": "08:44 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 15,
+          "deleted": 1
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 298,
+          "deleted": 278
+        }
+      ]
+    },
+    {
+      "date": "2024-10-22",
+      "commits": 1,
+      "added": 173,
+      "deleted": 152,
+      "firstCommit": "04:05 pm",
+      "lastCommit": "04:05 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 173,
+          "deleted": 152
+        }
+      ]
+    },
+    {
+      "date": "2024-10-25",
+      "commits": 2,
+      "added": 370,
+      "deleted": 254,
+      "firstCommit": "11:35 am",
+      "lastCommit": "05:08 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 370,
+          "deleted": 254
+        }
+      ]
+    },
+    {
+      "date": "2024-11-04",
+      "commits": 1,
+      "added": 447,
+      "deleted": 60,
+      "firstCommit": "02:34 pm",
+      "lastCommit": "02:34 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 447,
+          "deleted": 60
+        }
+      ]
+    },
+    {
+      "date": "2024-11-05",
+      "commits": 5,
+      "added": 153,
+      "deleted": 41,
+      "firstCommit": "09:31 am",
+      "lastCommit": "07:20 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 153,
+          "deleted": 41
+        }
+      ]
+    },
+    {
+      "date": "2024-11-06",
+      "commits": 1,
+      "added": 4,
+      "deleted": 0,
+      "firstCommit": "10:04 am",
+      "lastCommit": "10:04 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 4,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2024-11-07",
+      "commits": 2,
+      "added": 94,
+      "deleted": 33,
+      "firstCommit": "11:36 am",
+      "lastCommit": "02:45 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 94,
+          "deleted": 33
+        }
+      ]
+    },
+    {
+      "date": "2024-11-08",
+      "commits": 1,
+      "added": 86,
+      "deleted": 17,
+      "firstCommit": "04:45 pm",
+      "lastCommit": "04:45 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 86,
+          "deleted": 17
+        }
+      ]
+    },
+    {
+      "date": "2024-11-11",
+      "commits": 1,
+      "added": 128,
+      "deleted": 5,
+      "firstCommit": "02:48 pm",
+      "lastCommit": "02:48 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 128,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2024-11-14",
+      "commits": 3,
+      "added": 389,
+      "deleted": 127,
+      "firstCommit": "09:56 am",
+      "lastCommit": "06:04 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 389,
+          "deleted": 127
+        }
+      ]
+    },
+    {
+      "date": "2024-11-15",
+      "commits": 4,
+      "added": 3309,
+      "deleted": 2056,
+      "firstCommit": "05:04 pm",
+      "lastCommit": "06:49 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 3299,
+          "deleted": 2045
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 10,
+          "deleted": 11
+        }
+      ]
+    },
+    {
+      "date": "2024-11-18",
+      "commits": 1,
+      "added": 2,
+      "deleted": 2,
+      "firstCommit": "03:45 pm",
+      "lastCommit": "03:45 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 2,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2024-11-20",
+      "commits": 5,
+      "added": 31,
+      "deleted": 31,
+      "firstCommit": "11:50 am",
+      "lastCommit": "05:44 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 5,
+          "added": 31,
+          "deleted": 31
+        }
+      ]
+    },
+    {
+      "date": "2024-12-16",
+      "commits": 1,
+      "added": 1,
+      "deleted": 1,
+      "firstCommit": "02:45 pm",
+      "lastCommit": "02:45 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2024-12-18",
+      "commits": 3,
+      "added": 28,
+      "deleted": 20,
+      "firstCommit": "02:34 pm",
+      "lastCommit": "08:02 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 3,
+          "added": 28,
+          "deleted": 20
+        }
+      ]
+    },
+    {
+      "date": "2025-01-06",
+      "commits": 1,
+      "added": 3474,
+      "deleted": 1863,
+      "firstCommit": "02:55 pm",
+      "lastCommit": "02:55 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 3474,
+          "deleted": 1863
+        }
+      ]
+    },
+    {
+      "date": "2025-01-20",
+      "commits": 2,
+      "added": 24,
+      "deleted": 8,
+      "firstCommit": "02:46 pm",
+      "lastCommit": "02:46 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 24,
+          "deleted": 8
+        }
+      ]
+    },
+    {
+      "date": "2025-02-03",
+      "commits": 2,
+      "added": 259,
+      "deleted": 232,
+      "firstCommit": "10:29 am",
+      "lastCommit": "11:28 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 259,
+          "deleted": 232
+        }
+      ]
+    },
+    {
+      "date": "2025-02-13",
+      "commits": 1,
+      "added": 82,
+      "deleted": 35,
+      "firstCommit": "01:12 pm",
+      "lastCommit": "01:12 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 82,
+          "deleted": 35
+        }
+      ]
+    },
+    {
+      "date": "2025-03-12",
+      "commits": 3,
+      "added": 1809,
+      "deleted": 101,
+      "firstCommit": "11:03 am",
+      "lastCommit": "12:46 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 3,
+          "added": 1809,
+          "deleted": 101
+        }
+      ]
+    },
+    {
+      "date": "2025-03-17",
+      "commits": 2,
+      "added": 23,
+      "deleted": 5,
+      "firstCommit": "11:40 am",
+      "lastCommit": "06:33 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 23,
+          "deleted": 5
+        }
+      ]
+    },
+    {
+      "date": "2025-03-19",
+      "commits": 3,
+      "added": 37,
+      "deleted": 34,
+      "firstCommit": "03:17 pm",
+      "lastCommit": "04:28 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 37,
+          "deleted": 34
+        }
+      ]
+    },
+    {
+      "date": "2025-03-21",
+      "commits": 2,
+      "added": 15,
+      "deleted": 15,
+      "firstCommit": "01:17 pm",
+      "lastCommit": "01:21 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 15,
+          "deleted": 15
+        }
+      ]
+    },
+    {
+      "date": "2025-03-26",
+      "commits": 2,
+      "added": 66,
+      "deleted": 33,
+      "firstCommit": "10:27 am",
+      "lastCommit": "02:38 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 66,
+          "deleted": 33
+        }
+      ]
+    },
+    {
+      "date": "2025-03-28",
+      "commits": 2,
+      "added": 19,
+      "deleted": 11,
+      "firstCommit": "10:29 am",
+      "lastCommit": "02:34 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 19,
+          "deleted": 11
+        }
+      ]
+    },
+    {
+      "date": "2025-04-01",
+      "commits": 1,
+      "added": 13,
+      "deleted": 1,
+      "firstCommit": "01:49 pm",
+      "lastCommit": "01:49 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 13,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2025-04-02",
+      "commits": 1,
+      "added": 37,
+      "deleted": 31,
+      "firstCommit": "09:03 pm",
+      "lastCommit": "09:03 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 37,
+          "deleted": 31
+        }
+      ]
+    },
+    {
+      "date": "2025-04-03",
+      "commits": 1,
+      "added": 66,
+      "deleted": 24,
+      "firstCommit": "10:12 am",
+      "lastCommit": "10:12 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 66,
+          "deleted": 24
+        }
+      ]
+    },
+    {
+      "date": "2025-04-04",
+      "commits": 5,
+      "added": 89,
+      "deleted": 660,
+      "firstCommit": "12:39 pm",
+      "lastCommit": "05:24 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 5,
+          "added": 89,
+          "deleted": 660
+        }
+      ]
+    },
+    {
+      "date": "2025-04-11",
+      "commits": 1,
+      "added": 2,
+      "deleted": 6,
+      "firstCommit": "08:10 pm",
+      "lastCommit": "08:10 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 2,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2025-04-14",
+      "commits": 3,
+      "added": 324,
+      "deleted": 359,
+      "firstCommit": "01:25 pm",
+      "lastCommit": "02:18 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 228,
+          "deleted": 237
+        },
+        {
+          "name": "api-customer-feedback",
+          "branch": "master",
+          "commits": 1,
+          "added": 96,
+          "deleted": 122
+        }
+      ]
+    },
+    {
+      "date": "2025-04-21",
+      "commits": 3,
+      "added": 40,
+      "deleted": 22,
+      "firstCommit": "12:55 pm",
+      "lastCommit": "04:37 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 3,
+          "added": 40,
+          "deleted": 22
+        }
+      ]
+    },
+    {
+      "date": "2025-04-22",
+      "commits": 2,
+      "added": 6,
+      "deleted": 4,
+      "firstCommit": "10:50 am",
+      "lastCommit": "12:19 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 1,
+          "deleted": 1
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 5,
+          "deleted": 3
+        }
+      ]
+    },
+    {
+      "date": "2025-04-28",
+      "commits": 3,
+      "added": 233,
+      "deleted": 48,
+      "firstCommit": "09:35 am",
+      "lastCommit": "12:50 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 3,
+          "added": 233,
+          "deleted": 48
+        }
+      ]
+    },
+    {
+      "date": "2025-04-29",
+      "commits": 1,
+      "added": 1,
+      "deleted": 1,
+      "firstCommit": "11:07 am",
+      "lastCommit": "11:07 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2025-05-27",
+      "commits": 1,
+      "added": 13997,
+      "deleted": 2152,
+      "firstCommit": "01:06 pm",
+      "lastCommit": "01:06 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 13997,
+          "deleted": 2152
+        }
+      ]
+    },
+    {
+      "date": "2025-06-03",
+      "commits": 2,
+      "added": 252,
+      "deleted": 0,
+      "firstCommit": "09:19 am",
+      "lastCommit": "09:20 am",
+      "repos": [
+        {
+          "name": "api-reports",
+          "branch": "master",
+          "commits": 1,
+          "added": 143,
+          "deleted": 0
+        },
+        {
+          "name": "api-activities",
+          "branch": "master",
+          "commits": 1,
+          "added": 109,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2025-06-05",
+      "commits": 1,
+      "added": 40,
+      "deleted": 34,
+      "firstCommit": "08:43 pm",
+      "lastCommit": "08:43 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 40,
+          "deleted": 34
+        }
+      ]
+    },
+    {
+      "date": "2025-06-09",
+      "commits": 1,
+      "added": 7,
+      "deleted": 7,
+      "firstCommit": "11:50 am",
+      "lastCommit": "11:50 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 7,
+          "deleted": 7
+        }
+      ]
+    },
+    {
+      "date": "2025-06-12",
+      "commits": 3,
+      "added": 4,
+      "deleted": 8,
+      "firstCommit": "11:54 am",
+      "lastCommit": "11:58 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 4,
+          "deleted": 8
+        }
+      ]
+    },
+    {
+      "date": "2025-06-18",
+      "commits": 2,
+      "added": 609,
+      "deleted": 419,
+      "firstCommit": "08:08 am",
+      "lastCommit": "10:43 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 609,
+          "deleted": 419
+        }
+      ]
+    },
+    {
+      "date": "2025-06-20",
+      "commits": 1,
+      "added": 5,
+      "deleted": 8,
+      "firstCommit": "04:11 pm",
+      "lastCommit": "04:11 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 5,
+          "deleted": 8
+        }
+      ]
+    },
+    {
+      "date": "2025-06-26",
+      "commits": 1,
+      "added": 267,
+      "deleted": 73,
+      "firstCommit": "01:10 pm",
+      "lastCommit": "01:10 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 267,
+          "deleted": 73
+        }
+      ]
+    },
+    {
+      "date": "2025-06-30",
+      "commits": 1,
+      "added": 72,
+      "deleted": 2,
+      "firstCommit": "01:39 pm",
+      "lastCommit": "01:39 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 72,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-07-01",
+      "commits": 1,
+      "added": 121,
+      "deleted": 88,
+      "firstCommit": "02:15 pm",
+      "lastCommit": "02:15 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 121,
+          "deleted": 88
+        }
+      ]
+    },
+    {
+      "date": "2025-07-03",
+      "commits": 2,
+      "added": 104,
+      "deleted": 200,
+      "firstCommit": "04:12 pm",
+      "lastCommit": "07:41 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 104,
+          "deleted": 200
+        }
+      ]
+    },
+    {
+      "date": "2025-07-04",
+      "commits": 1,
+      "added": 22,
+      "deleted": 33,
+      "firstCommit": "03:02 pm",
+      "lastCommit": "03:02 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 22,
+          "deleted": 33
+        }
+      ]
+    },
+    {
+      "date": "2025-07-07",
+      "commits": 1,
+      "added": 71,
+      "deleted": 38,
+      "firstCommit": "02:12 pm",
+      "lastCommit": "02:12 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 71,
+          "deleted": 38
+        }
+      ]
+    },
+    {
+      "date": "2025-07-15",
+      "commits": 3,
+      "added": 1238,
+      "deleted": 1615,
+      "firstCommit": "10:43 am",
+      "lastCommit": "01:35 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 3,
+          "added": 1238,
+          "deleted": 1615
+        }
+      ]
+    },
+    {
+      "date": "2025-07-17",
+      "commits": 1,
+      "added": 1,
+      "deleted": 1,
+      "firstCommit": "01:11 pm",
+      "lastCommit": "01:11 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 1,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2025-07-21",
+      "commits": 3,
+      "added": 6941,
+      "deleted": 4,
+      "firstCommit": "10:10 am",
+      "lastCommit": "02:18 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 6888,
+          "deleted": 0
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 53,
+          "deleted": 4
+        }
+      ]
+    },
+    {
+      "date": "2025-07-22",
+      "commits": 1,
+      "added": 1868,
+      "deleted": 297,
+      "firstCommit": "02:35 pm",
+      "lastCommit": "02:35 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 1868,
+          "deleted": 297
+        }
+      ]
+    },
+    {
+      "date": "2025-07-24",
+      "commits": 2,
+      "added": 47,
+      "deleted": 2,
+      "firstCommit": "01:26 pm",
+      "lastCommit": "05:07 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 47,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-07-28",
+      "commits": 1,
+      "added": 67,
+      "deleted": 71,
+      "firstCommit": "10:39 am",
+      "lastCommit": "10:39 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 67,
+          "deleted": 71
+        }
+      ]
+    },
+    {
+      "date": "2025-07-29",
+      "commits": 1,
+      "added": 1,
+      "deleted": 0,
+      "firstCommit": "10:57 am",
+      "lastCommit": "10:57 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 1,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2025-07-31",
+      "commits": 3,
+      "added": 1828,
+      "deleted": 214,
+      "firstCommit": "03:01 pm",
+      "lastCommit": "04:52 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 3,
+          "added": 1828,
+          "deleted": 214
+        }
+      ]
+    },
+    {
+      "date": "2025-08-01",
+      "commits": 4,
+      "added": 4396,
+      "deleted": 1499,
+      "firstCommit": "05:35 am",
+      "lastCommit": "10:06 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 4,
+          "added": 4396,
+          "deleted": 1499
+        }
+      ]
+    },
+    {
+      "date": "2025-08-04",
+      "commits": 1,
+      "added": 61,
+      "deleted": 23,
+      "firstCommit": "05:27 pm",
+      "lastCommit": "05:27 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 61,
+          "deleted": 23
+        }
+      ]
+    },
+    {
+      "date": "2025-08-07",
+      "commits": 2,
+      "added": 15,
+      "deleted": 14,
+      "firstCommit": "06:18 pm",
+      "lastCommit": "06:30 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 15,
+          "deleted": 14
+        }
+      ]
+    },
+    {
+      "date": "2025-08-12",
+      "commits": 3,
+      "added": 30,
+      "deleted": 19,
+      "firstCommit": "10:07 am",
+      "lastCommit": "01:42 pm",
+      "repos": [
+        {
+          "name": "api-users",
+          "branch": "master",
+          "commits": 1,
+          "added": 3,
+          "deleted": 1
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 27,
+          "deleted": 18
+        }
+      ]
+    },
+    {
+      "date": "2025-08-13",
+      "commits": 2,
+      "added": 40296,
+      "deleted": 4805,
+      "firstCommit": "05:05 am",
+      "lastCommit": "06:00 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 40296,
+          "deleted": 4805
+        }
+      ]
+    },
+    {
+      "date": "2025-08-14",
+      "commits": 1,
+      "added": 16,
+      "deleted": 7,
+      "firstCommit": "12:32 pm",
+      "lastCommit": "12:32 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 16,
+          "deleted": 7
+        }
+      ]
+    },
+    {
+      "date": "2025-08-19",
+      "commits": 5,
+      "added": 726,
+      "deleted": 191,
+      "firstCommit": "10:46 am",
+      "lastCommit": "03:29 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 3,
+          "added": 533,
+          "deleted": 183
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 193,
+          "deleted": 8
+        }
+      ]
+    },
+    {
+      "date": "2025-08-20",
+      "commits": 2,
+      "added": 942,
+      "deleted": 378,
+      "firstCommit": "10:36 am",
+      "lastCommit": "11:30 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 942,
+          "deleted": 378
+        }
+      ]
+    },
+    {
+      "date": "2025-08-21",
+      "commits": 1,
+      "added": 105,
+      "deleted": 34,
+      "firstCommit": "12:26 pm",
+      "lastCommit": "12:26 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 105,
+          "deleted": 34
+        }
+      ]
+    },
+    {
+      "date": "2025-08-22",
+      "commits": 1,
+      "added": 3,
+      "deleted": 2,
+      "firstCommit": "03:33 pm",
+      "lastCommit": "03:33 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 3,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-08-24",
+      "commits": 2,
+      "added": 1749,
+      "deleted": 813,
+      "firstCommit": "12:12 pm",
+      "lastCommit": "01:27 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 1749,
+          "deleted": 813
+        }
+      ]
+    },
+    {
+      "date": "2025-08-25",
+      "commits": 2,
+      "added": 3494,
+      "deleted": 1757,
+      "firstCommit": "10:21 am",
+      "lastCommit": "02:26 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 3494,
+          "deleted": 1757
+        }
+      ]
+    },
+    {
+      "date": "2025-08-26",
+      "commits": 3,
+      "added": 3890,
+      "deleted": 1795,
+      "firstCommit": "02:10 am",
+      "lastCommit": "01:25 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 3,
+          "added": 3890,
+          "deleted": 1795
+        }
+      ]
+    },
+    {
+      "date": "2025-08-28",
+      "commits": 1,
+      "added": 863,
+      "deleted": 473,
+      "firstCommit": "02:14 pm",
+      "lastCommit": "02:14 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 863,
+          "deleted": 473
+        }
+      ]
+    },
+    {
+      "date": "2025-08-29",
+      "commits": 3,
+      "added": 1672,
+      "deleted": 241,
+      "firstCommit": "11:47 am",
+      "lastCommit": "04:01 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 499,
+          "deleted": 95
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 1173,
+          "deleted": 146
+        }
+      ]
+    },
+    {
+      "date": "2025-09-01",
+      "commits": 1,
+      "added": 1051,
+      "deleted": 119,
+      "firstCommit": "12:52 pm",
+      "lastCommit": "12:52 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 1051,
+          "deleted": 119
+        }
+      ]
+    },
+    {
+      "date": "2025-09-02",
+      "commits": 5,
+      "added": 1933,
+      "deleted": 365,
+      "firstCommit": "01:27 pm",
+      "lastCommit": "06:48 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 4,
+          "added": 1862,
+          "deleted": 326
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 71,
+          "deleted": 39
+        }
+      ]
+    },
+    {
+      "date": "2025-09-03",
+      "commits": 4,
+      "added": 2494,
+      "deleted": 688,
+      "firstCommit": "05:20 am",
+      "lastCommit": "01:27 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 4,
+          "added": 2494,
+          "deleted": 688
+        }
+      ]
+    },
+    {
+      "date": "2025-09-04",
+      "commits": 2,
+      "added": 314,
+      "deleted": 101,
+      "firstCommit": "12:33 am",
+      "lastCommit": "09:39 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 240,
+          "deleted": 81
+        },
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 74,
+          "deleted": 20
+        }
+      ]
+    },
+    {
+      "date": "2025-09-15",
+      "commits": 1,
+      "added": 82,
+      "deleted": 58,
+      "firstCommit": "11:20 am",
+      "lastCommit": "11:20 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 82,
+          "deleted": 58
+        }
+      ]
+    },
+    {
+      "date": "2025-10-07",
+      "commits": 1,
+      "added": 29,
+      "deleted": 2,
+      "firstCommit": "04:05 pm",
+      "lastCommit": "04:05 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 29,
+          "deleted": 2
+        }
+      ]
+    },
+    {
+      "date": "2025-10-22",
+      "commits": 1,
+      "added": 2442,
+      "deleted": 388,
+      "firstCommit": "04:10 am",
+      "lastCommit": "04:10 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 2442,
+          "deleted": 388
+        }
+      ]
+    },
+    {
+      "date": "2025-10-23",
+      "commits": 2,
+      "added": 2713,
+      "deleted": 494,
+      "firstCommit": "02:24 am",
+      "lastCommit": "01:43 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 2713,
+          "deleted": 494
+        }
+      ]
+    },
+    {
+      "date": "2025-11-12",
+      "commits": 1,
+      "added": 7,
+      "deleted": 1,
+      "firstCommit": "01:14 pm",
+      "lastCommit": "01:14 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 7,
+          "deleted": 1
+        }
+      ]
+    },
+    {
+      "date": "2025-11-17",
+      "commits": 1,
+      "added": 2171,
+      "deleted": 427,
+      "firstCommit": "12:50 pm",
+      "lastCommit": "12:50 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 2171,
+          "deleted": 427
+        }
+      ]
+    },
+    {
+      "date": "2025-11-20",
+      "commits": 1,
+      "added": 1435,
+      "deleted": 11,
+      "firstCommit": "04:04 pm",
+      "lastCommit": "04:04 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 1435,
+          "deleted": 11
+        }
+      ]
+    },
+    {
+      "date": "2025-11-21",
+      "commits": 1,
+      "added": 1348,
+      "deleted": 839,
+      "firstCommit": "12:19 pm",
+      "lastCommit": "12:19 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 1348,
+          "deleted": 839
+        }
+      ]
+    },
+    {
+      "date": "2025-11-25",
+      "commits": 4,
+      "added": 2518,
+      "deleted": 427,
+      "firstCommit": "10:55 am",
+      "lastCommit": "10:08 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 3,
+          "added": 443,
+          "deleted": 295
+        },
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 2075,
+          "deleted": 132
+        }
+      ]
+    },
+    {
+      "date": "2025-11-26",
+      "commits": 1,
+      "added": 1412,
+      "deleted": 175,
+      "firstCommit": "01:46 pm",
+      "lastCommit": "01:46 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 1412,
+          "deleted": 175
+        }
+      ]
+    },
+    {
+      "date": "2025-11-28",
+      "commits": 1,
+      "added": 41,
+      "deleted": 24,
+      "firstCommit": "10:23 am",
+      "lastCommit": "10:23 am",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 41,
+          "deleted": 24
+        }
+      ]
+    },
+    {
+      "date": "2025-12-01",
+      "commits": 2,
+      "added": 91,
+      "deleted": 33,
+      "firstCommit": "11:43 am",
+      "lastCommit": "11:58 am",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 91,
+          "deleted": 33
+        }
+      ]
+    },
+    {
+      "date": "2025-12-02",
+      "commits": 1,
+      "added": 39,
+      "deleted": 9,
+      "firstCommit": "06:22 pm",
+      "lastCommit": "06:22 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 39,
+          "deleted": 9
+        }
+      ]
+    },
+    {
+      "date": "2025-12-04",
+      "commits": 1,
+      "added": 95,
+      "deleted": 20,
+      "firstCommit": "02:02 pm",
+      "lastCommit": "02:02 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 95,
+          "deleted": 20
+        }
+      ]
+    },
+    {
+      "date": "2025-12-05",
+      "commits": 2,
+      "added": 178,
+      "deleted": 34,
+      "firstCommit": "12:37 pm",
+      "lastCommit": "12:38 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 178,
+          "deleted": 34
+        }
+      ]
+    },
+    {
+      "date": "2025-12-08",
+      "commits": 1,
+      "added": 628,
+      "deleted": 0,
+      "firstCommit": "03:42 pm",
+      "lastCommit": "03:42 pm",
+      "repos": [
+        {
+          "name": "compass",
+          "branch": "feature/enhanced-checklist-documentation",
+          "commits": 1,
+          "added": 628,
+          "deleted": 0
+        }
+      ]
+    },
+    {
+      "date": "2025-12-09",
+      "commits": 1,
+      "added": 136,
+      "deleted": 3,
+      "firstCommit": "12:51 pm",
+      "lastCommit": "12:51 pm",
+      "repos": [
+        {
+          "name": "api-departments",
+          "branch": "master",
+          "commits": 1,
+          "added": 136,
+          "deleted": 3
+        }
+      ]
+    },
+    {
+      "date": "2025-12-16",
+      "commits": 3,
+      "added": 1122,
+      "deleted": 79,
+      "firstCommit": "11:48 am",
+      "lastCommit": "03:10 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 1097,
+          "deleted": 71
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 25,
+          "deleted": 8
+        }
+      ]
+    },
+    {
+      "date": "2025-12-17",
+      "commits": 4,
+      "added": 167,
+      "deleted": 24,
+      "firstCommit": "10:51 am",
+      "lastCommit": "08:50 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 12,
+          "deleted": 12
+        },
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 1,
+          "deleted": 1
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 154,
+          "deleted": 11
+        }
+      ]
+    },
+    {
+      "date": "2025-12-19",
+      "commits": 16,
+      "added": 3522,
+      "deleted": 326,
+      "firstCommit": "01:02 pm",
+      "lastCommit": "03:44 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 16,
+          "added": 3522,
+          "deleted": 326
+        }
+      ]
+    },
+    {
+      "date": "2025-12-23",
+      "commits": 2,
+      "added": 16,
+      "deleted": 198,
+      "firstCommit": "10:23 am",
+      "lastCommit": "10:35 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 16,
+          "deleted": 198
+        }
+      ]
+    },
+    {
+      "date": "2025-12-24",
+      "commits": 2,
+      "added": 2394,
+      "deleted": 1162,
+      "firstCommit": "12:23 am",
+      "lastCommit": "01:14 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 2394,
+          "deleted": 1162
+        }
+      ]
+    },
+    {
+      "date": "2025-12-26",
+      "commits": 2,
+      "added": 990,
+      "deleted": 612,
+      "firstCommit": "01:28 am",
+      "lastCommit": "02:37 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 990,
+          "deleted": 612
+        }
+      ]
+    },
+    {
+      "date": "2025-12-30",
+      "commits": 8,
+      "added": 38,
+      "deleted": 12,
+      "firstCommit": "07:12 pm",
+      "lastCommit": "11:45 pm",
+      "repos": [
+        {
+          "name": "nimbly-reviews-frontend-sid",
+          "branch": "main",
+          "commits": 8,
+          "added": 38,
+          "deleted": 12
+        }
+      ]
+    },
+    {
+      "date": "2026-01-12",
+      "commits": 1,
+      "added": 76,
+      "deleted": 152,
+      "firstCommit": "01:42 pm",
+      "lastCommit": "01:42 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 76,
+          "deleted": 152
+        }
+      ]
+    },
+    {
+      "date": "2026-01-13",
+      "commits": 1,
+      "added": 128,
+      "deleted": 21,
+      "firstCommit": "04:58 pm",
+      "lastCommit": "04:58 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 128,
+          "deleted": 21
+        }
+      ]
+    },
+    {
+      "date": "2026-01-14",
+      "commits": 3,
+      "added": 2748,
+      "deleted": 1346,
+      "firstCommit": "03:09 pm",
+      "lastCommit": "07:21 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 2737,
+          "deleted": 1342
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 11,
+          "deleted": 4
+        }
+      ]
+    },
+    {
+      "date": "2026-01-15",
+      "commits": 2,
+      "added": 296,
+      "deleted": 151,
+      "firstCommit": "12:26 am",
+      "lastCommit": "02:20 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 284,
+          "deleted": 139
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 12,
+          "deleted": 12
+        }
+      ]
+    },
+    {
+      "date": "2026-01-16",
+      "commits": 4,
+      "added": 69,
+      "deleted": 33,
+      "firstCommit": "12:52 am",
+      "lastCommit": "03:10 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 28,
+          "deleted": 9
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 41,
+          "deleted": 24
+        }
+      ]
+    },
+    {
+      "date": "2026-01-19",
+      "commits": 1,
+      "added": 383,
+      "deleted": 29,
+      "firstCommit": "07:21 pm",
+      "lastCommit": "07:21 pm",
+      "repos": [
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 1,
+          "added": 383,
+          "deleted": 29
+        }
+      ]
+    },
+    {
+      "date": "2026-01-20",
+      "commits": 2,
+      "added": 4,
+      "deleted": 9,
+      "firstCommit": "05:41 pm",
+      "lastCommit": "05:57 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 2,
+          "added": 4,
+          "deleted": 9
+        }
+      ]
+    },
+    {
+      "date": "2026-01-23",
+      "commits": 1,
+      "added": 107,
+      "deleted": 441,
+      "firstCommit": "02:51 pm",
+      "lastCommit": "02:51 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 107,
+          "deleted": 441
+        }
+      ]
+    },
+    {
+      "date": "2026-01-28",
+      "commits": 2,
+      "added": 31869,
+      "deleted": 31846,
+      "firstCommit": "03:52 pm",
+      "lastCommit": "08:07 pm",
+      "repos": [
+        {
+          "name": "api-schedules",
+          "branch": "task/bump-entity-node",
+          "commits": 1,
+          "added": 31820,
+          "deleted": 31820
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 49,
+          "deleted": 26
+        }
+      ]
+    },
+    {
+      "date": "2026-02-02",
+      "commits": 8,
+      "added": 1107,
+      "deleted": 922,
+      "firstCommit": "11:57 am",
+      "lastCommit": "10:58 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 1065,
+          "deleted": 888
+        },
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 7,
+          "added": 42,
+          "deleted": 34
+        }
+      ]
+    },
+    {
+      "date": "2026-02-03",
+      "commits": 2,
+      "added": 98,
+      "deleted": 62,
+      "firstCommit": "09:54 am",
+      "lastCommit": "10:13 am",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 2,
+          "added": 98,
+          "deleted": 62
+        }
+      ]
+    },
+    {
+      "date": "2026-02-04",
+      "commits": 5,
+      "added": 407,
+      "deleted": 71,
+      "firstCommit": "12:50 am",
+      "lastCommit": "02:06 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 37,
+          "deleted": 51
+        },
+        {
+          "name": "nimblee",
+          "branch": "main",
+          "commits": 4,
+          "added": 370,
+          "deleted": 20
+        }
+      ]
+    },
+    {
+      "date": "2026-02-06",
+      "commits": 20,
+      "added": 3835,
+      "deleted": 1764,
+      "firstCommit": "03:47 pm",
+      "lastCommit": "10:24 pm",
+      "repos": [
+        {
+          "name": "nimblee",
+          "branch": "main",
+          "commits": 20,
+          "added": 3835,
+          "deleted": 1764
+        }
+      ]
+    },
+    {
+      "date": "2026-02-09",
+      "commits": 3,
+      "added": 552,
+      "deleted": 116,
+      "firstCommit": "11:50 am",
+      "lastCommit": "08:35 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 3,
+          "added": 552,
+          "deleted": 116
+        }
+      ]
+    },
+    {
+      "date": "2026-02-10",
+      "commits": 1,
+      "added": 0,
+      "deleted": 6,
+      "firstCommit": "12:30 pm",
+      "lastCommit": "12:30 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 0,
+          "deleted": 6
+        }
+      ]
+    },
+    {
+      "date": "2026-02-11",
+      "commits": 1,
+      "added": 16,
+      "deleted": 7,
+      "firstCommit": "01:38 pm",
+      "lastCommit": "01:38 pm",
+      "repos": [
+        {
+          "name": "audit-admin",
+          "branch": "master",
+          "commits": 1,
+          "added": 16,
+          "deleted": 7
+        }
+      ]
+    },
+    {
+      "date": "2026-02-13",
+      "commits": 1,
+      "added": 55,
+      "deleted": 37,
+      "firstCommit": "02:23 pm",
+      "lastCommit": "02:23 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 55,
+          "deleted": 37
+        }
+      ]
+    },
+    {
+      "date": "2026-02-23",
+      "commits": 1,
+      "added": 1957,
+      "deleted": 3681,
+      "firstCommit": "04:31 pm",
+      "lastCommit": "04:31 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 1,
+          "added": 1957,
+          "deleted": 3681
+        }
+      ]
+    },
+    {
+      "date": "2026-02-24",
+      "commits": 25,
+      "added": 3136,
+      "deleted": 3227,
+      "firstCommit": "04:32 pm",
+      "lastCommit": "05:06 pm",
+      "repos": [
+        {
+          "name": "admin-lite",
+          "branch": "refactor/questionnaire-preview-decomposition",
+          "commits": 25,
+          "added": 3136,
+          "deleted": 3227
+        }
+      ]
+    },
+    {
+      "date": "2026-03-02",
+      "commits": 4,
+      "added": 2884,
+      "deleted": 1319,
+      "firstCommit": "10:44 am",
+      "lastCommit": "11:57 pm",
+      "repos": [
+        {
+          "name": "nimbly-common",
+          "branch": "feat/org-media-limits",
+          "commits": 2,
+          "added": 13,
+          "deleted": 3
+        },
+        {
+          "name": "audit-lite",
+          "branch": "feat/expo-sdk-54-ios-sdk-26-upgrade",
+          "commits": 2,
+          "added": 2871,
+          "deleted": 1316
+        }
+      ]
+    }
+  ]
+}
