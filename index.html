@@ -157,6 +157,20 @@
   .filter-input::placeholder { color: var(--muted); }
   .filter-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
 
+  .month-group { margin-bottom: 4px; }
+  .month-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 6px;
+    cursor: pointer; user-select: none;
+    color: var(--muted); font-size: 12px; font-weight: 600;
+    transition: background 0.1s;
+  }
+  .month-header:hover { background: rgba(88,166,255,0.05); color: var(--text); }
+  .month-arrow { font-size: 10px; transition: transform 0.15s; display: inline-block; width: 10px; }
+  .month-header.collapsed .month-arrow { transform: rotate(-90deg); }
+  .month-rows { overflow: hidden; }
+  .month-header.collapsed + .month-rows { display: none; }
+
   .log-row {
     display: flex; align-items: center; gap: 12px;
     padding: 8px 10px;
@@ -552,12 +566,20 @@ function renderRepoBars(days) {
 
 function renderRecentLogs(days) {
   const sorted = [...days].reverse();
+  const total  = sorted.length;
+
+  // Group by YYYY-MM
+  const groups = new Map();
+  sorted.forEach(d => {
+    const key = d.date.slice(0, 7);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(d);
+  });
 
   function rowHTML(d) {
     const repos = d.repos?.map(r => r.name).join(', ') || '—';
     const time  = d.firstCommit && d.lastCommit ? `${d.firstCommit} – ${d.lastCommit}` : '';
-    return `
-      <div class="log-row" data-date="${d.date}" data-repos="${repos.toLowerCase()}" onclick="openDay('${d.date}')">
+    return `<div class="log-row" data-date="${d.date}" data-repos="${repos.toLowerCase()}" onclick="openDay('${d.date}')">
         <div class="date">${d.date}</div>
         <div class="log-repos">${repos}</div>
         <div class="log-meta">${time}</div>
@@ -565,26 +587,63 @@ function renderRecentLogs(days) {
       </div>`;
   }
 
-  document.getElementById('recent-logs').innerHTML = sorted.map(rowHTML).join('');
-  document.getElementById('filter-count').textContent = `${sorted.length} days`;
+  function monthLabel(key) {
+    const [y, m] = key.split('-');
+    return new Date(y, m - 1).toLocaleString('en', { month: 'long', year: 'numeric' });
+  }
+
+  let firstGroup = true;
+  const html = [...groups.entries()].map(([key, groupDays]) => {
+    const collapsed = firstGroup ? '' : ' collapsed';
+    firstGroup = false;
+    return `<div class="month-group" data-month="${key}">
+      <div class="month-header${collapsed}" onclick="toggleMonth(this)">
+        <span class="month-arrow">▾</span>
+        <span class="month-name">${monthLabel(key)}</span>
+        <span class="month-count" style="font-weight:400;margin-left:4px">· <span class="month-visible">${groupDays.length}</span> day${groupDays.length !== 1 ? 's' : ''}</span>
+      </div>
+      <div class="month-rows">${groupDays.map(rowHTML).join('')}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('recent-logs').innerHTML = html;
+  document.getElementById('filter-count').textContent = `${total} days`;
 
   const input = document.getElementById('filter-input');
 
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
     let visible = 0;
-    document.querySelectorAll('#recent-logs .log-row').forEach(row => {
-      const match = !q
-        || row.dataset.date.includes(q)
-        || row.dataset.repos.includes(q);
-      row.style.display = match ? '' : 'none';
-      if (match) visible++;
+
+    document.querySelectorAll('.month-group').forEach(group => {
+      let groupVisible = 0;
+      group.querySelectorAll('.log-row').forEach(row => {
+        const match = !q || row.dataset.date.includes(q) || row.dataset.repos.includes(q);
+        row.style.display = match ? '' : 'none';
+        if (match) { visible++; groupVisible++; }
+      });
+
+      const header = group.querySelector('.month-header');
+      const rows   = group.querySelector('.month-rows');
+      const countEl = group.querySelector('.month-visible');
+
+      if (q) {
+        // Expand groups with matches, hide groups with no matches
+        group.style.display = groupVisible > 0 ? '' : 'none';
+        header.classList.remove('collapsed');
+        rows.style.display = '';
+        if (countEl) countEl.textContent = groupVisible;
+      } else {
+        group.style.display = '';
+        rows.style.display = '';
+        if (countEl) countEl.textContent = group.querySelectorAll('.log-row').length;
+      }
     });
+
     document.getElementById('filter-count').textContent =
-      q ? `${visible} of ${sorted.length}` : `${sorted.length} days`;
+      q ? `${visible} of ${total}` : `${total} days`;
   });
 
-  // Press / to focus filter from anywhere
   document.addEventListener('keydown', e => {
     if (e.key === '/' && document.activeElement !== input) {
       e.preventDefault();
@@ -596,6 +655,10 @@ function renderRecentLogs(days) {
       input.blur();
     }
   });
+}
+
+function toggleMonth(header) {
+  header.classList.toggle('collapsed');
 }
 
 async function openDay(date) {
