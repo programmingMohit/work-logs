@@ -117,6 +117,27 @@
   .repo-bar-fill { height: 100%; background: var(--green-3); border-radius: 4px; transition: width 0.4s ease; }
   .repo-commits { font-size: 11px; color: var(--muted); width: 50px; text-align: right; flex-shrink: 0; }
 
+  .filter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .filter-input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 10px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .filter-input:focus { border-color: var(--accent); }
+  .filter-input::placeholder { color: var(--muted); }
+  .filter-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
   .log-row {
     display: flex; align-items: center; gap: 12px;
     padding: 8px 10px;
@@ -226,6 +247,10 @@
     </div>
     <div class="recent-wrap">
       <div class="section-title">All Days</div>
+      <div class="filter-wrap">
+        <input class="filter-input" id="filter-input" type="text" placeholder='Filter by date, repo… (press / to focus)'>
+        <span class="filter-count" id="filter-count"></span>
+      </div>
       <div id="recent-logs"></div>
     </div>
   </div>
@@ -435,17 +460,50 @@ function renderRepoBars(days) {
 
 function renderRecentLogs(days) {
   const sorted = [...days].reverse();
-  document.getElementById('recent-logs').innerHTML = sorted.map(d => {
+
+  function rowHTML(d) {
     const repos = d.repos?.map(r => r.name).join(', ') || '—';
     const time  = d.firstCommit && d.lastCommit ? `${d.firstCommit} – ${d.lastCommit}` : '';
     return `
-      <div class="log-row" data-date="${d.date}" onclick="openDay('${d.date}')">
+      <div class="log-row" data-date="${d.date}" data-repos="${repos.toLowerCase()}" onclick="openDay('${d.date}')">
         <div class="date">${d.date}</div>
         <div class="log-repos">${repos}</div>
         <div class="log-meta">${time}</div>
         <div class="commits-badge">${d.commits}</div>
       </div>`;
-  }).join('');
+  }
+
+  document.getElementById('recent-logs').innerHTML = sorted.map(rowHTML).join('');
+  document.getElementById('filter-count').textContent = `${sorted.length} days`;
+
+  const input = document.getElementById('filter-input');
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let visible = 0;
+    document.querySelectorAll('#recent-logs .log-row').forEach(row => {
+      const match = !q
+        || row.dataset.date.includes(q)
+        || row.dataset.repos.includes(q);
+      row.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    document.getElementById('filter-count').textContent =
+      q ? `${visible} of ${sorted.length}` : `${sorted.length} days`;
+  });
+
+  // Press / to focus filter from anywhere
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== input) {
+      e.preventDefault();
+      input.focus();
+    }
+    if (e.key === 'Escape' && document.activeElement === input) {
+      input.value = '';
+      input.dispatchEvent(new Event('input'));
+      input.blur();
+    }
+  });
 }
 
 async function openDay(date) {
