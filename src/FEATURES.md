@@ -31,7 +31,7 @@ Each daily log (`YYYY/MM/YYYY-MM-DD.md`) contains:
 - **5pm–11pm hourly**: pulls remote to sync local, checks if log exists, opens a Terminal window with the interactive worklog prompt if not
 - **00:00 midnight**: pulls remote to sync local, auto-pushes silently (`--auto` mode) if still no log for today
 - Guards against duplicate Terminal windows — skips if `worklog.mjs` is already running (`pgrep` check)
-- Once a log is pushed for the day, all subsequent triggers exit silently
+- Once a log is pushed with a `### Summary` or `### Tasks` section, all subsequent triggers exit silently; logs with only a `### Notes` section still trigger the reprompt
 - Missed triggers fire on next Mac wake (launchd behavior)
 
 ## Interactive CLI
@@ -44,6 +44,7 @@ Each daily log (`YYYY/MM/YYYY-MM-DD.md`) contains:
 | `worklog edit [YYYY-MM-DD]` | Edit a past log (defaults to today). Pulls from remote, opens in `$EDITOR`, prompts to push on save. Discarding reverts the file cleanly |
 | `worklog regen [YYYY-MM-DD]` | Delete and regenerate a log entry via AI. Shows preview, prompts to push. Discarding restores the original. Defaults to today |
 | `worklog note "text"` | Append a quick note to today's log and push immediately. Adds a `### Notes` section if one doesn't exist. Creates a minimal log if none exists yet |
+| `worklog push [YYYY-MM-DD]` | Push an existing log file without regenerating. Updates `data.json` (reusing existing metadata if available) and syncs the dashboard. Defaults to today |
 | `worklog --auto` | Non-interactive mode used by midnight trigger — generates and pushes without prompting |
 
 ### Interactive prompt options

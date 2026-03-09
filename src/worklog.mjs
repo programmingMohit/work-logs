@@ -601,7 +601,7 @@ async function main() {
 
   await maybeGenerateRollup('week');
   await maybeGenerateRollup('month');
-  pushLog(entry);
+  pushLog(entry, activity);
 }
 
 // ─── worklog view [date] ──────────────────────────────────────────────────────
@@ -903,6 +903,54 @@ async function cmdEdit() {
   log(`Pushed → https://github.com/${GH_PERSONAL}/work-logs/blob/main/${y}/${m}/${date}.md`);
 }
 
+// ─── worklog push [date] ──────────────────────────────────────────────────────
+
+async function cmdPush() {
+  const pushIdx = process.argv.indexOf('push');
+  const dateArg = process.argv[pushIdx + 1];
+  const date    = (dateArg && /^\d{4}-\d{2}-\d{2}$/.test(dateArg)) ? dateArg : today;
+
+  const [y, m] = date.split('-');
+  const filePath = join(STAGING_DIR, y, m, `${date}.md`);
+
+  ensureRepo();
+
+  if (!existsSync(filePath)) {
+    process.stderr.write(`No log found for ${date}.\n`);
+    process.exit(1);
+  }
+
+  // Build a minimal activity object from data.json if available (for data.json update)
+  const dataFile = join(STAGING_DIR, 'data.json');
+  let activity = { commits: [], totalAdded: 0, totalDeleted: 0, firstCommitTime: null, lastCommitTime: null, repoStats: [] };
+  if (existsSync(dataFile)) {
+    try {
+      const data = JSON.parse(readFileSync(dataFile, 'utf8'));
+      const existing = data.days.find(d => d.date === date);
+      if (existing) {
+        activity = {
+          commits:         Array(existing.commits).fill({}),
+          totalAdded:      existing.added,
+          totalDeleted:    existing.deleted,
+          firstCommitTime: existing.firstCommit,
+          lastCommitTime:  existing.lastCommit,
+          repoStats:       existing.repos || [],
+        };
+      }
+    } catch { /* use empty activity */ }
+  }
+
+  updateDataJson(activity);
+  syncDashboard();
+  run(`git -C "${STAGING_DIR}" add .`);
+  run(`git -C "${STAGING_DIR}" -c user.name="${GH_PERSONAL}" -c user.email="${GH_PERSONAL}@users.noreply.github.com" commit -m "worklog: ${date}"`);
+  const pushResult = run(`git -C "${STAGING_DIR}" push "${LOGS_REPO}" main 2>&1`);
+  if (pushResult.includes('error') || pushResult.includes('fatal')) {
+    throw new Error(`Push failed: ${pushResult}`);
+  }
+  log(`Pushed → https://github.com/${GH_PERSONAL}/work-logs/blob/main/${y}/${m}/${date}.md`);
+}
+
 // ─── Dispatch ─────────────────────────────────────────────────────────────────
 
 if (process.argv.includes('regen')) {
@@ -927,6 +975,11 @@ if (process.argv.includes('regen')) {
   });
 } else if (process.argv.includes('edit')) {
   cmdEdit().catch(err => {
+    process.stderr.write(`Fatal: ${err.message}\n`);
+    process.exit(1);
+  });
+} else if (process.argv.includes('push')) {
+  cmdPush().catch(err => {
     process.stderr.write(`Fatal: ${err.message}\n`);
     process.exit(1);
   });
