@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohit's Work Log</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0d1117;
+    --surface:   #161b22;
+    --border:    #30363d;
+    --text:      #e6edf3;
+    --muted:     #8b949e;
+    --accent:    #58a6ff;
+    --green-0:   #161b22;
+    --green-1:   #0e4429;
+    --green-2:   #006d32;
+    --green-3:   #26a641;
+    --green-4:   #39d353;
+    --added:     #3fb950;
+    --deleted:   #f85149;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header h1 { font-size: 16px; font-weight: 600; }
+  header .sub { color: var(--muted); font-size: 13px; }
+  header .staleness { font-size: 11px; margin-left: auto; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--muted); }
+  header .staleness.stale { border-color: #f85149; color: #f85149; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    min-height: calc(100vh - 53px);
+  }
+
+  .main { padding: 28px 32px; border-right: 1px solid var(--border); overflow-y: auto; }
+  .panel { padding: 24px; overflow-y: auto; background: var(--surface); }
+  .panel.empty { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 13px; }
+
+  .stats { display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    flex: 1;
+    min-width: 120px;
+  }
+  .stat .val { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 12px;
+  }
+
+  .heatmap-wrap { margin-bottom: 32px; }
+  .heatmap-scroll { overflow-x: auto; padding-bottom: 4px; }
+  .heatmap { display: flex; gap: 3px; }
+  .heatmap-col { display: flex; flex-direction: column; gap: 3px; }
+  .heatmap-col .month-label {
+    font-size: 10px;
+    color: var(--muted);
+    height: 13px;
+    line-height: 13px;
+    white-space: nowrap;
+  }
+  .cell {
+    width: 13px; height: 13px;
+    border-radius: 2px;
+    background: var(--green-0);
+    cursor: default;
+    transition: opacity 0.1s;
+  }
+  .cell[data-date] { cursor: pointer; }
+  .cell[data-date]:hover { opacity: 0.8; outline: 1px solid rgba(255,255,255,0.3); }
+  .cell.selected { outline: 2px solid var(--accent) !important; opacity: 1 !important; }
+  .cell[data-level="1"] { background: var(--green-1); }
+  .cell[data-level="2"] { background: var(--green-2); }
+  .cell[data-level="3"] { background: var(--green-3); }
+  .cell[data-level="4"] { background: var(--green-4); }
+
+  .heatmap-legend {
+    display: flex; align-items: center; gap: 4px;
+    margin-top: 8px; justify-content: flex-end;
+    font-size: 11px; color: var(--muted);
+  }
+
+  .trend-wrap { margin-bottom: 32px; }
+  .trend-chart { width: 100%; }
+  .trend-dot { cursor: crosshair; }
+  .trend-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
+  .trend-header .section-title { margin-bottom: 0; }
+  .trend-legend { display: none; align-items: center; gap: 12px; font-size: 11px; color: var(--muted); }
+  .trend-legend.visible { display: flex; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-line { width: 18px; height: 2px; border-radius: 1px; }
+  .legend-line.added { background: #3fb950; }
+  .legend-line.deleted { background: #f85149; border-top: 2px dashed #f85149; height: 0; }
+  .toggle-group { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .toggle-btn {
+    background: none; border: none; color: var(--muted);
+    font-size: 11px; padding: 4px 10px; cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+  }
+  .toggle-btn:not(:last-child) { border-right: 1px solid var(--border); }
+  .toggle-btn:hover { background: var(--border); color: var(--text); }
+  .toggle-btn.active { background: var(--border); color: var(--text); font-weight: 600; }
+
+  .repos-wrap { margin-bottom: 32px; }
+  .repo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .repo-name { width: 160px; font-size: 12px; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+  .repo-bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .repo-bar-fill { height: 100%; background: var(--green-3); border-radius: 4px; transition: width 0.4s ease; }
+  .repo-commits { font-size: 11px; color: var(--muted); width: 50px; text-align: right; flex-shrink: 0; }
+
+  .filter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .filter-input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px 10px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .filter-input:focus { border-color: var(--accent); }
+  .filter-input::placeholder { color: var(--muted); }
+  .filter-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+  .month-group { margin-bottom: 4px; }
+  .month-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 6px;
+    cursor: pointer; user-select: none;
+    color: var(--muted); font-size: 12px; font-weight: 600;
+    transition: background 0.1s;
+  }
+  .month-header:hover { background: rgba(88,166,255,0.05); color: var(--text); }
+  .month-arrow { font-size: 10px; transition: transform 0.15s; display: inline-block; width: 10px; }
+  .month-header.collapsed .month-arrow { transform: rotate(-90deg); }
+  .month-rows { overflow: hidden; }
+  .month-header.collapsed + .month-rows { display: none; }
+
+  .log-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .log-row:hover, .log-row.active { background: rgba(88,166,255,0.08); }
+  .log-row .date { font-size: 12px; color: var(--muted); width: 88px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .log-row .log-repos { font-size: 12px; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .log-row .log-meta { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+  .log-row .commits-badge {
+    font-size: 11px; padding: 1px 7px; border-radius: 10px;
+    background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .panel-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 16px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .panel-date { font-size: 15px; font-weight: 600; }
+  .panel-stats { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
+  .panel-stat { font-size: 11px; color: var(--muted); }
+  .panel-stat .added { color: var(--added); }
+  .panel-stat .deleted { color: var(--deleted); }
+  .close-btn {
+    background: none; border: none; color: var(--muted);
+    font-size: 18px; cursor: pointer; line-height: 1; padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .close-btn:hover { background: var(--border); color: var(--text); }
+  .panel-loading { color: var(--muted); font-size: 13px; padding: 20px 0; }
+
+  .md-body h2 { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+  .md-body h3 { font-size: 13px; font-weight: 600; margin: 14px 0 6px; color: var(--accent); }
+  .md-body h4 { font-size: 12px; font-weight: 600; margin: 10px 0 4px; color: var(--text); }
+  .md-body p { margin-bottom: 8px; font-size: 13px; color: var(--muted); }
+  .md-body ul { padding-left: 18px; margin-bottom: 8px; }
+  .md-body li { font-size: 12px; margin-bottom: 3px; color: var(--muted); }
+  .md-body li strong { color: var(--text); }
+  .md-body code {
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 11px;
+    background: rgba(110,118,129,0.15);
+    padding: 1px 5px; border-radius: 4px;
+    color: var(--text);
+  }
+  .md-body a { color: var(--accent); text-decoration: none; }
+  .md-body a:hover { text-decoration: underline; }
+  .md-body blockquote {
+    border-left: 3px solid var(--border);
+    padding: 4px 12px; margin: 8px 0;
+    color: var(--muted); font-size: 12px;
+  }
+  .md-body hr { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+  .tooltip {
+    position: fixed; pointer-events: none;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 6px; padding: 6px 10px;
+    font-size: 12px; color: var(--text);
+    z-index: 1000; display: none;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .panel { border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg width="20" height="20" viewBox="0 0 16 16" fill="#58a6ff"><path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8z"/></svg>
+  <h1>Work Log</h1>
+  <span class="sub" id="subtitle">Loading...</span>
+  <span class="staleness" id="staleness" style="display:none"></span>
+</header>
+
+<div class="layout">
+  <div class="main" id="main">
+    <div class="stats" id="stats-row"></div>
+    <div class="heatmap-wrap">
+      <div class="section-title">Contributions</div>
+      <div class="heatmap-scroll">
+        <div class="heatmap" id="heatmap"></div>
+      </div>
+      <div class="heatmap-legend">
+        Less
+        <div class="cell" data-level="0"></div>
+        <div class="cell" data-level="1"></div>
+        <div class="cell" data-level="2"></div>
+        <div class="cell" data-level="3"></div>
+        <div class="cell" data-level="4"></div>
+        More
+      </div>
+    </div>
+    <div class="trend-wrap">
+      <div class="trend-header">
+        <div class="section-title">Weekly Trend</div>
+        <div class="trend-legend" id="trend-legend">
+          <div class="legend-item"><div class="legend-line added"></div> Added</div>
+          <div class="legend-item"><div class="legend-line deleted"></div> Deleted</div>
+        </div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="btn-commits" onclick="setTrendMetric('commits')">Commits</button>
+          <button class="toggle-btn" id="btn-lines" onclick="setTrendMetric('lines')">Lines</button>
+        </div>
+      </div>
+      <div id="trend-chart" class="trend-chart"></div>
+    </div>
+    <div class="repos-wrap">
+      <div class="section-title">Repositories</div>
+      <div id="repo-bars"></div>
+    </div>
+    <div class="recent-wrap">
+      <div class="section-title">All Days</div>
+      <div class="filter-wrap">
+        <input class="filter-input" id="filter-input" type="text" placeholder='Filter by date, repo… (press / to focus)'>
+        <span class="filter-count" id="filter-count"></span>
+      </div>
+      <div id="recent-logs"></div>
+    </div>
+  </div>
+
+  <div class="panel empty" id="panel">
+    <span>Select a day to view the log</span>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const DATA_URL = 'https://raw.githubusercontent.com/programmingMohit/work-logs/main/data.json';
+const RAW_BASE = 'https://raw.githubusercontent.com/programmingMohit/work-logs/main';
+
+let data = null;
+
+async function init() {
+  const res = await fetch(DATA_URL);
+  data = await res.json();
+  render();
+}
+
+function render() {
+  const days = data.days;
+  const totalCommits = days.reduce((s, d) => s + d.commits, 0);
+  const totalAdded   = days.reduce((s, d) => s + (d.added   || 0), 0);
+  const totalDeleted = days.reduce((s, d) => s + (d.deleted || 0), 0);
+
+  document.getElementById('subtitle').textContent =
+    `${days[0].date} → ${days[days.length - 1].date}`;
+
+  // Staleness indicator
+  if (data.updated) {
+    const daysSince = Math.floor((Date.now() - new Date(data.updated)) / 86400000);
+    const label = daysSince === 0 ? 'Updated today'
+      : daysSince === 1 ? 'Updated yesterday'
+      : `Updated ${daysSince} days ago`;
+    const el = document.getElementById('staleness');
+    el.textContent = label;
+    el.style.display = '';
+    if (daysSince >= 3) el.classList.add('stale');
+  }
+
+  document.getElementById('stats-row').innerHTML = [
+    { val: days.length,             lbl: 'Active Days' },
+    { val: totalCommits,            lbl: 'Commits' },
+    { val: '+' + fmt(totalAdded),   lbl: 'Lines Added' },
+    { val: '-' + fmt(totalDeleted), lbl: 'Lines Deleted' },
+  ].map(s => `<div class="stat"><div class="val">${s.val}</div><div class="lbl">${s.lbl}</div></div>`).join('');
+
+  renderHeatmap(days);
+  renderTrendChart(days, 'commits');
+  renderRepoBars(days);
+  renderRecentLogs(days);
+}
+
+function renderHeatmap(days) {
+  const byDate = Object.fromEntries(days.map(d => [d.date, d]));
+  const maxCommits = Math.max(...days.map(d => d.commits));
+
+  function level(n) {
+    if (!n) return 0;
+    if (n <= maxCommits * 0.25) return 1;
+    if (n <= maxCommits * 0.50) return 2;
+    if (n <= maxCommits * 0.75) return 3;
+    return 4;
+  }
+
+  const first = new Date(days[0].date);
+  const last  = new Date(days[days.length - 1].date);
+  const start = new Date(first);
+  start.setDate(start.getDate() - start.getDay());
+
+  const cols = [];
+  let cur = new Date(start);
+  while (cur <= last) {
+    const col = { month: null, cells: [] };
+    for (let i = 0; i < 7; i++) {
+      const iso = cur.toLocaleDateString('en-CA');
+      if (i === 0 && cur.getDate() <= 7) col.month = cur.toLocaleString('en', { month: 'short' });
+      col.cells.push({ date: iso, data: byDate[iso] || null });
+      cur.setDate(cur.getDate() + 1);
+    }
+    cols.push(col);
+  }
+
+  const container = document.getElementById('heatmap');
+  container.innerHTML = cols.map(col => `
+    <div class="heatmap-col">
+      <div class="month-label">${col.month || ''}</div>
+      ${col.cells.map(c => {
+        const lv = c.data ? level(c.data.commits) : 0;
+        const attr = c.data ? `data-date="${c.date}" data-level="${lv}"` : `data-level="0"`;
+        return `<div class="cell" ${attr}></div>`;
+      }).join('')}
+    </div>`).join('');
+
+  const tooltip = document.getElementById('tooltip');
+  container.addEventListener('mousemove', e => {
+    const cell = e.target.closest('[data-date]');
+    if (!cell) { tooltip.style.display = 'none'; return; }
+    const d = byDate[cell.dataset.date];
+    tooltip.style.display = 'block';
+    tooltip.style.left = (e.clientX + 12) + 'px';
+    tooltip.style.top  = (e.clientY - 28) + 'px';
+    tooltip.textContent = d
+      ? `${d.date} · ${d.commits} commit${d.commits !== 1 ? 's' : ''} · +${d.added}/-${d.deleted}`
+      : cell.dataset.date;
+  });
+  container.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+  container.addEventListener('click', e => {
+    const cell = e.target.closest('[data-date]');
+    if (cell) openDay(cell.dataset.date);
+  });
+}
+
+let _trendDays = null;
+
+function setTrendMetric(metric) {
+  document.getElementById('btn-commits').classList.toggle('active', metric === 'commits');
+  document.getElementById('btn-lines').classList.toggle('active', metric === 'lines');
+  document.getElementById('trend-legend').classList.toggle('visible', metric === 'lines');
+  if (_trendDays) renderTrendChart(_trendDays, metric);
+}
+
+function renderTrendChart(days, metric) {
+  _trendDays = days;
+
+  function weekKey(dateStr) {
+    const d = new Date(dateStr);
+    const monday = new Date(d);
+    monday.setDate(d.getDate() - (d.getDay() === 0 ? 6 : d.getDay() - 1));
+    return monday.toLocaleDateString('en-CA');
+  }
+
+  // Group by week
+  const weekMap = new Map();
+  days.forEach(d => {
+    const wk = weekKey(d.date);
+    if (!weekMap.has(wk)) weekMap.set(wk, { commits: 0, added: 0, deleted: 0 });
+    const w = weekMap.get(wk);
+    w.commits += d.commits;
+    w.added   += d.added   || 0;
+    w.deleted += d.deleted || 0;
+  });
+  const entries = [...weekMap.entries()].sort(([a], [b]) => a.localeCompare(b));
+  if (entries.length < 2) return;
+
+  const W = 800, H = 100;
+  const PAD = { top: 12, right: 12, bottom: 22, left: 36 };
+  const cW = W - PAD.left - PAD.right;
+  const cH = H - PAD.top  - PAD.bottom;
+
+  const px = i => PAD.left + (i / (entries.length - 1)) * cW;
+
+  // X-axis labels
+  const interval = Math.max(1, Math.ceil(entries.length / 10));
+  const xLabels = entries.map(([wk], i) => {
+    if (i % interval !== 0) return '';
+    const d = new Date(wk);
+    const lbl = d.toLocaleString('en', { month: 'short' }) + " '" + String(d.getFullYear()).slice(2);
+    return `<text x="${px(i)}" y="${H - 4}" fill="#8b949e" font-size="9" text-anchor="middle">${lbl}</text>`;
+  }).join('');
+
+  let svgContent = '';
+
+  if (metric === 'commits') {
+    const values  = entries.map(([, w]) => w.commits);
+    const maxVal  = Math.max(...values) || 1;
+    const py = v => PAD.top + cH - (v / maxVal) * cH;
+
+    const grid = [0.5, 1].map(f => {
+      const yv = PAD.top + cH - f * cH;
+      return `<line x1="${PAD.left}" y1="${yv}" x2="${W - PAD.right}" y2="${yv}" stroke="#30363d" stroke-width="0.5"/>
+        <text x="${PAD.left - 4}" y="${yv + 3.5}" fill="#8b949e" font-size="8" text-anchor="end">${Math.round(f * maxVal)}</text>`;
+    }).join('');
+
+    const linePoints = values.map((v, i) => `${px(i)},${py(v)}`).join(' ');
+    const areaPoints = `${px(0)},${PAD.top + cH} ${linePoints} ${px(entries.length - 1)},${PAD.top + cH}`;
+    const threshold  = maxVal * 0.85;
+    const peakDots   = entries.map(([, w], i) =>
+      w.commits >= threshold ? `<circle cx="${px(i)}" cy="${py(w.commits)}" r="2.5" fill="var(--green-4)" pointer-events="none"/>` : ''
+    ).join('');
+    const dots = entries.map(([wk, w], i) =>
+      `<circle class="trend-dot" cx="${px(i)}" cy="${py(w.commits)}" r="5" fill="transparent" data-week="${wk}" data-commits="${w.commits}"/>`
+    ).join('');
+
+    svgContent = `
+      <defs>
+        <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#26a641" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#26a641" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      ${grid}
+      <polygon points="${areaPoints}" fill="url(#trendGrad)"/>
+      <polyline points="${linePoints}" fill="none" stroke="#26a641" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${peakDots}${dots}${xLabels}`;
+
+  } else {
+    const addedVals   = entries.map(([, w]) => w.added);
+    const deletedVals = entries.map(([, w]) => w.deleted);
+    const maxVal      = Math.max(...addedVals, ...deletedVals) || 1;
+    const py = v => PAD.top + cH - (v / maxVal) * cH;
+
+    const grid = [0.5, 1].map(f => {
+      const yv  = PAD.top + cH - f * cH;
+      const lbl = f * maxVal >= 1000 ? (f * maxVal / 1000).toFixed(1) + 'k' : Math.round(f * maxVal);
+      return `<line x1="${PAD.left}" y1="${yv}" x2="${W - PAD.right}" y2="${yv}" stroke="#30363d" stroke-width="0.5"/>
+        <text x="${PAD.left - 4}" y="${yv + 3.5}" fill="#8b949e" font-size="8" text-anchor="end">${lbl}</text>`;
+    }).join('');
+
+    const addedPoints   = addedVals.map((v, i)   => `${px(i)},${py(v)}`).join(' ');
+    const deletedPoints = deletedVals.map((v, i)  => `${px(i)},${py(v)}`).join(' ');
+    const areaPoints    = `${px(0)},${PAD.top + cH} ${addedPoints} ${px(entries.length - 1)},${PAD.top + cH}`;
+
+    // Transparent hover dots carrying both values
+    const dots = entries.map(([wk, w], i) =>
+      `<circle class="trend-dot" cx="${px(i)}" cy="${py(w.added)}" r="5" fill="transparent"
+        data-week="${wk}" data-added="${w.added}" data-deleted="${w.deleted}"/>`
+    ).join('');
+
+    svgContent = `
+      <defs>
+        <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3fb950" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#3fb950" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      ${grid}
+      <polygon points="${areaPoints}" fill="url(#trendGrad)"/>
+      <polyline points="${addedPoints}"   fill="none" stroke="#3fb950" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <polyline points="${deletedPoints}" fill="none" stroke="#f85149" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="3,2"/>
+      ${dots}${xLabels}`;
+  }
+
+  document.getElementById('trend-chart').innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" id="trend-svg">${svgContent}</svg>`;
+
+  const tooltip = document.getElementById('tooltip');
+  document.getElementById('trend-svg').addEventListener('mousemove', e => {
+    const dot = e.target.closest('.trend-dot');
+    if (!dot) { tooltip.style.display = 'none'; return; }
+    tooltip.style.display = 'block';
+    tooltip.style.left = (e.clientX + 12) + 'px';
+    tooltip.style.top  = (e.clientY - 28) + 'px';
+    tooltip.textContent = metric === 'commits'
+      ? `w/c ${dot.dataset.week} · ${dot.dataset.commits} commits`
+      : `w/c ${dot.dataset.week} · +${Number(dot.dataset.added).toLocaleString()} / -${Number(dot.dataset.deleted).toLocaleString()}`;
+  });
+  document.getElementById('trend-svg').addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+  });
+}
+
+function renderRepoBars(days) {
+  const repos = {};
+  days.forEach(d => d.repos?.forEach(r => { repos[r.name] = (repos[r.name] || 0) + r.commits; }));
+  const sorted = Object.entries(repos).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const max = sorted[0][1];
+  document.getElementById('repo-bars').innerHTML = sorted.map(([name, n]) => `
+    <div class="repo-row">
+      <div class="repo-name">${name}</div>
+      <div class="repo-bar-track"><div class="repo-bar-fill" style="width:${(n/max*100).toFixed(1)}%"></div></div>
+      <div class="repo-commits">${n}</div>
+    </div>`).join('');
+}
+
+function renderRecentLogs(days) {
+  const sorted = [...days].reverse();
+  const total  = sorted.length;
+
+  // Group by YYYY-MM
+  const groups = new Map();
+  sorted.forEach(d => {
+    const key = d.date.slice(0, 7);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(d);
+  });
+
+  function rowHTML(d) {
+    const repos = d.repos?.map(r => r.name).join(', ') || '—';
+    const time  = d.firstCommit && d.lastCommit ? `${d.firstCommit} – ${d.lastCommit}` : '';
+    return `<div class="log-row" data-date="${d.date}" data-repos="${repos.toLowerCase()}" onclick="openDay('${d.date}')">
+        <div class="date">${d.date}</div>
+        <div class="log-repos">${repos}</div>
+        <div class="log-meta">${time}</div>
+        <div class="commits-badge">${d.commits}</div>
+      </div>`;
+  }
+
+  function monthLabel(key) {
+    const [y, m] = key.split('-');
+    return new Date(y, m - 1).toLocaleString('en', { month: 'long', year: 'numeric' });
+  }
+
+  let firstGroup = true;
+  const html = [...groups.entries()].map(([key, groupDays]) => {
+    const collapsed = firstGroup ? '' : ' collapsed';
+    firstGroup = false;
+    return `<div class="month-group" data-month="${key}">
+      <div class="month-header${collapsed}" onclick="toggleMonth(this)">
+        <span class="month-arrow">▾</span>
+        <span class="month-name">${monthLabel(key)}</span>
+        <span class="month-count" style="font-weight:400;margin-left:4px">· <span class="month-visible">${groupDays.length}</span> day${groupDays.length !== 1 ? 's' : ''}</span>
+      </div>
+      <div class="month-rows">${groupDays.map(rowHTML).join('')}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('recent-logs').innerHTML = html;
+  document.getElementById('filter-count').textContent = `${total} days`;
+
+  const input = document.getElementById('filter-input');
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let visible = 0;
+
+    document.querySelectorAll('.month-group').forEach(group => {
+      let groupVisible = 0;
+      group.querySelectorAll('.log-row').forEach(row => {
+        const match = !q || row.dataset.date.includes(q) || row.dataset.repos.includes(q);
+        row.style.display = match ? '' : 'none';
+        if (match) { visible++; groupVisible++; }
+      });
+
+      const header = group.querySelector('.month-header');
+      const rows   = group.querySelector('.month-rows');
+      const countEl = group.querySelector('.month-visible');
+
+      if (q) {
+        // Expand groups with matches, hide groups with no matches
+        group.style.display = groupVisible > 0 ? '' : 'none';
+        header.classList.remove('collapsed');
+        rows.style.display = '';
+        if (countEl) countEl.textContent = groupVisible;
+      } else {
+        group.style.display = '';
+        rows.style.display = '';
+        if (countEl) countEl.textContent = group.querySelectorAll('.log-row').length;
+      }
+    });
+
+    document.getElementById('filter-count').textContent =
+      q ? `${visible} of ${total}` : `${total} days`;
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== input) {
+      e.preventDefault();
+      input.focus();
+    }
+    if (e.key === 'Escape' && document.activeElement === input) {
+      input.value = '';
+      input.dispatchEvent(new Event('input'));
+      input.blur();
+    }
+  });
+}
+
+function toggleMonth(header) {
+  header.classList.toggle('collapsed');
+}
+
+async function openDay(date) {
+  document.querySelectorAll('.cell.selected').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.log-row.active').forEach(el => el.classList.remove('active'));
+  const cell = document.querySelector(`.cell[data-date="${date}"]`);
+  if (cell) cell.classList.add('selected');
+  const row = document.querySelector(`.log-row[data-date="${date}"]`);
+  if (row) { row.classList.add('active'); row.scrollIntoView({ block: 'nearest' }); }
+
+  const dayData = data.days.find(d => d.date === date);
+  const panel = document.getElementById('panel');
+  panel.className = 'panel';
+
+  const meta = dayData ? `
+    <div class="panel-stats">
+      <span class="panel-stat">${dayData.commits} commits</span>
+      <span class="panel-stat"><span class="added">+${dayData.added}</span> / <span class="deleted">-${dayData.deleted}</span></span>
+      ${dayData.firstCommit ? `<span class="panel-stat">${dayData.firstCommit} – ${dayData.lastCommit}</span>` : ''}
+    </div>` : '';
+
+  panel.innerHTML = `
+    <div class="panel-header">
+      <div>
+        <div class="panel-date">${date}</div>
+        ${meta}
+      </div>
+      <button class="close-btn" onclick="closePanel()">×</button>
+    </div>
+    <div id="panel-body"><div class="panel-loading">Loading log...</div></div>`;
+
+  const [y, m] = date.split('-');
+  try {
+    const res = await fetch(`${RAW_BASE}/${y}/${m}/${date}.md`);
+    if (!res.ok) throw new Error();
+    const md = await res.text();
+    document.getElementById('panel-body').innerHTML = `<div class="md-body">${marked.parse(md)}</div>`;
+  } catch {
+    document.getElementById('panel-body').innerHTML = `<div class="panel-loading">No log found for this day.</div>`;
+  }
+}
+
+function closePanel() {
+  document.querySelectorAll('.cell.selected').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.log-row.active').forEach(el => el.classList.remove('active'));
+  const panel = document.getElementById('panel');
+  panel.className = 'panel empty';
+  panel.innerHTML = '<span>Select a day to view the log</span>';
+}
+
+function fmt(n) { return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n; }
+
+init().catch(console.error);
+</script>
+</body>
+</html>
