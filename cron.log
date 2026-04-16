@@ -217,3 +217,15 @@ Gathering today's activity (2026-04-14)...
   Calendar events:0
 
 No activity found for today. Nothing to log.
+
+Gathering today's activity (2026-04-16)...
+  Git commits:    2
+  GitHub events:  0
+  Calendar events:0
+  Active:         10:46 am – 02:11 pm
+  Lines:          +6 / -4
+
+Generating log with Claude...
+Error: AI generation failed. Email sent.
+codex: spawnSync codex ENOENT
+claude: spawnSync claude ENOENT
