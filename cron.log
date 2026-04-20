@@ -229,3 +229,15 @@ Generating log with Claude...
 Error: AI generation failed. Email sent.
 codex: spawnSync codex ENOENT
 claude: spawnSync claude ENOENT
+
+Gathering today's activity (2026-04-17)...
+  Git commits:    12
+  GitHub events:  0
+  Calendar events:0
+  Active:         12:01 am – 03:24 pm
+  Lines:          +295 / -19112
+
+Generating log with Claude...
+Error: AI generation failed. Email sent.
+codex: spawnSync codex ENOENT
+claude: spawnSync claude ENOENT
