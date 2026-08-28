@@ -1334,3 +1334,118 @@ Gathering today's activity (2026-08-26)...
   Calendar events:0
 
 No activity found for today. Nothing to log.
+
+Gathering today's activity (2026-08-27)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:5
+
+Generating log with Claude...
+Error: AI generation failed. Email sent.
+codex: Reading additional input from stdin...
+OpenAI Codex v0.149.0
+--------
+workdir: /Users/mohitchakraborty
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a04332-ff1e-7622-a06f-77d64ccbb5ff
+--------
+user
+Generate a professional daily work log for 2026-08-27 based on the git and GitHub activity below.
+
+Format exactly as:
+
+## Work Log — 2026-08-27
+
+> +0 / -0 lines
+
+### Summary
+[2-3 sentences summarising the day]
+
+### Tasks & Changes
+
+#### [Task/feature name]
+- **Repo:** `repo-name` · branch: `branch-name`
+- **What was done:** [outcome-focused description]
+- **Commits:**
+  - `abc1234` — [commit message verbatim]
+  - `def5678` — [commit message verbatim]
+- **PR:** [#number — PR title](url)  ← only if PR data exists
+- **Tickets:** [FZ-123](url) · [Notion](url)  ← only if found in commit messages
+
+[Repeat the above block for each logical task]
+
+### Notes
+[in-progress items, blockers, next steps — omit entire section if nothing notable]
+
+Rules:
+- Use the branch name from repoStats for each repo
+- ALWAYS include every commit hash and commit message verbatim
+- ALWAYS include PR number, title, and URL when present (from commit pr field or githubEvents)
+- Group commits that belong to the same feature/fix into one task block
+- Extract Fizzy card refs (app.fizzy.do URLs or FZ-123 patterns) from commit messages
+- Extract Notion links (notion.so/...) from commit messages
+- Omit Tickets line entirely if no ticket refs found
+- Omit PR line entirely if no PR data
+- If calendarEvents is non-empty, add a ### Meetings section after Tasks & Changes listing each meeting with its time and duration
+
+Activity data:
+```json
+{
+  "date": "2026-08-27",
+  "commits": [],
+  "repoStats": [],
+  "githubEvents": [],
+  "calendarEvents": [
+    {
+      "title": "Zahra on Leave",
+      "start": "",
+      "end": "",
+      "duration": null
+    },
+    {
+      "title": "Stability Stand-up",
+      "start": "02:00 PM",
+      "end": "02:30 PM",
+      "duration": "30 min"
+    },
+    {
+      "title": "Nimbly x Punthai: Weekly Meeting",
+      "start": "02:30 PM",
+      "end": "03:30 PM",
+      "duration": "60 min"
+    },
+    {
+      "title": "Nimbly x Punthai: Weekly Meeting",
+      "start": "02:30 PM",
+      "end": "03:30 PM",
+      "duration": "60 min"
+    },
+    {
+      "title": "Fireside chat with Mohit",
+      "start": "04:00 PM",
+      "end": "04:40 PM",
+      "duration": "40 min"
+    }
+  ]
+}
+```
+2026-08-27T12:30:11.900139Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer realm=\"OAuth\", error=\"invalid_token\", error_description=\"Missing or invalid access token\", resource_metadata=\"https://mcp.sentry.dev/.well-known/oauth-protected-resource/mcp\"" })
+ERROR: Your workspace is out of credits. Add credits to continue.
+ERROR: Your workspace is out of credits. Add credits to continue.
+claude: unknown error
+
+Gathering today's activity (2026-08-28)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:4
+
+Generating log with Claude...
+Error: AI generation failed. Email sent.
+codex: Reading additional input from stdin...
+2026-08-28T12:38:17.542938Z ERROR codex_models_manager::manager: failed to refresh available models: timeout waiting for child process to exit
+claude: unknown error
