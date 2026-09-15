@@ -1560,3 +1560,45 @@ Gathering today's activity (2026-09-07)...
   Calendar events:0
 
 No activity found for today. Nothing to log.
+
+Gathering today's activity (2026-09-10)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+
+No activity found for today. Nothing to log.
+
+Gathering today's activity (2026-09-11)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+
+No activity found for today. Nothing to log.
+
+Gathering today's activity (2026-09-11)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+
+No activity found for today. Nothing to log.
+[2026-09-15 09:00:26] calendar-check: AUTH EXPIRED — reauth needed
+[2026-09-15 09:15:06] calendar-check: ok
+[2026-09-15 10:54:00] calendar-check: ok
+[2026-09-15 10:54:39] calendar-check: AUTH EXPIRED — reauth needed
+[2026-09-15 10:55:33] calendar-check: AUTH EXPIRED — reauth needed
+[2026-09-15 10:59:31] calendar-check: ok
+[2026-09-15 10:59:31] calendar-check: UNREACHABLE — gcalcli exited 0 but produced no calendar data
+[2026-09-15 11:01:31] calendar-check: TIMEOUT — gcalcli did not respond in 60s
+[2026-09-15 11:18:21] calendar-check: ok
+
+Gathering today's activity (2026-09-15)...
+  Git commits:    0
+  GitHub events:  8
+  Calendar events:5
+  Claude sessions:6
+
+Generating log with Claude...
+Error: AI generation failed. Email sent.
+codex: spawnSync codex ENOENT
+claude: spawnSync claude ENOENT
+[2026-09-15 17:08:17] FAIL (1): Error: AI generation failed. Email sent.
