@@ -1602,3 +1602,68 @@ Error: AI generation failed. Email sent.
 codex: spawnSync codex ENOENT
 claude: spawnSync claude ENOENT
 [2026-09-15 17:08:17] FAIL (1): Error: AI generation failed. Email sent.
+
+Gathering today's activity (2026-09-15)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:5
+  Claude sessions:6
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-15
+
+> +0 / -0 lines
+
+### Summary
+No commits or PRs landed today; the day went to PR conflict untangling on `audit-lite`, scoping the submission-upload workstream for product, and discovery on the missing-attachment modal flow. A second thread rebuilt the personal work-log automation so it runs unattended with durable calendar auth. Rest of the day was meetings and local Android build/device troubleshooting.
+
+### Meetings
+- **Pratiksha on Leave** — all day
+- **Weekly Check-in** — 11:30 AM–11:55 AM (25 min)
+- **Gameday Report and Post Mortem** — 01:30 PM–02:20 PM (50 min)
+- **Stability Stand-up** — 02:00 PM–02:30 PM (30 min)
+- **Offline-First Initiative: Sync + Task Grooming** — 02:30 PM–03:00 PM (30 min)
+
+### Investigation & Research
+
+#### Stacked PR conflict chain on audit-lite (Fizzy card 1776)
+- **Repo:** `audit-lite`
+- **Question:** How to resolve conflicts on PR #1982 without breaking the PRs stacked on top of it, and what's actually deliverable in 4 days for the submission-upload targets?
+- **Outcome:** Established that #1982's rebase moved the base out from under #1983 (based on `feat/submission-notifications`), which in turn would flip #1985 to conflicting once GitHub recomputed — so the stack has to be rebased in order, not independently. Scoped the 4-day target list (3 design options for the uploading state, force-submit button, missing-attachment modal audit) and rewrote it for the product team. Produced a design proposal page on the internal dev server covering the "Live — uploading" state with three options, pulled from Claude Design via DesignSync.
+- **Time:** 08:10–20:11
+
+#### Missing-attachment modal flow on the review page
+- **Repo:** `audit-lite` (master)
+- **Question:** What does the missing-attachment modal on the review screen actually do, and which buttons does it expose?
+- **Outcome:** Traced and documented the flow and the modal's button set as discovery input for the durable-submit-outbox ADR — written up in `docs/ADR/ADR-078-durable-submit-outbox/discovery/missing-attachment-modal-review-screen.md`.
+- **Time:** part of 08:10–20:11 session
+
+#### Unattended work-log automation + non-expiring calendar auth
+- **Repo:** `worklog` (personal)
+- **Question:** Can the work-log cron run without prompting for input, and can gcalcli auth be made to stop expiring every 7 days?
+- **Outcome:** Moved the scheduler to a silent 17:00 push with success/failure notifications instead of a terminal prompt. Root-caused the recurring gcalcli expiry to the OAuth consent screen sitting in *Testing* publishing status (7-day refresh-token death), and settled on keeping the personal tooling off company infra — hosting the OAuth client and the repo under the personal `programmingMohit` account rather than `hellonimbly`.
+- **Time:** 08:33–20:12
+
+#### Fizzy card 1779 / PR #1931 context
+- **Repo:** `audit-lite`
+- **Question:** What is [card 1779](https://app.fizzy.do/6118580/cards/1779) asking for, and what does [PR #1931](https://github.com/Nimbly-Technologies/audit-lite/pull/1931) change?
+- **Outcome:** Walked through the card and the PR's intent end-to-end as background for the submission workstream; no code changes made.
+- **Time:** 08:36–10:54
+
+#### Android device build not connecting
+- **Repo:** `audit-lite`
+- **Question:** Why does `adb connect` to the phone get refused and `pnpm watch:android:prod --device` fail to attach?
+- **Outcome:** Diagnosed the wireless-debugging connection refusal and the device-targeting failure in the prod watch script; local environment issue, no code change.
+- **Time:** 13:20–13:36
+
+### Notes
+- The #1982 → #1983 → #1985 stack still needs rebasing in dependency order; #1985 will report MERGEABLE until GitHub recomputes.
+- Three uploading-state design options are with the product team pending a decision; force-submit button and missing-attachment modal changes are queued behind that.
+- ADR-078 (durable submit outbox) discovery is in progress — modal flow captured, rest of the flow still to be documented.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-15.md
+[2026-09-15 20:12:48] pushed 2026-09-15 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-15.md
+[2026-09-15 23:54:18] skip: 2026-09-15 already logged
+[2026-09-16 09:32:00] calendar-check: gcalcli failed (1): google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
