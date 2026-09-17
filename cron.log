@@ -1734,3 +1734,55 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-16 17:00:51] pushed 2026-09-16 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-16.md
 [2026-09-16 23:58:30] skip: 2026-09-16 already logged
 [2026-09-17 09:15:11] calendar-check: ok
+
+Gathering today's activity (2026-09-17)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:4
+  Claude sessions:4
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-17
+
+> +0 / -0 lines
+
+### Summary
+No commits landed today — the bulk of the day went into a long hands-on validation session for the durable-submit-outbox work (Fizzy card 1776) on `audit-lite`, reproducing the missing-attachment failure path on a physical Android device. Supporting time went to figuring out network-throttling tooling and getting the physical-device dev setup working correctly. Afternoon was partly consumed by the Punthai weekly and the Stability stand-up.
+
+### Tasks & Changes
+No commits or PRs were produced today; all work was experimental/device-validation and is captured below.
+
+### Meetings
+- **Nimbly x Punthai: Weekly Meeting** — 02:30 PM–03:30 PM (60 min)
+- **Stability Stand-up** — 04:00 PM–04:30 PM (30 min)
+- **Ryu on Leave** — all day (no time set)
+
+### Investigation & Research
+
+#### Durable submit outbox — reproducing the missing-attachment failure screen (Fizzy card 1776)
+- **Repo:** `audit-lite`
+- **Question:** Can the missing-attachment modal and the downstream submit-failure screen be reproduced on a real device on the new durable-submit-outbox path, by deleting an attached photo just before submitting? And how do you reliably degrade the network without killing the debug build's Metro connection?
+- **Outcome:** Confirmed PostHog is serving `durable-submit-outbox: true` to the test user, so the device was genuinely on the new path. Ruled out airplane mode and cable-pull approaches since both drop the adb/Metro connection for a debug build; settled on a Proxyman breakpoint to hold/fail the upload instead of a bandwidth proxy. Verified the first half of the experiment: with a photo deleted before submit, tapping **Review** on the new path does surface the missing-attachment modal as intended. `upload_jobs` state was inspected directly to confirm job bookkeeping. Submit-side behaviour was still being exercised at session end.
+- **Time:** 09:33–13:50 (4h 18m)
+
+#### Network-throttling tooling for device testing
+- **Repo:** `Nimbly` (docs)
+- **Question:** Where is the existing internal primer for throttling network traffic with Charles/Proxyman, and is there a FOSS equivalent worth using instead?
+- **Outcome:** Located the existing throttling guide in `docs` and evaluated open-source alternatives to Charles/Proxyman; fed directly into choosing Proxyman breakpoints for the card 1776 experiment above.
+- **Time:** 09:34–09:58 (25 min)
+
+#### audit-lite physical-device dev server setup
+- **Repo:** `audit-lite`
+- **Question:** With a debug build already installed on the phone, is a re-run of `pnpm watch:android:prod --device` needed just to start the dev server — and why does `pnpm start` + `a` launch the emulator instead of targeting the connected phone?
+- **Outcome:** Established that the install step doesn't need repeating for a server-only restart, and identified why the `a` shortcut defaults to the emulator rather than the physical device, along with the correct way to target the phone.
+- **Time:** 16:08–16:18 (11 min)
+
+### Notes
+- Card 1776 experiment is **half complete**: the Review → missing-attachment-modal leg is verified; the submit-with-degraded-network leg (Proxyman breakpoint → failure screen) was still in progress at 13:50 and needs to be picked back up.
+- Proxyman breakpoint is the chosen mechanism for forcing the upload failure — airplane mode and unplugging are off the table for debug builds.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-17.md
+[2026-09-17 17:00:50] pushed 2026-09-17 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-17.md
+[2026-09-17 23:50:01] skip: 2026-09-17 already logged
