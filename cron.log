@@ -1787,3 +1787,184 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-17 17:00:50] pushed 2026-09-17 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-17.md
 [2026-09-17 23:50:01] skip: 2026-09-17 already logged
 [2026-09-18 09:15:39] calendar-check: ok
+
+Gathering today's activity (2026-09-18)...
+  Git commits:    66
+  GitHub events:  21
+  Calendar events:4
+  Claude sessions:4
+  Active:         10:52 pm – 10:52 am
+  Lines:          +33525 / -12583
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-18
+
+> 10:52 pm – 10:52 am · +33525 / -12583 lines · `audit-lite` (fix/outbox-bugfixes)
+
+### Summary
+Rebased and force-pushed the full ADR-078 durable submit outbox stack in `audit-lite` (#1953 → #1983, plus the Phase 6 test PR #1985) after #1970 hit conflicts. Also landed the last fixes on the failed-submission state and follow-ups to #1978 review feedback. Separately, looked into a force-upgrade "already submitted" sync error reported on Discord, confirmed it's noise rather than user-facing, and wrote an engineering analysis and a CS-facing note.
+
+### Tasks & Changes
+
+#### Upload dialogs derived from durable state
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** The upload modals now read from durable state instead of in-memory component state. The display memo is keyed on the inputs it actually reads. Reports with no attachments show a full bar. `checkOutAt`/`submittedAt` are stamped at the submit tap and held across retries. Tests show settlement runs with no component mounted.
+- **Commits:**
+  - `79e2b3f4` — refactor: derive the upload modals from durable state
+  - `e1100226` — perf: key the display memo on what the derivation reads, not row identity
+  - `fcb56bdb` — fix: show a full bar for reports with no attachments to upload
+  - `358fdc09` — test: give the shared op-sqlite stub a select chain the upload dialogs can read
+  - `2cbfcca4` — test: prove settlement runs with no component mounted
+  - `f0394934` — test: cover the display hook's wiring and the save-as-draft dialog opener
+  - `342cfce4` — fix: stamp checkOutAt/submittedAt at the submit tap, not at render
+  - `12c3b1ea` — fix: hold the first tap's checkout time across retries
+  - `8a91e12b` — chore: format derive-attachment-display.test.ts
+  - `7a306bd1` — fix: count only the completions the draft still asks for
+- **PR:** [#1953 — refactor: derive the upload dialogs from durable state](https://github.com/Nimbly-Technologies/audit-lite/pull/1953)
+
+#### Durable submit outbox drain
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** Implemented the drain body for the durable submit outbox. The two missing-file writes are now guarded separately, and a note about a submission no longer counts as the thing that ends it.
+- **Commits:**
+  - `9a5897d3` — feat: implement the drain body for the durable submit outbox
+  - `69bc329a` — docs: name the right manual-sync function in the legacy uploader docblock
+  - `95829a4a` — test: give both submit-service fakes the dependency the other side added
+  - `3fca75d7` — fix: a note about a submission may not be the thing that ends it
+  - `1da21a5a` — fix: guard the two missing-file writes separately, not as a pair
+- **PR:** [#1956 — feat: implement the drain body for the durable submit outbox](https://github.com/Nimbly-Technologies/audit-lite/pull/1956)
+
+#### Complete as a local commit + enqueue
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** Tapping Complete now commits locally and enqueues a submit op. The offline Complete path was moved onto the submit queue, and snapshot integrity on enqueue is pinned by a test.
+- **Commits:**
+  - `ed912e8d` — feat: make Complete a local commit that enqueues a submit op
+  - `0e480a0c` — test: pin snapshot integrity on the submit enqueue
+  - `37ccbcc3` — feat: cut the offline Complete tap over to the submit queue
+  - `205a13d4` — style: wrap the confirm-submit test's mocks to the repo's print width
+- **PR:** [#1962 — feat: make Complete a local commit that enqueues a submit op](https://github.com/Nimbly-Technologies/audit-lite/pull/1962)
+
+#### Report lock derived from the submit queue
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** The report lock now comes from the submit queue and matches a promoted report's server id. Every check-in path is gated on the queue, not just Continue. The drained submission sends an idempotency key, and the schedule sheet names the two submit waits.
+- **Commits:**
+  - `6e55417b` — feat: derive the report lock from the submit queue
+  - `423050ce` — fix: match a promoted report's server id in the report lock
+  - `53ee1408` — refactor: guard the lock's query build and name its parameter honestly
+  - `804b9096` — feat: send an idempotency key on the drained submission
+  - `a925b2dd` — feat: name the two submit waits on the schedule sheet
+  - `b8dc5205` — fix: gate every check-in path on the submit queue, not just Continue
+  - `c924a6a4` — test: give the lock screen's connectivity mock the atom master added
+- **PR:** [#1970 — feat: derive the report lock from the submit queue](https://github.com/Nimbly-Technologies/audit-lite/pull/1970)
+
+#### Report submission screen
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** Added the submission screen. The Complete tap and schedule rows now lead to it. The uploading state was redrawn around a file count with a per-kind breakdown, and the failed state was rebuilt to match the design. The device is asked which attachments have already left it, and the auditor can send without a missing file. Today's commits pin the `failureKind` projection in a test and document that the missing-file scan is scoped to the active branch on purpose.
+- **Commits:**
+  - `bdf9f0d6` — feat: project the upload row's failure kind
+  - `a9cfee33` — feat: read a report's newest submission op
+  - `701e1050` — feat: file a rejected report again as a new op
+  - `2f492a70` — feat: add the submission screen
+  - `28f49e30` — feat: land the Complete tap on the submission screen
+  - `df95cc01` — feat: lead the schedule row to the submission screen
+  - `21eb9e71` — feat: leave delivered submission for payoff, refresh schedule list
+  - `f5424103` — feat: build the submission screen's visual design
+  - `b2ab7288` — feat: count the files rather than the percentage on the submission bar
+  - `ab378d53` — feat: redraw the uploading state around one figure and a per-kind breakdown
+  - `e8d26c34` — feat: state the upload advisory as the frame words it
+  - `3f0d4482` — feat: ask the device which attachments have left it
+  - `ae148582` — feat: stop the tap on a missing attachment file, and let the auditor send without it
+  - `7c7dd1a7` — feat: offer to send a failed report with what has actually arrived
+  - `f529d282` — feat: rebuild the failed submission state against the design
+  - `05a5941f` — docs: name the missing-file scan's active-branch scope as intentional
+  - `502f57d5` — test: pin the upload status hook's failureKind projection
+- **PR:** [#1978 — feat: add the submission screen](https://github.com/Nimbly-Technologies/audit-lite/pull/1978)
+
+#### Outbox release flag
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** The submit outbox now sits behind a reversible release flag that is read outside render. The pre-outbox submit path was restored verbatim as the fallback. Reports queued in the outbox show as pending upload, and the submitted-reports registry that master actually has was restored.
+- **Commits:**
+  - `b043a80e` — feat: read a release flag outside render
+  - `cbb0f583` — feat: restore the pre-outbox submit path, verbatim
+  - `2dfa316a` — feat: put the submit outbox behind a reversible release flag
+  - `991fa670` — feat: surface reports queued in the outbox as pending upload
+  - `f476bce3` — fix: restore the submitted-reports registry master actually has
+- **PR:** [#1980 — feat: put the submit outbox behind a reversible release flag](https://github.com/Nimbly-Technologies/audit-lite/pull/1980)
+
+#### Submission notifications
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** Submission state now shows in the notification tray, naming the questionnaire and site. Tapping a delivered submission opens the report list and names the report. When the app is open, a delivered submission shows as an in-app toast.
+- **Commits:**
+  - `82f4d158` — feat: report a submission's state in the notification tray
+  - `04d24a74` — fix: send a delivered submission's tap to the report list, and name the report
+  - `18af4c5e` — feat: name the questionnaire and site in every submission notification
+  - `7860901d` — feat: show a delivered submission as an in-app toast when the app is open
+- **PR:** [#1982 — feat: report a submission's state in the notification tray](https://github.com/Nimbly-Technologies/audit-lite/pull/1982)
+
+#### Outbox field-session bugfixes
+- **Repo:** `audit-lite` · branch: `fix/outbox-bugfixes`
+- **What was done:** Fixes from a sanity-build field session:
+  - Abandoned submit claims are reclaimed without a cold start, and startup reclaim no longer waits on an age gate.
+  - Only backgrounded submissions that are actually running get a notification.
+  - Button and row copy were corrected.
+  - A failed submission gets its own schedule state.
+  - The report-sync gate's re-drive is limited to one attempt.
+  - A promoted report is counted once in the unsynced-work guard.
+  - Live-query rows go only to the query that asked for them.
+  - The failed state's controls were checked and fixed against a real device.
+  - Today's two commits: schedule no longer offers Reset/Continue on a failed submission, and the submission is retired when the auditor reopens the report.
+- **Commits:**
+  - `e1f47ebe` — fix: reclaim an abandoned submit claim without a cold start
+  - `5296b3e9` — fix: reclaim at startup with no age gate, not a 15-minute one
+  - `cf834608` — fix: notify the backgrounded submissions that are actually running
+  - `926d83fc` — fix: the queued-report button names its destination, not the queue's state
+  - `5cc88cd4` — fix: the schedule row says which wait it is showing
+  - `78f209e8` — fix: the pre-outbox stamp keeps its own word for the wait
+  - `16bb7404` — feat(schedule): give a failed submission a state of its own
+  - `8f6d4669` — refactor(schedule): title the undelivered bucket for what it holds
+  - `772e0591` — fix(report-sync): count a promoted report once in the unsynced-work guard
+  - `d6cd640d` — fix(report-sync): bound the gate's re-drive to one attempt
+  - `831697db` — fix(db): return live-query rows only to the query that asked
+  - `fd0dc779` — fix(submission): repair the failed state's controls against the device
+  - `bdc8c902` — fix(schedule): stop offering Reset and Continue on a failed submission
+  - `2381f9a6` — fix(submission): retire the submission when the auditor reopens the report
+- **PR:** [#1983 — fix: outbox bugfixes from a sanity-build field session](https://github.com/Nimbly-Technologies/audit-lite/pull/1983)
+
+#### ADR-078 Phase 6 scenario tests
+- **Repo:** `audit-lite` · branch: `test/adr-078-phase-6-scenarios`
+- **What was done:** Rebased onto the updated stack and pushed (`1d011eef` → `9de3ddcd`).
+- **PR:** [#1985 — test(ADR-078 · 10/11): Phase 6 — the OF rewrites, the nine in both flag states, and the three rollout gaps](https://github.com/Nimbly-Technologies/audit-lite/pull/1985)
+
+### Meetings
+- **Offline-First Initiative: Sync + Task Grooming** — 11:30 AM–12:00 PM (30 min)
+- **Weekly Check-out** — 03:00 PM–03:45 PM (45 min)
+- Angelica Novia on Leave — all day
+- Andi Muhamad Primabudi on Leave — all day
+
+### Investigation & Research
+
+#### Force-upgrade sync failure ("already submitted") from Discord
+- **Repo:** `audit-lite`
+- **Question:** What caused the sync errors reported in the Discord thread, do users actually feel them, how would an OTA reach 2.16.0 once 2.17.0 ships, and is the root cause posted in the thread correct?
+- **Outcome:** The errors come from the force-upgrade path trying to sync reports that were already submitted. Users aren't affected; it's error noise. The root cause posted in the thread was reviewed for accuracy. Wrote an engineering analysis (`docs/analysis/AUDIT-LITE-V2-67N-force-upgrade-sync-already-submitted.md`) and a CS-facing explainer that uses the exact UI labels from the code (`docs/other/cs-app-update-sync-fail-2026-09-18.md`).
+- **Time:** 15:12–15:38
+
+#### Android device proxy / screen mirroring setup
+- **Repo:** `Nimbly`
+- **Question:** Was the ADB-connected test phone's traffic being proxied through the Mac?
+- **Outcome:** Checked the phone's proxy setting and switched it off and on as testing needed, mirrored the Nimbly app to the Mac with scrcpy for the device session, and left the proxy off at the end.
+- **Time:** 10:35–12:05
+
+### Notes
+- **#1978 has requested changes:** they were walked through at the end of the day; the fixes haven't been committed yet.
+- **Stack rebase:** #1970's conflicts set off a rebase of the whole stack (#1953 → #1983, plus #1985), and every branch was force-pushed. Once CI finishes, check that each PR is green and conflict-free.
+- **Next on the stack:** only #1985 (10/11) is up, so the 11/11 PR is still to come.
+- **Design feasibility write-up:** the check of how much of Design Redesign "5a" fits the failed/missing-attachment screens was written up under `docs/ADR/ADR-078-durable-submit-outbox/discovery/`. It still needs a decision on scope.
+- **Sentry issue in PostHog:** looked up how to ignore Sentry issue 7735846489 in PostHog, but no change was made.
+────────────────────────────────────────────────────────────────
+Generating week rollup... done.
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-18.md
+[2026-09-18 17:02:00] pushed 2026-09-18 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-18.md
+[2026-09-18 23:52:26] skip: 2026-09-18 already logged
+[2026-09-21 09:22:45] calendar-check: ok
