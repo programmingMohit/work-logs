@@ -1968,3 +1968,64 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-18 17:02:00] pushed 2026-09-18 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-18.md
 [2026-09-18 23:52:26] skip: 2026-09-18 already logged
 [2026-09-21 09:22:45] calendar-check: ok
+
+Gathering today's activity (2026-09-21)...
+  Git commits:    1
+  GitHub events:  2
+  Calendar events:2
+  Claude sessions:5
+  Active:         11:10 am – 11:10 am
+  Lines:          +645 / -1708
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-21
+
+> 11:10 am – 11:10 am · +645 / -1708 lines · `audit-lite` (revert/freshchat-cs-reply-2026)
+
+### Summary
+Diagnosed a hard app-start crash on a physical Android device and traced it to the Freshchat CS-reply notifications work merged in PR #2026, then shipped a revert. Follow-up went into responding to review feedback on the revert PR (#2033) and compiling a PR inventory for audit-lite milestone 42. Remaining time was spent building an audit checklist for the ADR-078 durable submit outbox manual test suite.
+
+### Tasks & Changes
+
+#### Revert Freshchat CS-reply notifications
+- **Repo:** `audit-lite` · branch: `revert/freshchat-cs-reply-2026`
+- **What was done:** Traced a Nimbly app crash-on-launch on a connected ADB device to expo-updates error recovery SIGKILLing the process ~3s after start, and identified PR #2026 (Freshchat CS-reply notifications) as the source. Opened and pushed a revert of that change, then worked through the review comments raised on the revert PR and posted a reply.
+- **Commits:**
+  - `8d195189` — revert: freshchat CS-reply notifications (#2026)
+- **PR:** [#2033 — revert: freshchat CS-reply notifications (#2026)](https://github.com/Nimbly-Technologies/audit-lite/pull/2033)
+
+### Meetings
+- **Weekly Check-in** — 12:30 PM – 12:55 PM (25 min)
+- **Andi Muhamad Primabudi on Leave** — all day
+
+### Investigation & Research
+
+#### ADR-078 durable submit outbox — manual test audit checklist
+- **Repo:** `ADR-078-durable-submit-outbox` (docs)
+- **Question:** How to make the ADR-078 manual test suite auditable — a checklist that can be worked through repeatedly with notes captured per test.
+- **Outcome:** Produced a checklist doc at `docs/ADR/ADR-078-durable-submit-outbox/MANUAL-TESTS-ADR-078-durable-submit-outbox.md` covering the full manual test set, structured for repeat audit passes with a notes field per item.
+- **Time:** 10:33–15:10
+
+#### audit-lite milestone 42 PR inventory
+- **Repo:** `audit-lite`
+- **Question:** What PRs are in milestone 42, what does each one do, and who authored it — needed as a list for release/status write-up.
+- **Outcome:** Compiled the full milestone 42 PR list with hyperlinked titles, per-PR purpose, and authors; content was lifted into the target write-up and the scratch markdown discarded.
+- **Time:** 12:08–12:50
+
+#### ADB device connectivity
+- **Repo:** `Nimbly`
+- **Question:** Why `adb connect 192.168.29.16:5555` was refused and why a USB-connected device showed no entry under `adb devices`.
+- **Outcome:** Established that wireless debugging was not listening on the device (no TCP/IP mode active), so the network connect could never succeed; resolved the USB-side detection so the device became reachable — this unblocked the crash reproduction that led to the #2026 revert.
+- **Time:** 10:53–10:55
+
+### Notes
+- Revert PR #2033 has review feedback outstanding — a reply has been posted, but the PR is not yet merged.
+- The underlying need behind #2026 (storing release info for CS-reply notifications) is still unsolved; the revert restores stability but the feature will need a different approach that doesn't trip expo-updates error recovery.
+- ADR-078 manual test checklist is in place but the audit passes themselves have not been run.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-21.md
+[2026-09-21 17:00:55] pushed 2026-09-21 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-21.md
+[2026-09-21 23:50:01] skip: 2026-09-21 already logged
+[2026-09-22 09:16:40] calendar-check: ok
