@@ -2029,3 +2029,89 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-21 17:00:55] pushed 2026-09-21 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-21.md
 [2026-09-21 23:50:01] skip: 2026-09-21 already logged
 [2026-09-22 09:16:40] calendar-check: ok
+
+Gathering today's activity (2026-09-22)...
+  Git commits:    12
+  GitHub events:  11
+  Calendar events:2
+  Claude sessions:6
+  Active:         09:34 am – 03:39 pm
+  Lines:          +1137 / -124
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-22
+
+> 09:34 am – 03:39 pm · +1137 / -124 lines · `audit-lite` (fix/submission-cancelled-request-terminal)
+
+### Summary
+The day went to the report submission flow in `audit-lite`. Two small UX fixes merged: #2037 fixes the waiting-state logic and #2039 fixes the delivered-report wording and toast position. Most of the day was on #2040. It makes report-sync retry submissions that never reached the server, fixes how dropped signatures are handled, and adds a batch of submission-screen fixes, including a dedicated screen for server rejections. A flight-recorder log from a field device drove several of those fixes, starting with the wrong "files still to send" count.
+
+### Tasks & Changes
+
+#### Submission waiting state uses the device's own offline status
+- **Repo:** `audit-lite` · branch: `fix/submission-cancelled-request-terminal`
+- **What was done:** The submission screen's waiting state now uses the device's own offline status to decide what to show. Merged first thing in the morning.
+- **Commits:**
+  - `c8b1238d` — fix: read the device's own offline verdict for the waiting state (#2037)
+- **PR:** [#2037 — fix: read the device's own offline verdict for the submission screen's waiting state](https://github.com/Nimbly-Technologies/audit-lite/pull/2037)
+
+#### Delivered-report wording and toast position
+- **Repo:** `audit-lite` · branch: `fix/submission-cancelled-request-terminal`
+- **What was done:** Rewrote the delivered-report message to open with the success. The old line ended on "no longer on this device", which users read as the report being deleted. Also moved the toast. Built on `fix/submission-toast-copy-and-position` and merged after the review comments were addressed. Updated the repo docs and the ADR in Notion to match.
+- **Commits:**
+  - `d9a6b821` — fix(submission): delivered-report copy and toast position (#2039)
+- **PR:** [#2039 — fix(submission): delivered-report copy and toast position](https://github.com/Nimbly-Technologies/audit-lite/pull/2039)
+
+#### Report-sync: retry submissions that never reached the server
+- **Repo:** `audit-lite` · branch: `fix/submission-cancelled-request-terminal`
+- **What was done:** A submission whose request was cancelled before it reached the server used to be treated as final. The drain now retries it. Also fixed how dropped signature slots are handled: their path key is now left out entirely instead of being set to an empty value, and the drain's attachment pre-check skips them so they don't block the upload.
+- **Commits:**
+  - `beeb47aa` — fix(report-sync): retry a submission whose request never reached the server
+  - `2525dc9f` — fix(report-sync): keep a dropped signature's path key absent, not empty
+  - `c448876f` — fix(report-sync): skip dropped signature slots in the drain's attachment prevalidation
+- **PR:** [#2040 — fix(report-sync): retry a submission whose request never reached the server](https://github.com/Nimbly-Technologies/audit-lite/pull/2040)
+
+#### Submission screen fixes and a dedicated rejection screen
+- **Repo:** `audit-lite` · branch: `fix/submission-cancelled-request-terminal`
+- **What was done:**
+  - **Diagnosis:** A flight-recorder log from a OnePlus CPH2487 on Android 16 showed "0 file(s) still need sending" while 19 attachments were still queued, and the retake/retry sections never appeared.
+  - **Fixes from that:** The count now tracks attachments still to send instead of failed uploads, and the screen waits for the upload rows to load before settling on a state.
+  - **Other screen fixes:** Timestamps now show the date and time zone. The back button has a destination. The force-submit dialog's buttons are stacked. The stopped card no longer says the report is "editable again".
+  - **Rejection screen:** A server rejection now gets its own screen with "Reopen" and "Submit again" actions.
+- **Commits:**
+  - `5e877398` — fix(submission): stack the force-submit dialog's buttons
+  - `0d95d3b6` — fix(submission): give the screen's back button a destination
+  - `2c414d88` — fix(submission): count the attachments still to send, not the failed uploads
+  - `165f244b` — fix(submission): date and zone the submission timestamps
+  - `9088d3f9` — fix(submission): resolve until the upload rows have loaded
+  - `c5909534` — fix(submission): drop 'report editable again' from the stopped card
+  - `993489df` — feat(submission): show a server rejection on its own screen with reopen and submit again
+- **PR:** [#2040 — fix(report-sync): retry a submission whose request never reached the server](https://github.com/Nimbly-Technologies/audit-lite/pull/2040)
+
+#### Code review: schedulerStatistic moved to Cloud Run
+- **Repo:** `nimbly-cloud`
+- **What was done:** Reviewed the PR that moves the `schedulerStatistic` runtime from gen1 Cloud Functions to Cloud Run.
+- **PR:** [#239 — feat(schedulerStatistic): lift runtime from gen1 Cloud Functions to Cloud Run](https://github.com/Nimbly-Technologies/nimbly-cloud/pull/239)
+
+### Meetings
+- **Fireside chat with Mohit** — 12:30 PM–01:00 PM (30 min)
+- **Stability Stand-up** — 02:00 PM–02:15 PM (15 min)
+
+### Investigation & Research
+#### Routing the Android test device's traffic through the Mac
+- **Repo:** `Nimbly` (local tooling)
+- **Question:** How do I send the adb-connected Android phone's network traffic through the Mac's proxy to inspect the app's requests, and make that setup repeatable?
+- **Outcome:** Routed the phone through the Mac's proxy, confirmed it worked, then switched it off and on again. Saved the steps as a reusable `adb-proxy` Claude skill (`~/.claude/skills/adb-proxy/SKILL.md`) so future sessions can do it without the background.
+- **Time:** 14:19–14:34
+
+### Notes
+- **#2040 is open.** It carries 10 commits on `fix/submission-cancelled-request-terminal` and needs review before merge. A CI workflow run on audit-lite was being watched at 15:47.
+- **Backlog item (P2):** Tapping the "Sending Paused" push notification should open that report's submission screen. It came up today but hasn't been picked up yet.
+- **Tracked under Fizzy card 1776.** No commit message references it, so there's no ticket link above.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-22.md
+[2026-09-22 17:01:15] pushed 2026-09-22 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-22.md
+[2026-09-22 23:50:01] skip: 2026-09-22 already logged
+[2026-09-23 09:15:07] calendar-check: ok
