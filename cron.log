@@ -2193,3 +2193,52 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-23 17:01:05] pushed 2026-09-23 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-23.md
 [2026-09-23 23:50:00] skip: 2026-09-23 already logged
 [2026-09-24 09:15:06] calendar-check: ok
+
+Gathering today's activity (2026-09-24)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:6
+  Claude sessions:3
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-24
+
+> +0 / -0 lines
+
+### Summary
+No commits or PRs today. Most of the day went to PostHog analysis for `audit-lite`: measuring what share of active users were on specific OTA update IDs for the latest Android and iOS release, then turning that into a reusable command. I also rewrote Fizzy card 1776 as a general observability card and attended the Stability stand-up and the weekly Punthai sync.
+
+### Tasks & Changes
+
+No commits or PRs recorded for 2026-09-24.
+
+### Meetings
+
+- **Stability Stand-up** — 02:30 PM–02:45 PM (15 min)
+- **Nimbly x Punthai: Weekly Meeting** — 02:30 PM–03:30 PM (60 min)
+
+### Investigation & Research
+
+#### OTA update adoption by update ID in PostHog
+- **Repo:** `audit-lite` (via `posthog`)
+- **Question:** Can PostHog show what percentage of active users are on a given update ID? Specifically for `01a0cdab-a56a-7946-84ae-7a02373b52d5` (Android) and `01a0cdab-a56a-765d-8570-f0bb133c5c52` (iOS), which are the same release with different update IDs per platform.
+- **Outcome:** Built a query for the share of active users on each target update ID and re-ran it to track adoption. It started as a continuously running script and was then changed to an on-demand command that can be run from anywhere. The command was extended to give a percentage breakdown of users across all versions.
+- **Time:** 11:50–17:00
+
+#### Fizzy card 1776: reframe as observability card
+- **Repo:** `audit-lite`
+- **Question:** What should the card say so it matches what the linked PR actually changes?
+- **Outcome:** Updated the card's title and content to describe it as a general observability card based on the PR's changes. Reformatted the body so it's easier to read and added a comment on the card.
+- **Time:** 11:36–12:34
+
+### Notes
+- **Team availability:** Ben was on sick leave. Andi Muhamad Primabudi and Ayush were on leave.
+- **Calendar clash:** The Stability Stand-up and the Punthai weekly were both booked at 02:30 PM. The Punthai invite also appeared twice.
+- **Follow-up:** Keep tracking adoption of the Android and iOS update IDs with the new PostHog command. I also looked up the PR that attempts to fix Sentry issue `AUDIT-LITE-V2-67N`, which still needs following up.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-24.md
+[2026-09-24 17:00:46] pushed 2026-09-24 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-24.md
+[2026-09-24 23:55:34] skip: 2026-09-24 already logged
+[2026-09-25 09:16:10] calendar-check: ok
