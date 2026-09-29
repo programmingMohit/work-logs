@@ -2242,3 +2242,341 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-24 17:00:46] pushed 2026-09-24 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-24.md
 [2026-09-24 23:55:34] skip: 2026-09-24 already logged
 [2026-09-25 09:16:10] calendar-check: ok
+
+Gathering today's activity (2026-09-25)...
+  Git commits:    3
+  GitHub events:  4
+  Calendar events:3
+  Claude sessions:4
+  Active:         11:34 am – 01:13 pm
+  Lines:          +2787 / -425
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-25
+
+> 11:34 am – 01:13 pm · +2787 / -425 lines · `audit-lite` (fix/submission-zero-attachment-progress)
+
+### Summary
+Two report-sync PRs landed in `audit-lite`. #2040 has the outbox and submission-screen fixes that came out of the offline field sessions. #2046 adds outbox observability (tracing spans, Sentry errors and ramp counters). A follow-up fix, PR #2056, stops the submission screen showing attachment progress, and a "0 file(s) still need sending" failure headline, for reports that have no attachments. A layman's PostHog feature-flag guide for QA was also drafted.
+
+### Tasks & Changes
+
+#### Report-sync outbox & submission-screen bugfixes (offline field sessions)
+- **Repo:** `audit-lite` · branch: `fix/submission-zero-attachment-progress`
+- **What was done:** Fixed the outbox and submission-screen bugs found during the offline field testing sessions, and merged the fixes via PR.
+- **Commits:**
+  - `b897f7fa` — fix(report-sync): outbox and submission-screen bugfixes from the offline field sessions (#2040)
+- **PR:** [#2040 — fix(report-sync): outbox and submission-screen bugfixes from the offline field sessions](https://github.com/Nimbly-Technologies/audit-lite/pull/2040)
+
+#### Report-sync outbox observability
+- **Repo:** `audit-lite` · branch: `fix/submission-zero-attachment-progress`
+- **What was done:** Added observability across the outbox. Tracing spans cover the report-sync journey end to end, Sentry errors are raised for real defects, and counters track the rollout ramp.
+- **Commits:**
+  - `e7b4a88e` — feat(report-sync): outbox observability — spans for the journey, Sentry errors for defects, counters for the ramp (#2046)
+- **PR:** [#2046 — feat(report-sync): outbox observability — spans for the journey, Sentry errors for defects, counters for the ramp](https://github.com/Nimbly-Technologies/audit-lite/pull/2046)
+
+#### Zero-attachment progress on the submission screen
+- **Repo:** `audit-lite` · branch: `fix/submission-zero-attachment-progress`
+- **What was done:** The count wasn't wrong: `totalAttachments = 0` is correct for these reports. The problem was that progress UI kept rendering for a count that no longer meant anything. `SegmentedProgress` already hides itself at zero, so the fix targeted the other surfaces that don't. A second instance of the same bug was also fixed: when a report with no attachments failed, the headline read "0 file(s) still need sending." Docs were updated to match.
+- **Commits:**
+  - `8f52d91c` — fix: stop the submission screen reporting attachment progress a report has none of
+- **PR:** [#2056 — fix: stop the submission screen reporting attachment progress a report has none of](https://github.com/Nimbly-Technologies/audit-lite/pull/2056)
+
+### Meetings
+- **Weekly Check-out** — 03:00 PM – 03:45 PM (45 min)
+- **Andi Muhamad Primabudi on Leave** — all day
+- **Mohit Chakraborty on Leave** — all day
+
+### Investigation & Research
+
+#### PostHog feature-flag guide for QA
+- **Repo:** `audit-lite` (docs saved to the `Nimbly/docs` workspace)
+- **Question:** How can QA enable or disable PostHog feature flags and add targeting conditions on their own, without engineering help?
+- **Outcome:** Wrote a layman's guide at `~/Desktop/Nimbly/docs/guides/posthog-feature-flags-qa-guide.md`. It was then reformatted based on the inline "Notes for Claude" review comments. Each screenshot has a described placeholder for now, since the actual images haven't been added yet. The file isn't committed yet.
+- **Time:** 12:02–14:24
+
+#### Android device debugging over Wi-Fi
+- **Repo:** — (local environment)
+- **Question:** Why did `adb connect 192.168.29.16:5555` fail with "No route to host", even though the terminal's network permission was already on? Also, is there a way to stop having to re-enable Developer Options by tapping Build Number every time?
+- **Outcome:** Troubleshot the connection with a raw TCP test from Node against port 5555, then looked at ways to keep Developer Options or wireless debugging on for longer. The sessions don't show a confirmed fix.
+- **Time:** 14:15–14:35
+
+### Notes
+- The zero-attachment fix was worked against Fizzy card 1776, but the commit message doesn't reference it. Link the card on PR #2056 before merge.
+- PR #2056 is open and awaiting review.
+- The PostHog QA guide still needs real screenshots in place of the placeholders, and it still needs to be committed.
+- Calendar marks the day as leave, but work was logged 11:34 am–2:35 pm.
+────────────────────────────────────────────────────────────────
+Generating week rollup... done.
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-25.md
+[2026-09-25 17:01:45] pushed 2026-09-25 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-25.md
+[2026-09-25 23:55:24] skip: 2026-09-25 already logged
+[2026-09-28 09:22:14] calendar-check: ok
+
+Gathering today's activity (2026-09-28)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:3
+
+Generating log with Claude...
+Error: AI generation failed. Email sent.
+codex: Reading additional input from stdin...
+claude: spawnSync claude ETIMEDOUT
+[2026-09-28 18:03:29] FAIL (1): Error: AI generation failed. Email sent.
+
+Gathering today's activity (2026-09-28)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:5
+
+Generating log with Claude...
+Error: AI generation failed. Email sent.
+codex: Reading additional input from stdin...
+2026-09-28T19:07:34.036855Z ERROR codex_login::auth::manager: Failed to refresh token: 401 Unauthorized: {
+  "error": {
+    "message": "Your refresh token has been invalidated. Please try signing in again.",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": "refresh_token_invalidated"
+  }
+}
+2026-09-28T19:07:34.039147Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.041921Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.043725Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.050880Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.054625Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.056174Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.226600Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Encountered invalidated oauth token for user, failing request, url: https://chatgpt.com/backend-api/codex/models?client_version=0.149.0, cf-ray: a4250822dbf2ff69-BOM, request id: req_779b4e61743041e987cad25ea1efba9a, auth error: 401, auth error code: token_revoked
+2026-09-28T19:07:34.499276Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Encountered invalidated oauth token for user, failing request, url: https://chatgpt.com/backend-api/codex/models?client_version=0.149.0, cf-ray: a4250822deef47f5-BOM, request id: req_fa12e9f3604a4d7699fac9c3f81bd027, auth error: 401, auth error code: token_revoked
+2026-09-28T19:07:34.516835Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.710731Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.775075Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:34.781109Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+OpenAI Codex v0.149.0
+--------
+workdir: /
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a0e96a-52e6-7513-8206-12682504dafc
+--------
+user
+Generate a professional daily work log for 2026-09-28 based on the git and GitHub activity below.
+
+Format exactly as:
+
+## Work Log — 2026-09-28
+
+> +0 / -0 lines
+
+### Summary
+[2-3 sentences summarising the day]
+
+### Tasks & Changes
+
+#### [Task/feature name]
+- **Repo:** `repo-name` · branch: `branch-name`
+- **What was done:** [outcome-focused description]
+- **Commits:**
+  - `abc1234` — [commit message verbatim]
+  - `def5678` — [commit message verbatim]
+- **PR:** [#number — PR title](url)  ← only if PR data exists
+- **Tickets:** [FZ-123](url) · [Notion](url)  ← only if found in commit messages
+
+[Repeat the above block for each logical task]
+
+### Investigation & Research
+#### [What was being figured out]
+- **Repo:** `repo-name`
+- **Question:** [what you were trying to answer]
+- **Outcome:** [what was established — root cause, decision, conclusion]
+- **Time:** [HH:MM–HH:MM]
+
+[Repeat per Claude Code session that produced no commit]
+
+### Notes
+[in-progress items, blockers, next steps — omit entire section if nothing notable]
+
+Rules:
+- Use the branch name from repoStats for each repo
+- ALWAYS include every commit hash and commit message verbatim
+- ALWAYS include PR number, title, and URL when present (from commit pr field or githubEvents)
+- Group commits that belong to the same feature/fix into one task block
+- Extract Fizzy card refs (app.fizzy.do URLs or FZ-123 patterns) from commit messages
+- Extract Notion links (notion.so/...) from commit messages
+- Omit Tickets line entirely if no ticket refs found
+- Omit PR line entirely if no PR data
+- If calendarEvents is non-empty, add a ### Meetings section after Tasks & Changes listing each meeting with its time and duration
+- claudeSessions is AI-pairing activity: each has a title, the prompts asked, files edited, and duration
+- Use claudeSessions ONLY for the ### Investigation & Research section, and ONLY for sessions whose work is not already represented by a commit or PR above — deduplicate against filesEdited and repo
+- Reconstruct the question and the outcome from the prompt sequence; prompts are verbatim user asks, so the later ones usually reveal what was concluded
+- Skip trivial sessions (a single throwaway question, under ~3 minutes with no files edited)
+- Omit the entire ### Investigation & Research section if nothing survives that filter
+
+Activity data:
+```json
+{
+  "date": "2026-09-28",
+  "commits": [],
+  "repoStats": [],
+  "githubEvents": [],
+  "calendarEvents": [],
+  "claudeSessions": [
+    {
+      "title": "Fizzy card 1776",
+      "project": "audit-lite",
+      "branch": "HEAD",
+      "start": "12:02",
+      "end": "20:40",
+      "minutes": 518,
+      "prompts": [
+        "eli5 this card https://app.fizzy.do/6118580/cards/1774",
+        "okay the underlying architecture has changes a bunch after this card was written. Is trh required approach still the best or is there a better approach?",
+        "<task-notification> <task-id>abaea0721c2a4e0fe</task-id> <tool-use-id>toolu_017P8ApgfFi4bPYZF7wt6UHM</tool-use-id> <output-file>/private/tmp/claude-501/-Users-mohitchakraborty-Desktop-Nimbly/a7a4a3fa-b94d-450d-9e98-8efd2…",
+        "<task-notification> <task-id>a880e689e4d749f68</task-id> <tool-use-id>toolu_01NiJnyRmQCGN4mtkynLA75m</tool-use-id> <output-file>/private/tmp/claude-501/-Users-mohitchakraborty-Desktop-Nimbly/a7a4a3fa-b94d-450d-9e98-8efd2…",
+        "<task-notification> <task-id>a51e469aa874014fd</task-id> <tool-use-id>toolu_01T6BevcD2ktucdSXCQhzbvu</tool-use-id> <output-file>/private/tmp/claude-501/-Users-mohitchakraborty-Desktop-Nimbly/a7a4a3fa-b94d-450d-9e98-8efd2…",
+        "eli5 the following please <pasted_content id=\"d6ed\"> The card's required approach is obsolete, and three of its four acceptance criteria are already met by a different design. The one real bug left isn't in the reconcile…",
+        "rewrite 1774 yes split the keystore issue yes",
+        "wewrite the title of 1774 and properly format the body of 1774 and 2701"
+      ],
+      "commands": [],
+      "filesEdited": [],
+      "fileCount": 0,
+      "turns": 57,
+      "topTools": [
+        "Bash×6",
+        "mcp__fizzy__fizzy_update_card×5",
+        "Agent×4",
+        "ToolSearch×3",
+        "mcp__fizzy__fizzy_get_card×3"
+      ]
+    },
+    {
+      "title": "Discord channel reference",
+      "project": "audit-admin",
+      "branch": "HEAD",
+      "start": "13:26",
+      "end": "15:43",
+      "minutes": 137,
+      "prompts": [
+        "eli5 https://discord.com/channels/647401765523685388/1553964143210532915",
+        "wait check the code again and re verfiy, i pulled from master just now",
+        "okay apparently it works for <pasted_content id=\"a8f5\"> { _id: ObjectId('67b83f14b8790058d8639eab'), userID: 'F4ugkNonTYfuUtURSAqQlMSjjcS2', createdAt: ISODate('2025-02-21T08:53:40.058Z'), createdBy: 'admin', deviceInfo:…",
+        "- Look up Anis's LMS role for richeesemy and compare it with the CS account's. in what collection?",
+        "<pasted_content id=\"a8f5\"> { _id: ObjectId('6811b2625eeb9d0b09cba5f7'), userID: 'F4ugkNonTYfuUtURSAqQlMSjjcS2', lastLoginDate: Double('1790586053988'), lmsRole: 'admin', lmsStatus: 'active', userGroupIDs: [], verificatio…",
+        "<pasted_content id=\"a8f5\"> { _id: ObjectId('67b83ef095528f8b587413af'), role: 'account_holder', label: 'Account Holder', level: NumberInt('99'), resources: [ { permission: [ 'view', 'edit' ], _id: ObjectId('68bfff417f728…",
+        "yes pull the logs",
+        "check the self hosted sentry to see if anything is there?",
+        "check on the ext remote server not dev or even int",
+        "yeah",
+        "<pasted_content id=\"a8f5\"> ~ $ jq -Rs '{content: ., flags: 4}' /private/tmp/claude-501/-Users-mohitchakraborty-Desktop-Nimbly/b039e764-0224-49ca-b44c-2400c63c1364/scratchpad/discord_msg.txt | ssh mohit@int.skynet.nimbly …",
+        "okay cool delere the script"
+      ],
+      "commands": [],
+      "filesEdited": [
+        "/private/tmp/claude-501/-Users-mohitchakraborty-Desktop-Nimbly/b039e764-0224-49ca-b44c-2400c63c1364/scratchpad/discord_msg.txt",
+        "/private/tmp/claude-501/-Users-mohitchakraborty-Desktop-Nimbly/b039e764-0224-49ca-b44c-2400c63c1364/scratchpad/post.sh"
+      ],
+      "fileCount": 2,
+      "turns": 197,
+      "topTools": [
+        "Bash×59",
+        "Read×11",
+        "mcp__gcp-nimbly-api__list_log_entries×9",
+        "mcp__gcp__run_gcloud_command×4",
+        "ToolSearch×2"
+      ]
+    },
+    {
+      "title": "Scrcpy phone to Mac",
+      "project": "Nimbly",
+      "branch": "HEAD",
+      "start": "14:51",
+      "end": "15:00",
+      "minutes": 9,
+      "prompts": [
+        "scrcpy my phone to this mac"
+      ],
+      "commands": [],
+      "filesEdited": [],
+      "fileCount": 0,
+      "turns": 5,
+      "topTools": [
+        "Bash×3"
+      ]
+    },
+    {
+      "title": "Issue PDF generation endpoint error",
+      "project": "nimbly-go-api",
+      "branch": "HEAD",
+      "start": "16:02",
+      "end": "16:12",
+      "minutes": 10,
+      "prompts": [
+        "why is https://apinew.hellonimbly.com/v1.0/go/v1/issue-pdf/bcc0d597-f7e2-4dbb-914b-3e2a6aeaaacd/generate with payload {\"sections\":{\"issueDetails\":true,\"comments\":false,\"attachments\":false,\"statusActivity\":false,\"signatur…"
+      ],
+      "commands": [],
+      "filesEdited": [],
+      "fileCount": 0,
+      "turns": 38,
+      "topTools": [
+        "Bash×13",
+        "mcp__gcp-nimbly-api__list_log_entries×7",
+        "ToolSearch×1"
+      ]
+    },
+    {
+      "title": "Generate a professional daily work log for 2026-09-28 based on the git and GitHub activity below. Format exactly as: ## Work Log — 2026-09-28 > +0 / -0 lines ### Summary [2-3 sentences summarising the day] ### Tasks & Ch…",
+      "project": "",
+      "branch": "HEAD",
+      "start": "17:51",
+      "end": "18:03",
+      "minutes": 12,
+      "prompts": [
+        "Generate a professional daily work log for 2026-09-28 based on the git and GitHub activity below. Format exactly as: ## Work Log — 2026-09-28 > +0 / -0 lines ### Summary [2-3 sentences summarising the day] ### Tasks & Ch…"
+      ],
+      "commands": [],
+      "filesEdited": [],
+      "fileCount": 0,
+      "turns": 0,
+      "topTools": []
+    }
+  ]
+}
+```
+2026-09-28T19:07:34.925341Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Encountered invalidated oauth token for user, failing request\",\n    \"type\": null,\n    \"code\": \"token_revoked\",\n    \"param\": null\n  },\n  \"status\": 401\n}")
+2026-09-28T19:07:35.275723Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Encountered invalidated oauth token for user, failing request\",\n    \"type\": null,\n    \"code\": \"token_revoked\",\n    \"param\": null\n  },\n  \"status\": 401\n}")
+2026-09-28T19:07:35.829773Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:35.830576Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:35.831269Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:37.108932Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+2026-09-28T19:07:37.113388Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:37.114326Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:37.115231Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:37.493549Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+2026-09-28T19:07:37.504801Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:37.572826Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Encountered invalidated oauth token for user, failing request\",\n    \"type\": null,\n    \"code\": \"token_revoked\",\n    \"param\": null\n  },\n  \"status\": 401\n}")
+2026-09-28T19:07:37.701810Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:37.956231Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:38.169067Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:38.482198Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:38.482653Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:38.483096Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:39.059511Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+2026-09-28T19:07:39.062777Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:39.063758Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:39.064643Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:39.474821Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+ERROR: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+2026-09-28T19:07:39.484691Z ERROR codex_login::auth::manager: Failed to refresh token: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+claude: spawnSync claude ETIMEDOUT
+[2026-09-29 00:48:01] FAIL (1): ERROR: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+[2026-09-29 09:16:30] calendar-check: ok
