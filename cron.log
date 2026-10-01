@@ -2653,3 +2653,107 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-29 17:01:13] pushed 2026-09-29 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-29.md
 [2026-09-29 23:55:35] skip: 2026-09-29 already logged
 [2026-09-30 09:15:07] calendar-check: ok
+
+Gathering today's activity (2026-09-30)...
+  Git commits:    5
+  GitHub events:  11
+  Calendar events:3
+  Claude sessions:13
+  Active:         09:31 am – 03:24 pm
+  Lines:          +2484 / -285
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-09-30
+
+> 09:31 am – 03:24 pm · +2484 / -285 lines · `api-users` (fix/add-user-to-schedules-timeout), `audit-lite` (master), `audit-admin` (fix/lms-add-user-table-widths)
+
+### Summary
+I shipped five fixes and features across three repos. In api-users, I fixed a regression that made user updates time out for large teams. In audit-lite, three changes landed on master: the attachment repair is now saved, the outbox retry budget is defined and enforced, and ClientBlockedError issues in Sentry now get separate titles. In audit-admin, I fixed the column widths in the LMS add-user modal. I also ran a Sentry post-deploy check, triaged an Android ANR, looked into how in-app links behave, and packaged the sanity-build announcement as a reusable Claude skill.
+
+### Tasks & Changes
+
+#### User updates time out on large teams
+- **Repo:** `api-users` · branch: `fix/add-user-to-schedules-timeout`
+- **What was done:** Fixed a regression from PR #316. After a user was saved, the schedule step checked every schedule once for each team member. On a 2,100-person team this went past the database's 10-second limit. The password and profile changes had already been saved, but the user still got an error. Matching now uses `$setIsSubset` instead of `$all`, and the benchmark went from over 600 s to a fraction of that. I posted the root cause and fix on the Fizzy card.
+- **Commits:**
+  - `d17242bf` — fix(users): match team schedules with $setIsSubset, not $all, so large teams don't time out user updates
+- **PR:** [#324 — fix(users): match team schedules with $setIsSubset, not $all, so large teams don't time out user updates](https://github.com/Nimbly-Technologies/api-users/pull/324)
+
+#### Persist the attachment repair on submit
+- **Repo:** `audit-lite` · branch: `master`
+- **What was done:** The attachment-ref repair used to run inside `prepareSubmit` and was then thrown away. It now returns `restoredRefs` in `PrepareResult` and is saved, so the fixed attachment references are kept. I updated the docs to match.
+- **Commits:**
+  - `98c596bd` — fix(submission): persist the attachment repair instead of discarding it (#2066)
+- **PR:** [#2066 — fix(submission): persist the attachment repair instead of discarding it (#2723)](https://github.com/Nimbly-Technologies/audit-lite/pull/2066)
+
+#### Outbox retry budget
+- **Repo:** `audit-lite` · branch: `master`
+- **What was done:** `retryCount` was incremented on the retryable branch of `nextRowState` but was never compared to a limit, so outbox rows could retry forever. There is now a ceiling of 5 attempts and a 24-hour expiry. I also added three new notification kinds, `retriesExhausted`, `expired` and `signInRequired`. Before this, `signInRequired` returned `null` and the auditor was never told.
+- **Commits:**
+  - `7680f04b` — feat(report-sync): define and enforce the outbox retry budget (#2067)
+- **PR:** [#2067 — feat(report-sync): define and enforce the outbox retry budget](https://github.com/Nimbly-Technologies/audit-lite/pull/2067)
+
+#### Distinct Sentry titles for ClientBlockedError
+- **Repo:** `audit-lite` · branch: `master`
+- **What was done:** Sentry issues 57S and 5NR had the same title even though they are different errors. I changed the observability layer and the auth interceptor so each one gets its own title, and added tests. I also created Fizzy card #2732 (`[Internal][Sentry]`) on the Bugs board to track it.
+- **Commits:**
+  - `cd229f10` — fix(observability): give ClientBlockedError Sentry issues distinct titles (#2068)
+- **PR:** [#2068 — fix(observability): give ClientBlockedError Sentry issues distinct titles](https://github.com/Nimbly-Technologies/audit-lite/pull/2068)
+
+#### LMS add-user modal column widths
+- **Repo:** `audit-admin` · branch: `fix/lms-add-user-table-widths`
+- **What was done:** Each of the three data columns was set to 10%, so the checkbox column took about 70% of the table and user names were cut off. I fixed the Admin, Instructor and Learner modals and checked the fix locally. The triage bot had blamed "chip truncating text", which was wrong; I noted that on the Fizzy card.
+- **Commits:**
+  - `168b23b2` — fix(lms): widen add-user modal columns so the checkbox column doesn't eat the table
+- **PR:** [#3209 — fix(lms): widen add-user modal columns so user names aren't truncated](https://github.com/Nimbly-Technologies/audit-admin/pull/3209)
+
+### Meetings
+- **Stability Stand-up** — 02:00 PM – 02:15 PM (15 min)
+- **Real device test lab discussion** — 02:30 PM – 02:55 PM (25 min)
+
+### Investigation & Research
+
+#### Post-deploy Sentry check for the offscreen-button probe
+- **Repo:** `audit-lite`
+- **Question:** Did the post-deploy telemetry for updates `01a0865c-…` look clean? And before the probe was removed, did it catch any real bugs?
+- **Outcome:** Yes, it caught a real bug, on the original reporter's own OPPO A60 (CPH2631). Between Sep 4 and Sep 21 that phone sent 7 offscreen events and 3 healthy baseline events. In all 10, the device state and the sheet's size were identical, and the button always sat 60dp above the bottom edge of the frame. #2029 missed it because it only looked at the totals, and the false positives from before the fix drowned it out.
+- **Time:** 12:43–12:54
+
+#### ANR triage: AUDIT-LITE-V2-E7
+- **Repo:** `audit-lite`
+- **Question:** What causes Sentry issue 6278074333 on the latest updates?
+- **Outcome:** This is a generic Android ANR, and none of our code shows up as the cause. When the camera shuts down (the user leaves the camera screen or the app goes to the background), the main thread waits for the GPU to finish. On a low-end TECNO phone the GPU replied too slowly and the main thread was blocked for more than 5 seconds. There is nothing to fix on our side.
+- **Time:** 12:56–13:00
+
+#### In-app link click behaviour
+- **Repo:** `Nimbly`
+- **Question:** What happens when a user taps a link in the app (Discord thread report)?
+- **Outcome:** Reference links open in the in-app browser, which can't hand off to the Google Sheets app, so "Use the app" does nothing and the sheet opens view-only. I titled the thread **"Reference link can't hand off to the Sheets app (in-app browser)"**. No fix yet.
+- **Time:** 13:26–14:25
+
+#### YTB generator dropping items
+- **Repo:** `worklog`
+- **Question:** Why did `ytb --copy` leave out the api-users, audit-admin and audit-lite#2066 work and the investigations?
+- **Outcome:** There were two bugs in `ytb.mjs`. First, PRs merged this morning fell outside both the "Yesterday" window (only 2026-09-29) and the "Today" window (open work only). Second, the session data only had prompts, not what Claude concluded, so the rule to include only concluded investigations dropped every investigation. I fixed the "Yesterday" window to also cover work finished today before the standup, and fed session outcomes into the data.
+- **Time:** 13:44–13:49
+
+#### Sanity-build Discord announcement → Claude skill
+- **Repo:** `audit-lite`
+- **Question:** Can I automate posting the Release Sanity build links and OTA update IDs to the Discord QA thread once a GitHub Actions run finishes?
+- **Outcome:** I built the `/announce-sanity-build` skill (`SKILL.md` and `announce.sh`). It waits for the run, posts only if the run succeeds, and looks up each platform's own update ID with `eas update:view`, fixing the earlier mistake of posting the group ID. It passed a dry run against today's run (`01a0f1c4`). Today's announcement itself went out with the corrected ID.
+- **Time:** 15:29–15:36
+
+### Notes
+- **#2068 caveat:** Sentry titles may switch back and forth until older app versions stop reporting.
+- **#3209:** Check on staging after merge.
+- **`/announce-sanity-build`:** The real posting step hasn't been tested yet, only the dry run.
+- **OPPO A60 offscreen-button bug:** The probe data confirms a real layout bug on this device. It needs a follow-up card or fix.
+- **Reference-link / in-app browser issue:** Only the Discord thread has been titled. It still needs a card and a fix.
+────────────────────────────────────────────────────────────────
+Generating month rollup... done.
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-30.md
+[2026-09-30 17:02:16] pushed 2026-09-30 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-30.md
+[2026-09-30 23:50:00] skip: 2026-09-30 already logged
+[2026-10-01 09:15:10] calendar-check: ok
