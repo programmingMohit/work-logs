@@ -2757,3 +2757,72 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-
 [2026-09-30 17:02:16] pushed 2026-09-30 -> https://github.com/programmingMohit/work-logs/blob/main/2026/09/2026-09-30.md
 [2026-09-30 23:50:00] skip: 2026-09-30 already logged
 [2026-10-01 09:15:10] calendar-check: ok
+
+Gathering today's activity (2026-10-01)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:4
+  Claude sessions:4
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-01
+
+> +0 / -0 lines
+
+### Summary
+No commits or PRs today. Most of the day went to setting up an Orange Pi for the discovery device lab. I checked the SD card, flashed Armbian, and set up the beacon service, user sync and a custom login screen, then updated the hardware doc. Later I reviewed the UI changes in audit-lite milestone 43 and prepared release notes for `v2.17.0-ota.20261001.1`. That release has a server-side blocker for inventory reports.
+
+### Tasks & Changes
+
+_No commits or PRs recorded for this date._
+
+### Meetings
+- **Stability Stand-up** — 02:00 PM–02:15 PM (15 min)
+- **Nimbly x Punthai: Weekly Meeting** — 02:30 PM–03:30 PM (60 min)
+
+### Investigation & Research
+
+#### Orange Pi device lab: SD card check, Armbian flash and node setup
+- **Repo:** `discovery`
+- **Question:** Is the 64 GB SD card in the reader real capacity or fake? With no `f3probe` on macOS, how do we check it without bricking the card? After that, how do we flash Armbian and set the board up as a devlab node?
+- **Outcome:**
+  - Wrote a custom probe script (`sdprobe.py`) to test the card in place of f3, then flashed Armbian with `xz -dc … | dd of=/dev/rdisk4`.
+  - Built the node provisioning:
+    - Armbian preset script
+    - `devlab-beacon` service and unit, plus a `listen-beacon.py` listener
+    - `sync-devlab-users.sh` for user sync
+    - A custom MOTD (`05-devlab`) showing a devlab-blr banner and lab, network, system and commands sections
+  - Turned off the default Armbian MOTD with `MOTD_DISABLE` in `/etc/default/armbian-motd`, so package updates shouldn't bring it back. The original is backed up as `armbian-motd.orig`, and only the "reboot required" warning is kept. The WAN IP is cached and refreshed in the background every hour, so logins never wait on the network.
+  - Checked the new login screen by logging in as `mohit`.
+  - Updated `docs/discovery/discovery-device-lab-orange-pi-hardware.md` along the way.
+- **Time:** 11:41–16:57
+
+#### Audit-lite milestone 43: UI change review
+- **Repo:** `audit-lite`
+- **Question:** Does [milestone 43](https://github.com/Nimbly-Technologies/audit-lite/milestone/43) add any new UI, and can the screens be shown in a local HTML page like `audit-lite-submission-final`?
+- **Outcome:** Built `docs/audit-lite-v2.17.0-ota-ui/index.html` with 16 phone frames at 390×844, checked with a headless Chrome screenshot. It covers:
+  - #2040 / #2067: submission end states (server refused, out of retries, expired after 24 hours)
+  - #2056: the waiting card with 0 attachments, before and after
+  - #2067: notifications
+- **Time:** 15:42–16:02
+
+#### Release notes for audit-lite `v2.17.0-ota.20261001.1`
+- **Repo:** `audit-lite`
+- **Question:** Prepare release notes and an announcement for the OTA release.
+- **Outcome:** Updated the release notes and saved the announcement email as a draft. Found a blocker:
+  - The release makes the app add products that were put on an inventory schedule after the report was created.
+  - The server still rejects any inventory report whose product count differs from the stored one (`api-skus` `skuReport.usecase.ts:758` returns `409 SKU count mismatch`).
+  - So affected reports will be blocked until the server fix ships.
+- **Time:** 16:04–16:08
+
+### Notes
+- **Blocker:** The audit-lite `v2.17.0-ota.20261001.1` rollout depends on `api-skus#175`, which is still open with changes requested. Merge and deploy it before widening the OTA rollout, or inventory reports with changed schedules will fail with a 409.
+- The announcement email for the OTA release is still a draft and hasn't been sent.
+- Andi Muhamad Primabudi was on leave today.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-01.md
+[2026-10-01 17:01:04] pushed 2026-10-01 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-01.md
+[2026-10-01 23:50:05] skip: 2026-10-01 already logged
+[2026-10-02 09:18:11] calendar-check: ok
