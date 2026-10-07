@@ -2951,3 +2951,90 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-05 17:01:05] pushed 2026-10-05 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-05.md
 [2026-10-05 23:55:07] skip: 2026-10-05 already logged
 [2026-10-06 09:19:44] calendar-check: ok
+
+Gathering today's activity (2026-10-06)...
+  Git commits:    9
+  GitHub events:  19
+  Calendar events:0
+  Claude sessions:5
+  Active:         12:43 pm – 04:56 pm
+  Lines:          +505 / -29
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-06
+
+> 12:43 pm – 04:56 pm · +505 / -29 lines · `compass` (docs/submission-all-failure-states), `audit-admin` (fix/photo-source-permission-role-level)
+
+### Summary
+Most of the day went into Compass documentation for Customer Success (CS). I published a new page on the Single Audit submission (outbox) flow, refreshed its screenshots, then wrote up every failure state on the Submission screen and fixed how Mermaid diagrams render in dark mode. In parallel I shipped two audit-admin fixes (line breaks in issue resolve/block reasons, and role-level handling for photo-source permissions) and an audit-lite fix that treats a no-signal client block during autosave as offline instead of a fault. I also investigated a duplicate check-in on a completed schedule slot and wrote a summary for CS.
+
+### Tasks & Changes
+
+#### CS-facing Single Audit submission flow page
+- **Repo:** `compass` · branch: `docs/submission-all-failure-states`
+- **What was done:** Published a new Compass page for CS that explains the Single Audit outbox submission flow, with diagrams and no deep technical detail. Added screenshots for the "Waiting to Send" and "Report Couldn't Be Sent" states. Some designs in the source mockups were out of date, so I checked the screens against the local ADRs and the code. I then cut the "Couldn't Be Sent" screenshot down to a two-file retry list. The page is live after #171 merged, and I posted it in the Discord thread.
+- **Commits:**
+  - `0eedd708` — docs(single-audit): add CS-facing submission flow page (#171)
+  - `1aa0ff93` — docs(single-audit): add Waiting to Send and Report Couldn't Be Sent screenshots (#172)
+  - `9f2c322f` — docs(single-audit): shorten the Report Couldn't Be Sent screenshot to a two-file retry list (#173)
+- **PR:** [#171 — docs(single-audit): add CS-facing submission flow page](https://github.com/Nimbly-Technologies/compass/pull/171) · [#172 — docs(single-audit): add Waiting to Send and Report Couldn't Be Sent screenshots](https://github.com/Nimbly-Technologies/compass/pull/172) · [#173 — docs(single-audit): shorten the Report Couldn't Be Sent screenshot to a two-file retry list](https://github.com/Nimbly-Technologies/compass/pull/173)
+
+#### Submission screen failure states and dark-mode Mermaid fix
+- **Repo:** `compass` · branch: `docs/submission-all-failure-states`
+- **What was done:** Extended the submission page to cover every failure state on the Submission screen. Reworded the "server refused" case so it only claims what the server's own message says. Made pale Mermaid nodes readable in dark mode. That first fix didn't work: previewing the Quartz build locally showed Quartz's base `p, li, … { color: var(--darkgray) }` rule recolouring the `<p>` that Mermaid puts inside each node label. I fixed this with a style change that lets node labels keep their own colour, then checked it against the real build.
+- **Commits:**
+  - `766a97ec` — docs(single-audit): cover every failure state on the Submission screen
+  - `899bc159` — docs(single-audit): narrow the server-refused claim to the server's own wording
+  - `72bf9eaf` — docs(single-audit): make pale mermaid nodes readable in dark mode
+  - `24995af3` — fix(styles): let mermaid node labels keep their own colour
+- **PR:** [#174 — docs(single-audit): cover every failure state on the Submission screen](https://github.com/Nimbly-Technologies/compass/pull/174)
+
+#### Allow line breaks in issue resolve/block reasons
+- **Repo:** `audit-admin` · branch: `fix/photo-source-permission-role-level`
+- **What was done:** Fixed the issue-status reason modal so a resolve or block reason can contain line breaks, and added test coverage in `IssueStatusReasonModal.test.tsx`.
+- **Commits:**
+  - `0ced6838` — fix(issues): allow line breaks in resolve/block reason (#3216)
+- **PR:** [#3216 — fix(issues): allow line breaks in resolve/block reason](https://github.com/Nimbly-Technologies/audit-admin/pull/3216)
+
+#### Respect role level for photo-source permission checkboxes
+- **Repo:** `audit-admin` · branch: `fix/photo-source-permission-role-level`
+- **What was done:** Fixed `PermissionsContainer.tsx` so the photo-source permission checkboxes follow the role's level and no longer ignore it. Opened the PR and added a status update to the related Fizzy card.
+- **Commits:**
+  - `ea1d0fb6` — fix(permissions): respect role level for photo-source checkboxes
+- **PR:** [#3217 — fix(permissions): respect role level for photo-source checkboxes](https://github.com/Nimbly-Technologies/audit-admin/pull/3217)
+
+#### Autosave: treat a no-signal client block as offline
+- **Repo:** `audit-lite` · branch: `fix/autosave-client-blocked-offline`
+- **What was done:** Traced Sentry issue 7609516270, which is `(FiberFailure) ClientBlockedError: Request blocked: device has no signal` raised from the autosave path. Changed `update-questionnaire-controller.ts` so a no-signal client block counts as offline and is no longer reported as a fault. Added a unit test covering an error wrapped in `FiberFailure`. Commented on the Sentry issue and the Discord thread, and renamed the linked Fizzy card. I also confirmed that 5V7 (`autosave_api_failed`) and 3T5 (`submit_report_failed`) are separate Sentry issues: they carry the same exception but come from different code paths, so this PR does not cover 3T5.
+- **Commits:** none in the local log; pushed `12ed7bcc`, `c4acfe85`
+- **PR:** [#2086 — fix(autosave): treat a no-signal client block as offline, not a fault](https://github.com/Nimbly-Technologies/audit-lite/pull/2086)
+
+### Investigation & Research
+
+#### Duplicate check-in on a completed schedule slot
+- **Repo:** `Nimbly` (api-schedules)
+- **Question:** On Sep 17, how did auditor astariniagara end up with a second check-in, and a second report, on a schedule slot (19:30–21:30) that was already complete? And how could one account be signed in on two phones at once?
+- **Outcome:** The account was signed in on more than one phone. At 21:25 the auditor tapped **Check in** on Phone B for the already-completed slot, and the server accepted it because nothing stops a check-in on a slot that already has a completed report. I wrote a CS-ready summary. The triage thread listed six fixes in two groups. The main one is a server-side check-in guard in api-schedules that refuses the check-in or returns the existing report, which fixes the problem however many phones are signed in. The bug was filed as P2 (due within 5 working days), moved to a new Discord bug thread, and is tracked on Fizzy card #2795.
+- **Time:** 12:06–13:44
+
+### Notes
+- audit-admin #3216 and #3217 are still unmerged. Neither was in today's production deploys (runs 37430572642 and 37453822745, both green), so they go out in the next deploy after merge.
+- compass #174 (failure states and the Mermaid colour fix) is open and awaiting review.
+- audit-lite #2086 is open. Sentry issue 3T5 (the same `ClientBlockedError`, but raised from `submit-questionnaire-controller.ts`) is not covered and needs its own fix.
+- The duplicate check-in fixes on Fizzy #2795 are P2, due within 5 working days. Start with the api-schedules check-in guard.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-06.md
+[2026-10-06 17:01:09] pushed 2026-10-06 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-06.md
+[2026-10-06 23:59:54] skip: 2026-10-06 already logged
+[2026-10-07 09:18:57] calendar-check: ok
+
+Gathering today's activity (2026-10-07)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:0
+
+No activity found for today. Nothing to log.
+[2026-10-07 17:03:08] nothing to log for 2026-10-07
