@@ -5076,3 +5076,97 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-15 17:01:28] pushed 2026-10-15 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-15.md
 [2026-10-15 23:52:40] skip: 2026-10-15 already logged
 [2026-10-16 09:19:08] calendar-check: ok
+
+Gathering today's activity (2026-10-16)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:2
+  Claude sessions:1
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-16
+
+> +0 / -0 lines
+
+### Summary
+No code was committed or pushed today. Most of the day went to hardware work on the `lab-blr` device lab. This covered checking the connected Samsung phone, checking the USB hub in the office, and wiring a newly arrived relay module, with step-by-step visual guides built along the way. The relay now powers on, a scheduled timer is running on the lab setup, and the findings are going into the lab doc.
+
+### Tasks & Changes
+
+_No commits, PRs or GitHub activity were recorded for 2026-10-16._
+
+### Meetings
+- **Weekly Check-out** — 03:00 PM–03:45 PM (45 min)
+- **Riyan on Leave** — all day (calendar notice, not a meeting)
+
+### Investigation & Research
+#### `lab-blr` device lab: phone state, USB hub check, relay wiring
+- **Repo:** `Nimbly` (local workspace; no repo changes)
+- **Question:** What brightness was the Samsung phone on `lab-blr` set to? Was the USB hub working properly once checked in person? How should the new relay module be wired and powered from the Pi?
+- **Outcome:**
+  - Read the Samsung phone's brightness on `lab-blr` and applied the follow-up change.
+  - Ran the USB hub check from the office and recorded the result in the lab doc.
+  - Built an HTML reference panel for the relay with three tabs: build steps with diagrams, pin identification (which end is male and which is female, and how to tell without a multimeter), and how the orange and blue wires are set up.
+  - Connecting DC+ to pin 2 and DC- to pin 6 did not light the power LED at first. After troubleshooting, the relay's power LED came on.
+  - The session ended with a scheduled timer running (next run 17:14) and the lab doc update in progress.
+- **Time:** 13:05–16:59
+
+### Notes
+- The lab doc still needs to be finished with the relay wiring steps and the timer setup.
+- The relay guides (`build-panel.html`, `pins-panel.html`, `wires-panel.html`) only exist in a temporary Claude scratchpad folder. Copy them somewhere permanent, such as the lab doc or a repo, if you want to keep them.
+- Next step: check that the 17:14 timer run worked, then test the relay switching end to end now that it powers on.
+────────────────────────────────────────────────────────────────
+Generating week rollup... done.
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-16.md
+[2026-10-16 17:01:38] pushed 2026-10-16 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-16.md
+[2026-10-16 23:58:28] skip: 2026-10-16 already logged
+[2026-10-19 09:28:27] calendar-check: gcalcli failed (1): google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
+
+Gathering today's activity (2026-10-19)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:0
+
+No activity found for today. Nothing to log.
+[2026-10-19 17:10:54] nothing to log for 2026-10-19
+
+Gathering today's activity (2026-10-19)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:0
+
+No activity found for today. Nothing to log.
+[2026-10-20 00:00:04] nothing to log for 2026-10-19
+[2026-10-20 09:23:49] calendar-check: gcalcli failed (1): google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
+
+Gathering today's activity (2026-10-20)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:0
+
+No activity found for today. Nothing to log.
+[2026-10-20 17:17:58] nothing to log for 2026-10-20
+
+Gathering today's activity (2026-10-20)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:0
+
+No activity found for today. Nothing to log.
+[2026-10-20 23:55:02] nothing to log for 2026-10-20
+[2026-10-21 09:22:08] calendar-check: gcalcli failed (1): google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
+
+Gathering today's activity (2026-10-21)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:0
+  Claude sessions:0
+
+No activity found for today. Nothing to log.
+[2026-10-21 17:19:37] nothing to log for 2026-10-21
