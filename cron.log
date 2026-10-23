@@ -5201,3 +5201,49 @@ No code changes. On leave.
 Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-21.md
 [2026-10-21 23:50:42] pushed 2026-10-21 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-21.md
 [2026-10-22 09:15:11] calendar-check: ok
+
+Gathering today's activity (2026-10-22)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:5
+  Claude sessions:2
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-22
+
+> +0 / -0 lines
+
+### Summary
+No commits or PRs today; the day was mostly meetings. These were a fireside chat, the AI Team DSM, an architecture planning session and the weekly Nimbly x Punthai sync. Work on `chore/remove-health-score-peer-comparison` in `admin-lite` is still uncommitted.
+
+### Tasks & Changes
+_No commits, PRs or GitHub activity recorded._
+
+### Meetings
+| Time | Meeting | Duration |
+|---|---|---|
+| 11:00 AM – 11:30 AM | Fireside chat with Mohit | 30 min |
+| 12:00 PM – 12:30 PM | AI Team DSM | 30 min |
+| 12:30 PM – 01:20 PM | Architecture Planning & Discussion | 50 min |
+| 02:30 PM – 03:30 PM | Nimbly x Punthai: Weekly Meeting | 60 min |
+
+**Total:** 2h 50m
+
+### Notes
+- **`admin-lite` has 63 uncommitted changes** on `chore/remove-health-score-peer-comparison`. Commit or stash them before switching branches.
+- `GET /questionnaireIndexes/minified` is called by all three apps: `audit-lite`, `audit-admin` and `admin-lite`. In `audit-lite` it's called from `packages/app/shared/infrastructure/api/endpoints/questionnaire-endpoint.ts:16` via `ALL_QUESTIONNAIRE`. Check these callers before changing or removing the endpoint.
+
+---
+
+A few things I changed or left out:
+- **Duplicate meeting:** "Nimbly x Punthai: Weekly Meeting" was listed twice for the same time slot, so I kept it once.
+- **eMudhra session (11 min):** I left it out of Investigation & Research. It was in the `personal` project and had nothing to do with work. Tell me if you want it in.
+- **`questionnaireIndexes/minified` session:** It was 2 minutes, one prompt and no file edits, so it fails the "trivial" filter. I put the useful finding in Notes instead.
+- **Investigation & Research:** No sessions were left after filtering, so I removed the whole section.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-22.md
+[2026-10-22 17:00:48] pushed 2026-10-22 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-22.md
+[2026-10-22 23:53:22] skip: 2026-10-22 already logged
+[2026-10-23 09:17:10] calendar-check: ok
