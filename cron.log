@@ -5247,3 +5247,85 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-22 17:00:48] pushed 2026-10-22 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-22.md
 [2026-10-22 23:53:22] skip: 2026-10-22 already logged
 [2026-10-23 09:17:10] calendar-check: ok
+
+Gathering today's activity (2026-10-23)...
+  Git commits:    0
+  GitHub events:  0
+  Calendar events:4
+  Claude sessions:8
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-23
+
+> +0 / -0 lines
+
+### Summary
+There were no commits today. The day went to planning and verification. I set milestones and ETAs for the AI Pulse mobile scope and verified the Sentry autosave fix on self-hosted Sentry, which closed Fizzy card #2012. Most of the afternoon went to mapping the `ai` monorepo and deciding how Pulse's backend should get the APIs it needs from echo-vision-api. Outside of engineering, I prepared a reimbursement claim.
+
+### Tasks & Changes
+
+No code commits or PRs today.
+
+### Meetings
+- **Nimbly Thailand Holiday – King Chulalongkorn Memorial Day:** all day
+- **AI Team DSM:** 12:00 PM–12:30 PM (30 min)
+- **Weekly Check-out:** 03:00 PM–03:45 PM (45 min)
+
+### Investigation & Research
+
+#### AI Pulse mobile: milestones and ETA
+- **Repo:** `audit-lite` (the app under test is actually in `ai`)
+- **Question:** How should the mobile work (cards #2993–#2998) be split into milestones with ETAs, and how should the timeline be reported to my manager?
+- **Outcome:** Added milestones to the top of `docs/analysis/ai-pulse-oct30-feasibility-2026-10-22.md`. The ETA is split in two:
+  - **Oct 30:** dev complete on a mocked device (#2993–#2997).
+  - **Nov 5:** tested on a real device, if firmware is ready.
+  - **#2998:** after Nov 6.
+  
+  QA can start on #2993, #2994 and #2997 from Nov 2. Connect and Walk (#2995, #2996) depend on Andi delivering the setup network and walk mode.
+- **Time:** 10:59–11:37
+
+#### Post-deploy verification for Sentry autosave fix
+- **Repo:** `audit-lite` / `Nimbly` workspace
+- **Question:** Does Fizzy card [#2012](https://app.fizzy.do/6118580/cards/2012) need any steps after deploy, now that audit-lite errors also go to self-hosted Sentry?
+- **Outcome:** Checked on self-hosted Sentry (sentry.hellonimbly.com, via MCP):
+  - On release `v2.18.0-ota.20261022.1`, autosave failures with no network signal now go to AUDIT-LITE-W.
+  - All 162 of those events are at warning level.
+  
+  Closed the card, moved it to Done and posted a verification comment. I also updated memory with the self-hosted Sentry setup.
+- **Time:** 11:15–11:30
+
+#### Figma MCP setup
+- **Repo:** `Nimbly` workspace
+- **Question:** Is Figma MCP set up, and can it read the AI Pulse Mockups file?
+- **Outcome:** Set up the Figma MCP server. Reading the mockups file failed: even a basic read call (`get_metadata`) returned "you don't have edit access." The fix is to get edit access from the owner or duplicate the file into my drafts. My account is also on the Starter plan, which allows only 20 MCP tool calls per month.
+- **Time:** 13:30–13:43
+
+#### `ai` monorepo architecture and how Pulse gets echo-vision APIs
+- **Repo:** `ai`
+- **Question:**
+  - Is there an endpoint that returns feature flags for a user or org?
+  - How is the `ai` monorepo structured?
+  - How should Pulse use the APIs that currently live in `echo-vision-api`?
+- **Outcome:**
+  - **Approach:** Not making `echo-vision-api` the shared control plane. Whatever Pulse needs goes into a separate shared layer, copying code from echo-vision-api as needed. echo-vision-api can be refactored onto it later. The main reason is that Pulse needs its own release schedule.
+  - **pulse-api:** confirmed it is a FastAPI microservice inside the monorepo.
+  - **Mobile app:** `echo-vision-app` is about 70% Echo features and 30% shared shell (auth, layout, `useFeatureAccess`). Decided not to move anything until Pulse actually comes to mobile.
+  - **Doc:** wrote a map of the architecture to `docs/analysis/ai-echo-pulse-single-app-architecture-2026-10-23.html`.
+- **Time:** 13:50–16:56
+
+### Notes
+- **Sentry 5V7 (sentry.io):** Still need to decide whether to archive it "until escalating." If an old bundle fires there, Nimblee may reopen #2012, which is what happened on 10-06.
+- **Figma:** Need edit access to AI Pulse Mockups, or a duplicate in my drafts. With 20 MCP calls a month, use them sparingly.
+- **AI Pulse dependency:** The Nov 5 real-device date depends on Andi's firmware (setup network and walk mode).
+- **Reimbursement:**
+  - Renamed the 8 invoices and merged them into `2026-10_Reimbursement_Invoices_Merged_Rs9834.10.pdf` (19 pages, ₹9,834.10 total).
+  - The Gmail draft to Pratiksha is ready, but the invoices weren't attached. They're too large for the Gmail tool, so attach them by hand before sending.
+  - The merged PDF hasn't been opened to check it yet.
+────────────────────────────────────────────────────────────────
+Generating week rollup... done.
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-23.md
+[2026-10-23 17:01:20] pushed 2026-10-23 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-23.md
+[2026-10-23 23:57:53] skip: 2026-10-23 already logged
+[2026-10-26 09:23:29] calendar-check: ok
