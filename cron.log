@@ -5329,3 +5329,106 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-23 17:01:20] pushed 2026-10-23 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-23.md
 [2026-10-23 23:57:53] skip: 2026-10-23 already logged
 [2026-10-26 09:23:29] calendar-check: ok
+
+Gathering today's activity (2026-10-26)...
+  Git commits:    9
+  GitHub events:  8
+  Calendar events:4
+  Claude sessions:3
+  Active:         10:36 pm – 01:20 pm
+  Lines:          +1533 / -154
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-26
+
+> 10:36 pm – 01:20 pm · +1533 / -154 lines · `ai` (feat/pulse-2993-app-home-cards)
+
+### Summary
+Finished the Pulse home cards work in the Echo Vision app and opened PR #877. The day's changes added a product-neutral sign-in screen, Nimbly brand marks on the Echo and Pulse cards, pull-to-refresh and foreground refetch on Home, and a temporary dev mock for the Pulse calibrator, which was removed once real assignment worked. Separately, I opened an `audit-lite` report-sync fix, reviewed the site Devices tab PR, and found why OTLP spans weren't showing up in self-hosted Sentry.
+
+### Tasks & Changes
+
+#### Pulse home cards behind feature flag and calibrator assignment
+- **Repo:** `ai` · branch: `feat/pulse-2993-app-home-cards`
+- **What was done:** Pulse product cards now appear on the app Home screen when the `pulse` flag is on and the user is assigned as a calibrator. This is the base change for PR #877.
+- **Commits:**
+  - `672ca55d` — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993)
+- **PR:** [#877 — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993)](https://github.com/Nimbly-Technologies/ai/pull/877)
+- **Tickets:** [FZ-2993](https://app.fizzy.do/6118580/cards/2993)
+
+#### Product-neutral sign-in screen
+- **Repo:** `ai` · branch: `feat/pulse-2993-app-home-cards`
+- **What was done:** Rebuilt the sign-in screen to match Pulse mockup 7a so it no longer belongs to one product. Replaced the placeholder logo with the brand waveform logo from the supplied SVG.
+- **Commits:**
+  - `f88507cb` — feat(app): product-neutral sign-in screen per Pulse mockup 7a
+  - `b10d53f8` — feat(app): use the brand waveform logo on the sign-in screen
+- **PR:** [#877 — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993)](https://github.com/Nimbly-Technologies/ai/pull/877)
+
+#### Nimbly Echo / Pulse brand marks on Home
+- **Repo:** `ai` · branch: `feat/pulse-2993-app-home-cards`
+- **What was done:** Added `EchoMark` and `PulseMark` SVG components. They replace the generic icons on the Echo home card, the Pulse home screen and the Pulse card.
+- **Commits:**
+  - `a84b57ba` — feat(app): use the Nimbly Echo mark on the Echo home card
+  - `9bc21c27` — feat(app): use the Nimbly Pulse mark on the Pulse home and card
+- **PR:** [#877 — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993)](https://github.com/Nimbly-Technologies/ai/pull/877)
+
+#### Pulse calibrator dev mock (added, then removed)
+- **Repo:** `ai` · branch: `feat/pulse-2993-app-home-cards`
+- **What was done:** Added a client-side mock for the Pulse calibrator assignment, off by default, so the Pulse card could be tested on a real device before the backend data existed. It was documented in `docs/pulse-dev-mock.md`. Once the real assignment path worked, the mock was removed.
+- **Commits:**
+  - `7001b934` — feat(app): add a dev-only Pulse calibrator mock, off by default
+  - `21d51fdc` — chore(app): remove the Pulse dev mock now that the real assignment path works
+- **PR:** [#877 — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993)](https://github.com/Nimbly-Technologies/ai/pull/877)
+
+#### Home data freshness: foreground refetch and pull-to-refresh
+- **Repo:** `ai` · branch: `feat/pulse-2993-app-home-cards`
+- **What was done:** The React Query client now refetches stale queries when the app returns to the foreground. Every Home variant got pull-to-refresh through a shared `useHomeRefresh` hook, which has tests.
+- **Commits:**
+  - `602a4c81` — feat(app): refetch stale queries when the app returns to the foreground
+  - `256ae899` — feat(app): pull to refresh on every Home variant
+- **PR:** [#877 — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993)](https://github.com/Nimbly-Technologies/ai/pull/877)
+
+#### Report-sync outbox fix
+- **Repo:** `audit-lite` · branch: n/a
+- **What was done:** Opened a PR so outbox taps that refuse without throwing are terminated instead of hanging.
+- **PR:** [#2163 — fix(report-sync): terminate the outbox taps that refuse without throwing](https://github.com/Nimbly-Technologies/audit-lite/pull/2163)
+
+#### Code review: site Devices tab
+- **Repo:** `ai` · branch: n/a
+- **What was done:** Reviewed the new site Devices tab, which shows Echo Vision mics and AI Pulse.
+- **PR:** [#847 — feat: site Devices tab with Echo Vision mics and AI Pulse (Fizzy #2989)](https://github.com/Nimbly-Technologies/ai/pull/847)
+- **Tickets:** FZ-2989
+
+### Meetings
+- **Maharishi Valmiki Jayanti**: all day (holiday)
+- **Gabe - Unpaid Leave**: all day
+- **AI DSM**: 12:00 PM – 12:25 PM (25 min)
+- **Weekly Check-in**: 02:00 PM – 02:25 PM (25 min)
+
+### Investigation & Research
+
+#### Missing OTLP spans in self-hosted Sentry (Optikseis gap)
+- **Repo:** `compass`
+- **Question:** Why does the PostHog dashboard show 17 unaccounted-for items for Optikseis, and are trace spans actually reaching self-hosted Sentry?
+- **Outcome:** The app is sending spans: nginx on the Sentry host logged about 13.7k `POST /api/7/integration/otlp/v1/traces` per hour, almost all answered `200`. The Relay container logs show Relay accepting the OTLP posts and then discarding the spans without an error. This is not the `invalid_transaction` rejections. The fault is on the Relay side, not in the client.
+- **Time:** 12:24–13:50
+- **Tickets:** FZ-1776
+
+#### Echo calendar mockup 7b proposal
+- **Repo:** `docs` (Nimbly/docs/mockups)
+- **Question:** How should the Echo calendar entry point look on the new Home (proposal 7b)?
+- **Outcome:** Updated `7b-echo-calendar-proposal.html`, removed the "Open Echo → Echo page" badge from Option C1, and exported an Option C screenshot to share. The "Tap card → Echo home" badge on the earlier Alternative mockup is still in place until someone decides on it.
+- **Time:** 09:32–14:31, as part of the PR #877 session
+
+### Notes
+- **PR #877** was opened at about 13:24 with all of the branch's commits and is waiting for review.
+- **Sentry/Relay:** the spans being dropped behind a `200` is confirmed, but the reason in Relay's config (project/DSN mapping, OTLP span ingestion, or a filter) still needs to be found and fixed. Until then, trace-based numbers in PostHog/Sentry for Optikseis will be incomplete.
+- **Echo 7b mockup:** need a decision on whether to also remove the badge from the Alternative mockup.
+- **Commit `672ca55d`'s `pr` field** shows #2993, which is the Fizzy card number. The real GitHub PR is #877.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-26.md
+[2026-10-26 17:01:10] pushed 2026-10-26 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-26.md
+[2026-10-26 23:50:02] skip: 2026-10-26 already logged
+[2026-10-27 09:15:08] calendar-check: ok
