@@ -5432,3 +5432,121 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-26 17:01:10] pushed 2026-10-26 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-26.md
 [2026-10-26 23:50:02] skip: 2026-10-26 already logged
 [2026-10-27 09:15:08] calendar-check: ok
+
+Gathering today's activity (2026-10-27)...
+  Git commits:    13
+  GitHub events:  20
+  Calendar events:5
+  Claude sessions:5
+  Active:         10:28 am – 02:15 pm
+  Lines:          +4546 / -681
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-27
+
+> 10:28 am – 02:15 pm · +4546 / -681 lines · `ai` (spike/pulse-wifi-join-2995), `audit-lite` (fix/attachment-gate-unenqueued-bound)
+
+### Summary
+On the Pulse side of the `ai` app, I shipped the home cards behind the pulse flag and the calibration intro sheet with its Install step, then started a spike on joining a Pulse device's Wi-Fi. In `audit-lite`, I bounded how long the report-sync attachment gate waits on references that have no upload row (Fizzy 3048), and I made the new enqueue telemetry stop leaking file names and fork-cause text. I also looked into KFC's 21 `attachmentBlocked` failures, which led to a PR that tracks which failure screen auditors see.
+
+### Tasks & Changes
+
+#### Pulse home cards behind the pulse flag and calibrator assignment
+- **Repo:** `ai` · branch: `spike/pulse-wifi-join-2995`
+- **What was done:** Pulse home cards now show only when the pulse flag is on and the auditor has a calibrator assignment. `HomeTab` waits for the flags and the assignment to load before it renders, and shows a loader in the meantime. The Calendar card was removed from home after product decided the History page will cover it later. I checked that `UploadReminderModal` stays hidden when Echo is off for an auditor.
+- **Commits:**
+  - `266c8b4d` — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993) (#877)
+- **PR:** [#877 — feat(app): Pulse home cards behind the pulse flag and calibrator assignment (Fizzy #2993)](https://github.com/Nimbly-Technologies/ai/pull/877)
+- **Tickets:** [FZ-2993](https://app.fizzy.do/6118580/cards/2993)
+
+#### Pulse calibration intro sheet and Install step
+- **Repo:** `ai` · branch: `spike/pulse-wifi-join-2995`
+- **What was done:** Added the first part of the calibration wizard: an intro sheet, an Install step, a stepper, progress tracking, a store map and a walk preview, with tests for the intro sheet and the wizard.
+- **Commits:**
+  - `844006a0` — feat(app): Pulse calibration intro sheet and Install step (#915)
+- **PR:** [#915 — feat(app): Pulse calibration intro sheet and Install step](https://github.com/Nimbly-Technologies/ai/pull/915)
+
+#### Spike: joining a Pulse device's Wi-Fi
+- **Repo:** `ai` · branch: `spike/pulse-wifi-join-2995`
+- **What was done:** Built a proof of concept in echo-vision-app for connecting the phone to a Pulse device's Wi-Fi. It still has to be run on real devices.
+- **Commits:**
+  - `a44c0600` — chore(echo-vision-app): spike joining a Pulse device's Wi-Fi (#2995)
+- **Tickets:** [FZ-2995](https://app.fizzy.do/6118580/cards/2995)
+
+#### Bound the attachment gate's wait on unenqueued references
+- **Repo:** `audit-lite` · branch: `fix/attachment-gate-unenqueued-bound`
+- **What was done:** The report-sync attachment gate no longer waits forever on a reference that has no `upload_jobs` row. The time limit now counts from the moment the queue says it received the reference, and that moment is dated to the submission being drained. The handoff is recorded by the side that makes it. A reference the queue received during the current pass is not marked as failed. The code comments now say what a missing upload row does and does not prove.
+- **Commits:**
+  - `a0d199b8` — fix(report-sync): bound the attachment gate's wait on a reference with no upload row (Fizzy 3048)
+  - `f7fb27ff` — fix(report-sync): do not condemn a reference the queue was handed this pass
+  - `a36639cf` — fix(report-sync): measure the unenqueued bound from the queue's own handoff
+  - `00cb656b` — fix(background-upload): date the enqueue handoff to the submission being drained
+  - `ded7c69f` — fix(background-upload): record the enqueue handoff on the side that makes it
+  - `36c64195` — fix(background-upload): say what the absent upload_jobs row does and does not prove
+- **PR:** [#2168 — fix(report-sync): bound the attachment gate's wait on a reference with no upload row (Fizzy 3048)](https://github.com/Nimbly-Technologies/audit-lite/pull/2168)
+- **Tickets:** [FZ-3048](https://app.fizzy.do/6118580/cards/3048)
+
+#### Keep sensitive data out of the background-upload telemetry
+- **Repo:** `audit-lite` · branch: `fix/attachment-gate-unenqueued-bound`
+- **What was done:** Made the new enqueue spans safer in steps: first the fork cause was redacted, then every separated token in it was redacted, and finally the fork cause's text was removed entirely. The file name was also removed from the two new enqueue spans.
+- **Commits:**
+  - `0077abc8` — fix(background-upload): redact the fork cause before it reaches a span
+  - `d1900f29` — fix(background-upload): redact every separated token in a fork cause
+  - `c160cc35` — fix(background-upload): stop emitting the fork cause's text entirely
+  - `590a2568` — fix(background-upload): keep the file name off the two new enqueue spans
+- **PR:** [#2168 — fix(report-sync): bound the attachment gate's wait on a reference with no upload row (Fizzy 3048)](https://github.com/Nimbly-Technologies/audit-lite/pull/2168)
+- **Tickets:** [FZ-3048](https://app.fizzy.do/6118580/cards/3048)
+
+#### Failure-screen telemetry for report submission
+- **Repo:** `audit-lite` · branch: worktree on the dev server
+- **What was done:** Added two events to report submission: which failure screen an auditor sees, and which button they press. Each event carries the IDs needed to join it to the original failure event. Added a temporary tile to the PostHog outbox rollout dashboard until the events go live. The work is tracked on [Fizzy 3053](https://app.fizzy.do/6118580/cards/3053) (Waiting for Deployment), which lists the 5 steps to do after deploy.
+- **Commits:**
+  - none in the local repo (written in a worktree on the dev server)
+- **PR:** [#2170 — feat(report-submission): report which failure screen an auditor sees and what they press](https://github.com/Nimbly-Technologies/audit-lite/pull/2170)
+
+### Meetings
+- **11:00–11:15 (15 min):** Follow up: PR #877 open items (Fizzy #2993)
+- **12:00–12:30 (30 min):** AI Team DSM
+- **15:00–15:15 (15 min):** Follow up: Pulse Connect risks (Fizzy #2995)
+- **All day:** Gabe on unpaid leave · Azza on replacement day off
+
+### Investigation & Research
+
+#### What KFC's 21 `attachmentBlocked` failures mean
+- **Repo:** `audit-lite` (plus `scripts/sentry`, `scripts/posthog`)
+- **Question:** What do the 21 `attachmentBlocked` failures for KFC on the PostHog dashboard actually mean, and why can't span search on the self-hosted Sentry help answer it?
+- **Outcome:** The current telemetry can't show which failure screen an auditor saw or what they did next, so the 21 failures can't be fully explained yet. That led to PR #2170 and Fizzy 3053. I fixed Sentry querying with a new `scripts/sentry/events_query` script that takes an API token. A possible follow-up was noted: `attachmentBlocked` may be firing while the device is offline.
+- **Time:** 13:39–14:35
+
+#### Self-hosted Sentry ignoring OTLP traces
+- **Repo:** `audit-lite` / self-hosted Sentry (`ext.skynet.nimbly`)
+- **Question:** Why does Relay accept OTLP trace POSTs and return 200, but then drop the spans? And are those spans going to Sentry cloud instead?
+- **Outcome:** Relay discards the spans because `organizations:relay-otlp-traces-endpoint` isn't enabled. I tried adding that feature flag to `sentry.conf.py`, then reverted it from the `.bak-20261027` backup. The bug is written up on the Fizzy board, and I've started checking whether the spans reach Sentry cloud.
+- **Time:** 01:52–14:41 (interleaved with the Fizzy 3048 work)
+
+#### Reminder tooling with CLI/MCP access
+- **Repo:** — (workspace tooling)
+- **Question:** Which reminder app has a web UI and can be used from a CLI or MCP?
+- **Outcome:** Set up Todoist Free through MCP and checked that reading, writing and deleting tasks all work. I used it to add reminders for the two Pulse follow-ups listed below.
+- **Time:** 14:06–14:14
+
+### Notes
+- **Pulse Wi-Fi spike (Fizzy 2995):** run it on real devices on Wed 28 Oct at 10:30 (Todoist reminder set). The Pulse Connect risks follow-up is at 15:00 today.
+- **PR #2168 and PR #2170** are waiting for review. After #2170 merges, it needs an OTA release and then the 5 post-deploy steps on Fizzy 3053.
+- **OTA releases don't start on merge.** Someone has to run `release-ota-gradual.yml` (or `release-ota-full.yml`) by hand. Decide the version first: `EXPO_UPDATE_APP_VERSION` is still `2.18.0`.
+- **Self-hosted Sentry OTLP traces:** the bug is filed and the config change is reverted. The fix is still open.
+
+---
+
+A few data issues I handled instead of copying them as-is:
+- **Commit `266c8b4d`:** its PR field said #2993, but that's the Fizzy card number. I used PR #877, which is in the commit subject and in the PR event.
+- **Commit `a44c0600`:** its PR field says #2995. There's no PR event for it, and #2995 matches the Fizzy card on the branch name and the calendar invite, so I listed it as a ticket rather than a PR. If PR #2995 really does exist, add the PR line back.
+- **Ticket links:** the Fizzy card URLs for 2995 and 3048 follow the `cards/2993` URL pattern; I didn't check that they open.
+- **Commit count:** `repoStats` says `audit-lite` has 10 commits, but only 9 are in the data, so the log shows 9.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-27.md
+[2026-10-27 17:01:40] pushed 2026-10-27 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-27.md
+[2026-10-27 23:50:00] skip: 2026-10-27 already logged
+[2026-10-28 09:31:31] calendar-check: gcalcli failed (1): google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
