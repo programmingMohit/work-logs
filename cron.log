@@ -5550,3 +5550,123 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-27 17:01:40] pushed 2026-10-27 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-27.md
 [2026-10-27 23:50:00] skip: 2026-10-27 already logged
 [2026-10-28 09:31:31] calendar-check: gcalcli failed (1): google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
+
+Gathering today's activity (2026-10-28)...
+  Git commits:    12
+  GitHub events:  19
+  Calendar events:4
+  Claude sessions:7
+  Active:         10:31 am – 03:33 pm
+  Lines:          +1851 / -170
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-28
+
+> 10:31 am – 03:33 pm · +1851 / -170 lines · `ai` (feat/pulse-connect-2995)
+
+### Summary
+Most of the day went into the Echo Vision app's Pulse Connect flow. PR #952 adds joining a Nimbly Pulse's Wi-Fi during calibration. A run of follow-up fixes made sure the phone leaves the Pulse network cleanly, retries a failed leave, and stops reading a device after it's released. The join was then checked end-to-end on the newly added lab iPhone 13. On the side, two EAS build config PRs (#957, #958) were opened, six teammate PRs were reviewed, and the rollout of the latest OTA update was checked.
+
+### Tasks & Changes
+
+#### Pulse Connect: join a Nimbly Pulse on calibration
+- **Repo:** `ai` · branch: `feat/pulse-connect-2995`
+- **What was done:** Built the Connect step in calibration. It joins a Pulse device's Wi-Fi through `react-native-wifi-reborn` and reads the device's status. The list rescans every 10 s while no Pulse is listed, and a dev-only device URL lets the flow run against a stand-in device.
+- **Commits:**
+  - `e8171922` — feat(echo-vision-app): connect to a Nimbly Pulse on calibration (#2995)
+  - `5d842f26` — chore(echo-vision-app): add react-native-wifi-reborn for joining a Pulse's Wi-Fi (#2995)
+  - `518f0190` — fix(echo-vision-app): rescan for a Pulse every 10 s while none is listed
+  - `546b37b7` — feat(echo-vision-app): dev-only Pulse device URL for a stand-in device
+- **PR:** [#952 — feat(app): connect to a Nimbly Pulse on calibration (#2995)](https://github.com/Nimbly-Technologies/ai/pull/952)
+- **Tickets:** Fizzy #2995
+
+#### Pulse Connect: Wi-Fi leave and cleanup
+- **Repo:** `ai` · branch: `feat/pulse-connect-2995`
+- **What was done:** Made sure the phone always lets go of the Pulse network:
+  - It leaves a Pulse that joins after the wizard has already let go, and retries a leave that fails.
+  - It keeps the user's own Wi-Fi when leaving on Android versions before 10.
+  - It cancels a status read still in flight when Connect lets go, and stops reading a released device.
+  - A row now shows when the phone couldn't leave the Pulse Wi-Fi.
+  - The mic and Pulse clients now share one local-device request helper.
+- **Commits:**
+  - `2cbdb026` — fix(echo-vision-app): leave a Pulse joined after the wizard let go, retry a failed leave
+  - `9581a8d1` — fix(echo-vision-app): keep the user's own Wi-Fi when leaving a Pulse before Android 10
+  - `ba9eb7a0` — fix(echo-vision-app): retry a failed leave of a late Pulse join, stop reading a released device
+  - `23fc8093` — fix(echo-vision-app): cancel the Pulse status read in flight when Connect lets go
+  - `d2772113` — refactor(echo-vision-app): share one local-device request helper between the mic and Pulse clients
+  - `8a75c1e8` — fix(echo-vision-app): show on its row when the phone could not leave the Pulse Wi-Fi
+- **PR:** [#952 — feat(app): connect to a Nimbly Pulse on calibration (#2995)](https://github.com/Nimbly-Technologies/ai/pull/952)
+- **Tickets:** Fizzy #2995
+
+#### EAS build configuration
+- **Repo:** `ai` · branch: `chore/app-easignore`, `chore/app-eas-ios-image`
+- **What was done:** EAS builds now upload only `echo-vision-app` instead of the whole monorepo, and iOS builds are pinned to the SDK 54 build image.
+- **Commits:**
+  - `72985f89` — chore(app): upload only echo-vision-app to EAS builds (#957)
+  - `3205b7a9` — chore(app): pin EAS iOS builds to the SDK 54 image (#958)
+- **PR:** [#957 — chore(app): upload only echo-vision-app to EAS builds](https://github.com/Nimbly-Technologies/ai/pull/957) · [#958 — chore(app): pin EAS iOS builds to the SDK 54 image](https://github.com/Nimbly-Technologies/ai/pull/958)
+
+#### Code reviews
+- **Repo:** `ai`
+- **What was done:** Reviewed six teammate PRs. #874, #876 and #879 were approved.
+- **PR:**
+  - [#874 — feat(pipeline): prepare self-hosted Langfuse pilot](https://github.com/Nimbly-Technologies/ai/pull/874)
+  - [#876 — feat(pipeline): compare explicit offline ASR attempts](https://github.com/Nimbly-Technologies/ai/pull/876)
+  - [#879 — feat(pipeline): verify Langfuse backup recovery from S3](https://github.com/Nimbly-Technologies/ai/pull/879)
+  - [#852 — feat: Pulse traffic overview: aggregation, summary, Excel, dashboard (Fizzy #2991)](https://github.com/Nimbly-Technologies/ai/pull/852)
+  - [#859 — feat: Pulse traffic by the hour, Getin metrics (revised 8a)](https://github.com/Nimbly-Technologies/ai/pull/859)
+  - [#938 — feat: POS daily sales upload for AI Pulse, by date range (Fizzy #2991)](https://github.com/Nimbly-Technologies/ai/pull/938)
+- **Tickets:** Fizzy #2991
+
+### Meetings
+- **Gabe - Unpaid Leave**: all-day calendar entry
+- **Pulse Wi-Fi spike: run on devices (Fizzy #2995)**: 10:30 AM – 10:45 AM (15 min)
+- **AI Team DSM**: 12:00 PM – 12:30 PM (30 min)
+- **AI Agent Evolution Sync**: 03:30 PM – 03:55 PM (25 min)
+
+### Investigation & Research
+
+#### Pulse Wi-Fi join on iOS
+- **Repo:** `ai`
+- **Question:** Does PR #952's Pulse join work on a real iPhone? Is the project on track for the Pulse milestones (M0–M2)?
+- **Outcome:**
+  - The join works on iOS. On the lab iPhone, Calibrate → Connect showed one system prompt ("Wants to Join Wi-Fi Network PULSE-7F3A21?"). After Join, the row read "Nimbly Pulse 7F3A21 · Connected".
+  - "Look for other device" moved the phone back to the lab Wi-Fi within 6 s.
+  - New iOS-only issue: right after joining, iOS opens its captive-portal sheet (`captive.apple.com`) over the app, showing an error page.
+  - Milestones were added to Todoist. Failure-path tests on the spike screen are next: wrong password, Cancel on the system dialog, device out of range.
+- **Time:** 00:02–16:59
+
+#### Adding an iPhone 13 to the BLR device lab
+- **Repo:** `docs` / `tools` (Nimbly workspace)
+- **Question:** How do we add the iPhone 13 to the real-device lab the way the Android phones were added (Apple ID, Tailscale/headscale, WebDriverAgent)?
+- **Outcome:**
+  - The phone is set up: a new `lab-blr-iphone13@nimbly.email` Apple ID, Tailscale registered against `skynet.nimbly.technology`, and the WDA build/install scripts (`tools/build-wda.sh`, `tools/install-ios-wda.sh`).
+  - New guide: `docs/guides/adding-an-iphone-to-the-device-lab.md`. Setup log: `docs/discovery/iphone-lab-blr-log-2026-10-28.md`.
+  - Captive-portal trouble on BHIVE Wi-Fi meant connecting through a personal hotspot during setup.
+  - The battery is at 78% health with 1,106 cycles, so the relay is only workable overnight.
+  - Quality-of-life follow-ups are in Todoist, due 2026-11-02. A WDA cert rebuild is scheduled for 2027-10-01.
+- **Time:** 10:23–15:25
+
+#### OTA update rollout status
+- **Repo:** `ota_update_adoption`
+- **Question:** How far has the current release rolled out, checked with the PostHog rollout script over 1d, 7d and 30d?
+- **Outcome:** New update `01a1811f` is on 67 users (50 Android, 17 iOS): **0.9% of daily active users**, against a 10% target. The 7d and 30d figures (0.8% and 0.7%) only differ because the active-user count grows with the window, not because adoption changed. The previous update `01a1614f` is on 7,191 users (93.8% of daily actives).
+- **Time:** 14:25–14:35
+
+### Notes
+- **PR #952** is open. Still to do: handle or document the iOS captive-portal sheet after a Pulse join, then run the failure-path tests on the Android lab phones and the iPhone.
+- **PRs #957 and #958** are open and need review.
+- **PRs #874, #876 and #879** are approved but still blocked by a `github-actions` review that requested changes.
+- **OTA rollout** is at 0.9% against a 10% target and needs watching or bumping.
+- **Also done:**
+  - Rewrote the audit-lite release notes for `v2.18.0-ota.20261028.1` and saved the announcement as an unsent Gmail draft.
+  - Published the device-lab blog post "No MR3020? No Problem. The Device Lab Ate". One typo is still in it: "it's hotspot" should be "its hotspot".
+  - Set a Todoist reminder to release the outbox to everyone on PostHog.
+- **Data quirk:** the commit data lists `(#2995)` as a PR link (`/pull/2995`), but #2995 is the Fizzy card. The real PR is #952, so this log uses #952.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-28.md
+[2026-10-28 17:01:32] pushed 2026-10-28 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-28.md
+[2026-10-28 23:50:03] skip: 2026-10-28 already logged
+[2026-10-29 09:19:41] calendar-check: ok
