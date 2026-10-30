@@ -5670,3 +5670,148 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-28 17:01:32] pushed 2026-10-28 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-28.md
 [2026-10-28 23:50:03] skip: 2026-10-28 already logged
 [2026-10-29 09:19:41] calendar-check: ok
+
+Gathering today's activity (2026-10-29)...
+  Git commits:    23
+  GitHub events:  29
+  Calendar events:6
+  Claude sessions:7
+  Active:         01:25 am – 03:55 pm
+  Lines:          +7343 / -399
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-10-29
+
+> 01:25 am – 03:55 pm · +7343 / -399 lines · `ai` (feat/pulse-walk-2996)
+
+### Summary
+Most of the day went into the guided 5-spot calibration walk on the AI Pulse (PR #997). The first app and API versions went up in the morning. After about 11 rounds of automated review fixes, mostly about delivering the walk result reliably once the phone leaves the device's Wi-Fi, the PR was approved at `0eb561fd`. Pulse Connect PRs #952 and #966 merged overnight, and two follow-up PRs were opened and approved: #1006 (link the device inside Connect) and #1007 (join by scanning the QR label). Outside the Pulse work, I traced the root cause of the Sushi Yay report data-loss bug.
+
+### Tasks & Changes
+
+#### Pulse Connect: connect to the Pulse and link it to the site
+- **Repo:** `ai` · branch: `feat/pulse-walk-2996`
+- **What was done:** Merged the app flow that connects to a Nimbly Pulse during calibration. Merged the API that links the connected Pulse to the calibrator's site, including a hardware pre-registration path so a MAC address alone can't claim a device. Updated the Fizzy card and Todoist after each merge.
+- **Commits:**
+  - `d3f5b19e` — feat(app): connect to a Nimbly Pulse on calibration (#2995) (#952)
+  - `bddf124f` — feat(api): link the connected AI Pulse to the calibrator's site (#2995) (#966)
+- **PR:** [#952](https://github.com/Nimbly-Technologies/ai/pull/952) · [#966](https://github.com/Nimbly-Technologies/ai/pull/966)
+- **Tickets:** Fizzy #2995
+
+#### Guided 5-spot walk on the AI Pulse: first version
+- **Repo:** `ai` · branch: `feat/pulse-walk-2996`
+- **What was done:** Added the API side that records the calibrator's walk progress and result, and the app's guided 5-spot walk flow (walk screens, the `use-pulse-walk` hook, tests). Opened PR #997.
+- **Commits:**
+  - `538c8de1` — feat(api): record the calibrator's walk progress and result (#2996)
+  - `5aa2f7ee` — feat(app): guided 5-spot walk on the AI Pulse (#2996)
+- **PR:** [#997 — feat(app,api): guided 5-spot walk on the AI Pulse (#2996)](https://github.com/Nimbly-Technologies/ai/pull/997)
+- **Tickets:** Fizzy #2996
+
+#### Pulse walk: reliable result delivery off the device Wi-Fi
+- **Repo:** `ai` · branch: `feat/pulse-walk-2996`
+- **What was done:** The Pulse router's Wi-Fi has no internet, so a walk result sent at spot 5 could be lost. Fixes:
+  - Results now carry a walk id, so a retried report counts once.
+  - The app waits until the phone is off the device Wi-Fi before sending, and retries.
+  - The walk stays on screen until the backend has the result.
+  - Retries stop once the calibrator has left the walk.
+  - A 409 that arrives after the calibrator left no longer restarts a walk.
+  - A repeated `move_device` report counts the failed walk only once.
+  - A result with no spot reports still sets the start time.
+  - Each tap starts only one walk.
+- **Commits:**
+  - `78ad8bc6` — fix(api): a repeated move_device report counts the failed walk once
+  - `c472e7ac` — fix(app): cancel the walk a 409 restarted when the calibrator left meanwhile
+  - `c201ecf1` — fix(app): stop retrying the walk result once the calibrator left the walk
+  - `e1c205ee` — feat(api): walk results carry a walk id, so a retried report counts once
+  - `98b6ba39` — feat(app): send the walk result once off the device Wi-Fi, with a walk id and retries
+  - `f1a3c8eb` — fix(app): send the walk result only once the phone is off the device Wi-Fi
+  - `1a2998ff` — fix(app): hold the walk's way on until the phone leaves the device Wi-Fi
+  - `cd00aaf0` — fix(app): hold the walk result until the backend has it
+  - `f8484de4` — fix(api): a walk result with no spot reports still sets the start time (#2996)
+  - `3255179c` — fix(app): hold the walk until its result is sent; one walk start per tap and after the last cancel (#2996)
+- **PR:** [#997 — feat(app,api): guided 5-spot walk on the AI Pulse (#2996)](https://github.com/Nimbly-Technologies/ai/pull/997)
+- **Tickets:** Fizzy #2996
+
+#### Pulse walk: state, UX and copy review fixes
+- **Repo:** `ai` · branch: `feat/pulse-walk-2996`
+- **What was done:**
+  - **State fixes:** a failed walk or Redo Walk now drops the previous walk's signal numbers, and a complete walk clears the failed count so "Get help" goes away. A walk that finishes starting after the calibrator has left is now cancelled.
+  - **UI fixes:** Pause is blocked while a spot is being saved, and the stepper shows all 5 spots saved when only the result was lost. Also fixed the review back navigation, the lost device name, the phone network handling and the ring animation.
+  - **Copy:** applied the designers' signed-off Pulse Connect copy, and fixed the Vietnamese iOS join hint so it no longer names the Android button.
+  - **Result:** PR #997 approved at `0eb561fd`, with CI green.
+- **Commits:**
+  - `908e5f0a` — fix(app): pulse walk review back, lost device name, phone network, smooth ring
+  - `0b88bc91` — fix(api): a failed walk drops the previous walk's signal numbers (#2996)
+  - `a61d1285` — fix(app): no new device walk when a 409 lands after leaving the walk (#2996)
+  - `6dec64d0` — fix(api): a complete walk clears the failed count, so Get help goes away (#2996)
+  - `7345a972` — fix(app): cancel a walk that finished starting after leaving, and say all 5 spots are saved when only the result was lost (#2996)
+  - `a23175a8` — fix(api): Redo Walk drops the previous walk's signal numbers (#2996)
+  - `fd5cfdc9` — fix(app): no Pause while a spot is being saved; stepper shows spot 5 done when only the result was lost (#2996)
+  - `c8804e0c` — fix(app): Pulse Connect copy from the designers' sign-off
+  - `0eb561fd` — fix(app): Vietnamese iOS join hint no longer names the Android button (#2996)
+- **PR:** [#997 — feat(app,api): guided 5-spot walk on the AI Pulse (#2996)](https://github.com/Nimbly-Technologies/ai/pull/997)
+- **Tickets:** Fizzy #2996
+
+#### Link the AI Pulse inside Connect
+- **Repo:** `ai` · branch: `feat/pulse-connect-link-device-2995`
+- **What was done:**
+  - Built this from the handoff doc and opened the PR. The branch was pushed at `cb24671c`, `e9b5f6c3` and `5e22f1d7`.
+  - Fixed one review round: the server error-code lookup is now a `Map` instead of a plain object, so a code like `constructor` no longer crashes the Connect screen.
+  - The PR is approved, and the ELI5 summary is posted on it.
+- **PR:** [#1006 — feat(app): link the AI Pulse inside Connect (#2995)](https://github.com/Nimbly-Technologies/ai/pull/1006)
+- **Tickets:** Fizzy #2995
+
+#### Join the Nimbly Pulse by scanning its label QR
+- **Repo:** `ai` · branch: `feat/pulse-qr-join-2995`
+- **What was done:**
+  - Added QR parsing and a scanner screen for joining the Pulse's Wi-Fi, with tests. The branch was pushed at `2e16d6ee` and `0d524159`.
+  - Review fix in `0d524159`: on iOS the camera now pauses behind the manual name-and-password sheet and after a failed join, so a QR code still in view can't start another join by itself.
+  - The PR is approved but not merged.
+- **PR:** [#1007 — feat(app): join the Nimbly Pulse by scanning its label QR](https://github.com/Nimbly-Technologies/ai/pull/1007)
+- **Tickets:** Fizzy #2995
+
+#### Code reviews
+- **Repo:** `ai`
+- **What was done:** Reviewed two PRs.
+- **PR:** [#341 — fix(report-generator): don't print a section heading over an empty table](https://github.com/Nimbly-Technologies/ai/pull/341) · [#998 — feat(nimbly-ai-web): AI Pulse devices tab to register device MACs (Fizzy #2995)](https://github.com/Nimbly-Technologies/ai/pull/998)
+
+### Meetings
+- **AI Team DSM:** 12:00 PM – 12:30 PM (30 min)
+- **Nimbly x Punthai: Weekly Meeting:** 02:30 PM – 03:30 PM (60 min)
+- **All day:** Karaka Chaturthi; Gabe on unpaid leave; Krisnata Panji on leave
+
+### Investigation & Research
+
+#### Sushi Yay report data loss (Fizzy card 1776)
+- **Repo:** `analysis` (`docs/analysis/`)
+- **Question:** Was the Sushi Yay report loss reported on Discord caused by the outbox, and what actually happened to the report?
+- **Outcome:**
+  - **Not the outbox:** no submit attempt was ever made on the report.
+  - **Root cause:** a draft was wiped through the "Continue" card path. `report.app.usecase.ts:1495` checks only `!reportMongo` and `status === 'complete'` before the hard `deleteOne` at `report.mongo.repository.ts:463`.
+  - **Impact:** eight auditors are affected, not two. The data is recoverable until 2026-11-04.
+  - **Verification:** HelloClaw independently verified the root cause, and the thread was asked to reprioritize the fixes.
+  - **Docs written:** `sushiyay-continue-card-draft-wipe-2026-10-29.md` and `sushiyay-report-recovery-runbook-2026-10-29.md`.
+- **Time:** 13:16–14:34
+
+#### Stampbly: PR approval tool on the dev server
+- **Repo:** local scratch, not in a GitHub repo
+- **Question:** Can devs get a small web page on the dev server where they paste one or more GitHub PR URLs and a script approves them?
+- **Outcome:** Built "Stampbly — nimbly rubber-stamps it": a Python server with a green, playful page, tests, and an MCP hook so Claude can stamp PRs. Anyone on the tailnet can open it at `http://dev.skynet.nimbly:8791`, or at `http://100.64.0.3:8791` if Tailscale DNS is off. Headscale has no ACL policy, so all devices can reach it.
+- **Time:** 02:16–02:44
+
+### Notes
+- **#997:** ready to merge.
+- **#1006 and #1007:** both approved and still open.
+- **#1007:** needs a new native build before it reaches phones, because `expo-camera` can't ship in an over-the-air update.
+- **#966:** still to decide whether it needs testing on a physical device now or can wait for Andi's test of the final internal build.
+- **Team note:** the device pre-registration path was extra work and an issue the team should hear about (Todoist reminder set for the DSM).
+- **Separate card needed:** pulse-api still accepts a device's counts by MAC alone.
+- **Sushi Yay:** recovery must happen before 2026-11-04.
+- **Cleanup:** removed the `ai-pulse-link-2995` worktree and the `ev-pulse2995-pg` container.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-29.md
+[2026-10-29 17:01:32] pushed 2026-10-29 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-29.md
+[2026-10-29 23:50:01] skip: 2026-10-29 already logged
+[2026-10-30 09:21:06] calendar-check: ok
