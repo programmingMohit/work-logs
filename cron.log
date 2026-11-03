@@ -5874,3 +5874,112 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-
 [2026-10-30 17:02:17] pushed 2026-10-30 -> https://github.com/programmingMohit/work-logs/blob/main/2026/10/2026-10-30.md
 [2026-10-30 23:50:01] skip: 2026-10-30 already logged
 [2026-11-02 09:15:10] calendar-check: ok
+
+Gathering today's activity (2026-11-02)...
+  Git commits:    7
+  GitHub events:  28
+  Calendar events:6
+  Claude sessions:5
+  Active:         12:38 am – 04:31 pm
+  Lines:          +2996 / -157
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-11-02
+
+> 12:38 am – 04:31 pm · +2996 / -157 lines · `ai` (main), `audit-lite` (master)
+
+### Summary
+Most of the day went into Pulse calibration in `ai`. I merged push registration, the live and offline Pulse cards with a Devices view, a group of fixes so submitted calibrations reach the server reliably, and support for the router's own walk id. In `audit-lite` I traced the Punthai stuck-submission incident to an attachment upload that kept looping. The fix for that loop is merged, and follow-up PRs for telemetry and the incident record are open. In `claude-skills` I opened testlab changes so phones powered through the relay can be reserved.
+
+### Tasks & Changes
+
+#### Pulse: register for push and open Pulse from a calibration notification
+- **Repo:** `ai` · branch: `main`
+- **What was done:** The app now registers for push notifications. Tapping a calibration notification opens Pulse directly. I also wrote a setup guide for the push credentials.
+- **Commits:**
+  - `162405ee` — feat(app): register for push and open Pulse from a calibration notification (#1050)
+- **PR:** [#1050 — feat(app): register for push and open Pulse from a calibration notification](https://github.com/Nimbly-Technologies/ai/pull/1050)
+- **Tickets:** [FZ-3035](https://app.fizzy.do/6118580/cards/3035)
+
+#### Pulse: live and offline cards, Devices row and device detail
+- **Repo:** `ai` · branch: `main`
+- **What was done:** Shipped the Pulse live card, which hides after 24 h, plus the offline card, a Devices row and a device detail screen, across the app and the API. All 19 phone cases passed on the A05.
+- **Commits:**
+  - `d4a35d98` — feat(app,api): Pulse live and offline cards, Devices row and device detail (#2998) (#1054)
+- **PR:** [#1054 — feat(app,api): Pulse live and offline cards, Devices row and device detail (#2998)](https://github.com/Nimbly-Technologies/ai/pull/1054)
+- **Tickets:** [FZ-2998](https://app.fizzy.do/6118580/cards/2998)
+
+#### Pulse: reliable calibration submit (no duplicate posts, correct validation status, queued-result card)
+- **Repo:** `ai` · branch: `main`
+- **What was done:**
+  - **Duplicate posts:** a result that is still waiting to send is now posted once, not once per waiting call (outbox dedupe, with tests).
+  - **Validation status:** the API now marks a submitted calibration `phone_trend_not_validated`.
+  - **Home card:** Home now shows a "waiting to send" Pulse card while a submitted walk is still queued.
+- **Commits:**
+  - `18ee4793` — fix(app): send a hanging Pulse result once, not once per waiting call (#1072)
+  - `859bff1f` — fix(api): mark a submitted Pulse calibration phone_trend_not_validated (#2997) (#1077)
+  - `c61a4c9b` — feat(app): show a waiting-to-send Pulse card on Home while a submitted walk is queued (#2997) (#1080)
+- **PR:** [#1072 — fix(app): send a hanging Pulse result once, not once per waiting call](https://github.com/Nimbly-Technologies/ai/pull/1072) · [#1077 — fix(api): mark a submitted Pulse calibration phone_trend_not_validated (#2997)](https://github.com/Nimbly-Technologies/ai/pull/1077) · [#1080 — feat(app): show a waiting-to-send Pulse card on Home while a submitted walk is queued (#2997)](https://github.com/Nimbly-Technologies/ai/pull/1080)
+- **Tickets:** [FZ-2997](https://app.fizzy.do/6118580/cards/2997)
+
+#### Pulse: use the router's walk id from firmware
+- **Repo:** `ai` · branch: `main`
+- **What was done:** When the Pulse router firmware sends its own walk id, the app now uses it instead of generating one. Covered by tests for `pulse-device` and `use-pulse-walk`.
+- **Commits:**
+  - `622a6278` — feat(app): use the Pulse router's walk id when its firmware sends one (#2996) (#1075)
+- **PR:** [#1075 — feat(app): use the Pulse router's walk id when its firmware sends one](https://github.com/Nimbly-Technologies/ai/pull/1075)
+- **Tickets:** [FZ-2996](https://app.fizzy.do/6118580/cards/2996)
+
+#### Punthai stuck submissions: attachment re-drive loop
+- **Repo:** `audit-lite` · branch: `master`
+- **What was done:** I traced the stuck Punthai submissions to the phone. Report `2026-10-29_1793232952423` was stuck at 94% (17 of 18 files). One attachment never confirmed, and the outbox won't POST while any file is still local. Behind that, an upload row looped `failed → pending → failed`: 15 `bg_upload.retry_exhausted_resurrected` warnings between 10-29 and 11-02. The fix stops the loop and makes a looping upload visible in telemetry.
+- **Commits:**
+  - `1b5aecf4` — fix: stop the attachment re-drive loop, and make a looping upload visible (#2189)
+- **PR:** [#2189 — fix: stop the attachment re-drive loop, and make a looping upload visible](https://github.com/Nimbly-Technologies/audit-lite/pull/2189)
+
+#### Submit pipeline observability and incident record (open)
+- **Repo:** `audit-lite` · branch: `fix/submit-pipeline-observability`, `docs/punthai-incident-record`
+- **What was done:** A follow-up so that a stuck submission can be diagnosed from its own telemetry. It adds an identity and recorder tracer, report-sync drain telemetry, a device header on API calls, and telemetry for the stranded submit screen. A second PR brings the Punthai incident record and the Sentry events query script into the repo.
+- **Commits:** none on `master` yet
+- **PR:** [#2190 — fix: make a stuck submission answerable from its own telemetry](https://github.com/Nimbly-Technologies/audit-lite/pull/2190) · [#2191 — docs: bring the Punthai incident record and the Sentry query script into the repo](https://github.com/Nimbly-Technologies/audit-lite/pull/2191)
+
+#### Testlab: phones powered through the relay are paused and reservable
+- **Repo:** `claude-skills`
+- **What was done:** I checked how phones are reserved across the device lab and the dev, int and ext servers, and wrote it up in `docs/analysis/device-lab-reservation-systems-2026-11-02.md`. The main finding was that the Redmi could not be reserved because `redmi-charge` cuts its power. Testlab now treats phones powered through the relay as paused but reservable, shows them as discharging rather than charging, and shows the relay report.
+- **Commits:** none in tracked repos
+- **PR:** [#68 — feat(testlab): relay-powered phones are paused and reservable](https://github.com/Nimbly-Technologies/claude-skills/pull/68) · [#69 — fix(testlab): paused relay phones are discharging, not charging](https://github.com/Nimbly-Technologies/claude-skills/pull/69) · [#70 — fix(testlab): show the relay report on paused phones](https://github.com/Nimbly-Technologies/claude-skills/pull/70)
+
+### Meetings
+- **AI DSM:** 12:00 PM – 12:25 PM (25 min)
+- **Weekly Check-in:** 01:00 PM – 01:25 PM (25 min)
+- **Fireside chat with Mohit:** 04:30 PM – 05:00 PM (30 min)
+- *Out today: Kennard Alcander (leave), Ratna (leave), Marcella (sick leave)*
+
+### Investigation & Research
+#### Production `jwtsecret` removed from Firebase functions config
+- **Repo:** `Nimbly` (workspace)
+- **Question:** What does the Discord alert about a deleted production secret mean?
+- **Outcome:** The `jwtsecret` setting was deleted from the Firebase functions config. This was an automatic notice that a setting changed, not a breach or an outage. The secret signed the tokens that background functions use to authenticate calls to other Nimbly services.
+- **Time:** 00:08–00:11
+
+### Notes
+- **FZ-2998 is not ready to move:**
+  - One acceptance criterion isn't built yet: "Offline alert reaches the people set in #2987". Nothing sends the push or the email.
+  - Two cases have never been run on a phone: the calibrator's empty Devices tab, and Echo + Pulse.
+  - Testers need a new internal build, because Andi's Oct 30 build `8a339686` doesn't include #1054.
+- **Punthai Report A:** the loop is fixed in #2189, but the missing photo still has to be retaken on the device.
+- **Open PRs:** `audit-lite` #2190 and #2191, and `claude-skills` #68, #69 and #70.
+- **Device lab:** I proposed an `/etc/ssh/sshrc` pointer on `lab-blr` so that every SSH session, including one-off `adb` commands, prints the lab rules. It isn't applied on the board yet.
+
+---
+
+There were two problems in the input data:
+- **Wrong PR numbers:** the commit `pr` fields read the Fizzy card numbers in the subjects (#2997, #2996, #2998) as PR numbers. The log uses the real PRs from `githubEvents` instead (#1054, #1075, #1077, #1080).
+- **Tickets not in commit messages:** FZ-3035 isn't in a commit message; it comes from the branch name and the session prompt. The Punthai session is titled "Fizzy card 1776", but I left that ticket out because I couldn't confirm its URL. The walk-id branch is named `…-3073` while its commit says #2996; I used #2996.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-02.md
+[2026-11-02 17:01:43] pushed 2026-11-02 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-02.md
+[2026-11-02 23:50:05] skip: 2026-11-02 already logged
+[2026-11-03 09:15:11] calendar-check: ok
