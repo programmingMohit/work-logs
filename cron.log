@@ -6155,3 +6155,82 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-
 [2026-11-04 17:01:22] pushed 2026-11-04 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-04.md
 [2026-11-04 23:50:51] skip: 2026-11-04 already logged
 [2026-11-05 09:20:47] calendar-check: ok
+
+Gathering today's activity (2026-11-05)...
+  Git commits:    0
+  GitHub events:  7
+  Calendar events:4
+  Claude sessions:4
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-11-05
+
+> +0 / -0 lines
+
+### Summary
+No commits today. The day went to reviewing pull requests: 7 PRs in `Nimbly-Technologies/ai`, mostly the Pulse walk-sets calibration work (Fizzy #3125) and Echo Vision Audio Monitoring billing logic. Outside of reviews, I redesigned the Pulse Step 3 calibration walk as hosted HTML mockups and fixed stale data on the PostHog "Stuck reports by org" dashboard tile.
+
+### Tasks & Changes
+
+#### Review: Pulse walk-sets calibration (router, API, Echo Vision sessions)
+- **Repo:** `ai`
+- **What was done:** Reviewed three linked PRs. Together they move the Pulse calibration to walk sets on the router (wall walks, floor walks and an inside-floor line), let the Pulse API accept walk-sets surveys, and add walk-sets sessions to Echo Vision with handoffs to the UI and ML.
+- **PR:** [#1166 — feat(pulse-api): accept walk-sets surveys from the router (Fizzy #3125)](https://github.com/Nimbly-Technologies/ai/pull/1166)
+- **PR:** [#1167 — feat(pulse): walk sets on the router: walls and floor walks, inside-floor line (Fizzy #3125)](https://github.com/Nimbly-Technologies/ai/pull/1167)
+- **PR:** [#1168 — feat(echo-vision-api): walk-sets sessions for the Pulse calibration, with UI and ML handoffs (Fizzy #3125)](https://github.com/Nimbly-Technologies/ai/pull/1168)
+- **Tickets:** Fizzy #3125
+
+#### Review: Audio Monitoring add-on history and per-mic plan hours
+- **Repo:** `ai`
+- **What was done:** Reviewed two PRs. One keeps a history of each mic's add-on changes so every Audio Monitoring day is judged on the add-on that mic had that day. The other makes the upload-summary email judge each mic on its own plan hours for the reported day.
+- **PR:** [#1157 — feat(echo-vision-api): keep each mic's add-on changes and judge each Audio Monitoring day on the add-on it had](https://github.com/Nimbly-Technologies/ai/pull/1157)
+- **PR:** [#1161 — fix(upload-summary-email): judge each mic on its own plan hours for the reported day](https://github.com/Nimbly-Technologies/ai/pull/1161)
+
+#### Review: Echo Vision survey sketch with free-form store outlines
+- **Repo:** `ai`
+- **What was done:** Reviewed a PR that adds free-form store outlines and open stores to the Echo Vision app's survey sketch.
+- **PR:** [#1153 — feat(echo-vision-app): free-form store outline and open stores in the survey sketch](https://github.com/Nimbly-Technologies/ai/pull/1153)
+
+#### Review: Langfuse observability guide
+- **Repo:** `ai`
+- **What was done:** Reviewed a new pipeline doc, a learning guide for Langfuse observability.
+- **PR:** [#1175 — docs(pipeline): add Langfuse observability learning guide](https://github.com/Nimbly-Technologies/ai/pull/1175)
+
+### Meetings
+- **AI Team DSM:** 12:00 PM–12:30 PM (30 min)
+- **Nimbly x Punthai: Weekly Meeting:** 02:30 PM–03:30 PM (60 min)
+
+### Investigation & Research
+
+#### Redesign of the Pulse Step 3 calibration walk (mockups)
+- **Repo:** `Nimbly` (scratchpad HTML, not committed)
+- **Question:** How should the new Step 3 walk look for calibrators? The new flow is two parts: a walk along the inner boundary of the store, then coverage of the floor.
+- **Outcome:** Built interactive HTML mockups (`pulse-walk-v1.html`, `step3-islands.html`) and hosted them on the dev server through `/nimbly:deploy-report-public`. Decisions:
+  - The walk starts just inside the store, with no outside-door segment like today's spot 1.
+  - Progress is a percentage of the minimum required readings, not a fixed walk time. "Keep walking" counts down the percent left and shows no raw numbers.
+  - "Walk slowly" moved from a banner to a bullet point in the instructions.
+  - Part 2 asks the calibrator to cover as much of the floor as possible, not to walk in lanes. Its animation is a cross-hatch.
+  - "Finish anyway" appears once 50% is done. There is also a hidden hold-to-finish that only support can unlock when a calibrator escalates.
+  - Fixed the skinny "Start part 2" button in figure 3.
+  - Terminology: "inline store" (enclosed mall unit) vs "island store"/kiosk (freestanding, no walls). Anchor stores count as inline for the walk.
+- **Time:** 11:34–16:50
+
+#### Stale data on the Punthai stuck-report dashboard
+- **Repo:** `Nimbly` (PostHog dashboard 28)
+- **Question:** Is the "Stuck reports by org (outbox)" tile showing stale or false-positive stuck submissions?
+- **Outcome:** Yes. Updated insight 351 and tested the new query before pushing it:
+  1. A report still has to start in the outbox to count, but a `delivered`, `failed`, `rejected` or `server_accepted` event on any path now closes it. Before this, reports delivered through the legacy path stayed "stuck" forever.
+  2. Only reports started after the fix (2026-11-03 09:25 UTC) are counted, within the 14-day window.
+  3. Added a note to the tile explaining the logic.
+- **Time:** 11:25–11:29
+
+### Notes
+- The Pulse Step 3 walk mockups are still in a scratchpad and not committed. The disconnect and pause states are not drawn yet. They need to be shared with the team and lined up with the walk-sets PRs (#1166 / #1167 / #1168) before the UI work starts.
+- Kennard Alcander was on leave.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-05.md
+[2026-11-05 17:01:18] pushed 2026-11-05 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-05.md
+[2026-11-05 23:50:05] skip: 2026-11-05 already logged
+[2026-11-06 09:15:08] calendar-check: ok
