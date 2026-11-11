@@ -6355,3 +6355,79 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-
 [2026-11-09 17:01:13] pushed 2026-11-09 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-09.md
 [2026-11-09 23:50:04] skip: 2026-11-09 already logged
 [2026-11-10 09:15:08] calendar-check: ok
+
+Gathering today's activity (2026-11-10)...
+  Git commits:    4
+  GitHub events:  9
+  Calendar events:2
+  Claude sessions:4
+  Active:         08:30 am – 03:10 pm
+  Lines:          +2542 / -4108
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-11-10
+
+> 08:30 am – 03:10 pm · +2542 / -4108 lines · `ai` (main), `audit-lite` (fix/sweep-tests-recovery-layer)
+
+### Summary
+Shipped three audit-lite fixes to the upload pipeline: the upload kill loop now has an upper bound, the orphan sweep no longer touches live uploads, and a broken sweep test suite was fixed so master Tests is green again for the `v2.18.0-ota.20261111` milestone. In `ai`, the 5-spot Pulse walk was replaced with the two-part walk from the latest Step 3 mockups (about 4k lines removed), and the PR went through review and was merged. Most of the afternoon went to release QA for milestone 51: deciding which scenarios the lab-blr device lab can run, then running them on Android and iOS.
+
+### Tasks & Changes
+
+#### Upload pipeline hardening: kill loop bound and orphan sweep safety
+- **Repo:** `audit-lite` · branch: `fix/sweep-tests-recovery-layer`
+- **What was done:** The upload kill loop now has an upper bound, and each killed attempt records what it was doing at the time, so killed uploads can be diagnosed. The orphaned-upload sweep now skips uploads that are still in flight, and an upload that has already landed always gets its completion recorded, even if a sweep or kill happens at the same time.
+- **Commits:**
+  - `4b681cf6` — fix: bound the upload kill loop and record what each killed attempt was doing (#2196)
+  - `4df24da9` — fix: keep the orphan sweep off live uploads, and never lose a landed upload's completion (#2197)
+- **PR:** [#2196 — fix: bound the upload kill loop and record what each killed attempt was doing](https://github.com/Nimbly-Technologies/audit-lite/pull/2196) · [#2197 — fix: keep the orphan sweep off live uploads, and never lose a landed upload's completion](https://github.com/Nimbly-Technologies/audit-lite/pull/2197)
+
+#### Fix the attempt-record sweep tests after the recovery-layer change
+- **Repo:** `audit-lite` · branch: `fix/sweep-tests-recovery-layer`
+- **What was done:** After the #2196/#2197 changes, master Tests was failing because three sweep tests didn't provide `WorkflowRecoveryService`. In `sweep-orphaned-uploads.test.ts`, those three tests now call the `sweep()` helper instead of `Effect.runPromise(sweepOrphanedUploads())`. Only tests changed. Locally, 13/13 sweep tests passed and ESLint was clean. The PR was added to the `v2.18.0-ota.20261111` milestone because master Tests stays red until it merges.
+- **Commits:**
+  - `5c839c43` — fix: provide WorkflowRecoveryService to the attempt-record sweep tests
+- **PR:** [#2222 — fix: provide WorkflowRecoveryService to the attempt-record sweep tests](https://github.com/Nimbly-Technologies/audit-lite/pull/2222)
+
+#### Pulse Step 3: the two-part walk replaces the 5-spot walk
+- **Repo:** `ai` · branch: `main` (developed on `feat/pulse-walk-sets-v3`)
+- **What was done:** The work began as a new Step 3 walk variant behind a PostHog flag (`pulse-walk-sets`). It then changed: the flag was removed, the old 5-spot walk code was deleted, and the two-part walk from the latest Step 3 mockups became the only walk, with the Pulse APIs connected (`pulse-api.ts`, `pulse-device.ts`, `walk-sets-wizard.tsx`). Copy that still said "5 spots" was replaced with placeholder wording, and the submit page was updated to match. Data from the old flow was not migrated because only test accounts had used it. Reviewer change requests were worked through until the PR was approved, and it was merged.
+- **Commits:**
+  - `aebbdebc` — feat(echo-vision-app): the two-part Pulse walk from the latest Step 3 mockups replaces the 5-spot walk (#1253)
+- **PR:** [#1253 — feat(echo-vision-app): the two-part Pulse walk from the latest Step 3 mockups replaces the 5-spot walk](https://github.com/Nimbly-Technologies/ai/pull/1253)
+
+#### Code review: daily report digest cron
+- **Repo:** `api-reports`
+- **What was done:** Reviewed the PR that adds sending of the daily report digest by cron and a preview route for it.
+- **Commits:** none (review only)
+- **PR:** [#415 — feat(cron): send the daily report digest and add its preview route](https://github.com/Nimbly-Technologies/api-reports/pull/415)
+
+### Meetings
+- **AI Team DSM** — 12:00 PM–12:30 PM (30 min)
+- **Kennard Alcander on Leave** — all day
+
+### Investigation & Research
+
+#### Release QA for audit-lite milestone 51 (`v2.18.0-ota.20261111`)
+- **Repo:** `audit-lite` (Nimbly workspace)
+- **Question:** Which release QA scenarios can be run and checked on the lab-blr device lab, and can they be run in parallel on Android and iOS with results recorded in Notion?
+- **Outcome:** Scenario verdicts were generated and confirmed. Each scenario in the [Release QA Notion doc](https://app.notion.com/p/nimblytechnologies/Release-QA-v2-18-0-ota-20261111-414c00148769811eaf2dc38a5c8fd9ce) now has a field saying whether the device lab can test it, plus a table splitting testable from not-testable scenarios. About 8 scenarios need a build the lab didn't have, so the build was installed from the Discord release thread. Subagents then ran the Android and iOS scenarios in the order the doc lists them, each with its own Notion subpage of steps and screenshots. **2209.1 passed** on the new build (`01a1c507`, which loaded after one force-stop/relaunch from `01a1c3a1`). A photo attached offline and then cleared was dropped from the upload queue, only video, selfie and signature uploaded, and the report synced with no retry or Retake prompt. That behaviour was flagged for a dev to look at.
+- **Time:** 10:54–16:54
+
+#### Device lab adb connection failure
+- **Repo:** — (local tooling)
+- **Question:** Why did `adb connect 172.168.244.192:5555` fail with "No route to host"?
+- **Outcome:** The device's IP had changed to `172.168.110.122`, and reconnecting on that address worked. If the error comes back, the fix is `adb kill-server && adb start-server` before connecting again.
+- **Time:** 15:56–16:01
+
+### Notes
+- **#2222** needs to merge to clear the red master Tests on the `v2.18.0-ota.20261111` milestone. CI on the PR hadn't finished at last check.
+- **Pulse walk copy:** the placeholder text that replaced "5 spots" still needs designer sign-off.
+- **QA follow-up:** 2209.1 (cleared offline photo silently dropped, no retry prompt) needs a dev to confirm it's intended. The remaining scenarios on the milestone 51 QA page are still being run by the Android and iOS agents.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-10.md
+[2026-11-10 17:01:22] pushed 2026-11-10 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-10.md
+[2026-11-10 23:50:03] skip: 2026-11-10 already logged
+[2026-11-11 09:15:09] calendar-check: ok
