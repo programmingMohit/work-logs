@@ -6515,3 +6515,82 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-
 [2026-11-11 17:01:29] pushed 2026-11-11 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-11.md
 [2026-11-11 23:50:05] skip: 2026-11-11 already logged
 [2026-11-12 09:15:12] calendar-check: ok
+
+Gathering today's activity (2026-11-12)...
+  Git commits:    1
+  GitHub events:  2
+  Calendar events:4
+  Claude sessions:7
+  Active:         12:35 pm – 12:35 pm
+  Lines:          +15 / -15
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-11-12
+
+> 12:35 pm – 12:35 pm · +15 / -15 lines · `ai` (main)
+
+### Summary
+I shipped one change to `ai`: the echo-vision-app run scripts now pull EAS env vars non-interactively, which fixes the prompt that blocked `pnpm android:development --device` (PR #1289). Most of the day went to the Audit-lite milestone 51 rollout and QA triage, and to a Pulse "Get online" design-review doc for the design team. I also attended the AI Team DSM and the weekly Punthai sync.
+
+### Tasks & Changes
+
+#### Non-interactive EAS env pull in echo-vision-app run scripts
+- **Repo:** `ai` · branch: `main`
+- **What was done:** The echo-vision-app run scripts now pull EAS env vars without stopping for input. Before, `pnpm android:development --device` stopped at an interactive prompt. I traced it from how `.env.local` is used in `repos/ai/echo-vision-app`, fixed it in a separate worktree and opened PR #1289, which was merged into `main`. I removed the worktree afterwards.
+- **Commits:**
+  - `6b8fdc8b` — chore(app): pull EAS env non-interactively in run scripts (#1289)
+- **PR:** [#1289 — chore(app): pull EAS env non-interactively in run scripts](https://github.com/Nimbly-Technologies/ai/pull/1289)
+
+### Meetings
+- **Pratiksha Pundalik Mhatre on Leave** — all day
+- **AI Team DSM** — 12:00 PM–12:30 PM (30 min)
+- **Nimbly x Punthai: Weekly Meeting** — 02:30 PM–03:30 PM (60 min)
+
+### Investigation & Research
+
+#### Audit-lite milestone 51: staged rollout cadence
+- **Repo:** `audit-lite`
+- **Question:** The rollout is at 10% and has to reach 100% by tomorrow afternoon. What cadence should the 30%, 50% and 100% steps follow, and is it safe to move on?
+- **Outcome:** I set the cadence for the 30%, 50% and 100% steps and created reminders and crons for each one, then updated Todoist to match. 30% is already done. I moved the 50% step earlier so it lands before the Jakarta office closes at 5pm WIB. The safety concern raised in a Discord thread was checked against the evidence. Before continuing I fixed and reconnected the MCP.
+- **Time:** 09:57–14:25
+
+#### Audit-lite milestone 51: QA findings triage and bug cards
+- **Repo:** `audit-lite`
+- **Question:** Which findings on the "Worth a dev look" Notion page are real bugs that need cards, and which should be struck off?
+- **Outcome:**
+  - **Bug cards:**
+    - #1, "Report Submitted!" shown on a report another user had already submitted. The existing card was [Fizzy #3266](https://app.fizzy.do/6118580/cards/3266), so the duplicate card was deleted and related findings were folded into #3266.
+    - #3, edits to an already-submitted report get a 400 with no error shown. A bug card was created.
+  - **Struck off:** #4, #5, #17, #21, #25, #26, #28 and #29.
+    - #5 ("NIMBLYZ-" with no issue number) had no real evidence: no screenshot on the 2208.3 run page, only a screen-text dump in a subagent transcript.
+  - **Other:** #6 (a blur soft exception on an unmounted input) was handed to a subagent to follow up.
+- **Time:** 09:57–16:45
+
+#### Pulse "Get online" flow: design review doc
+- **Repo:** `ai`
+- **Question:** How do the current Pulse "Get online" screens look on a real device? I needed to show the design team so they could give feedback.
+- **Outcome:**
+  - I mocked the Nimbly Pulse connection in `pulse-device.ts` and `use-pulse-connect.ts` to get past the "connect to Nimbly Pulse" step on an adb device.
+  - I captured every screen with uiautomator and published a walkthrough plus a Mockups tab to `research.nimbly.technology`. In the copy, "the device" now reads "Pulse router" wherever it means the router.
+  - All of Mia's feedback is reflected in the Mockups tab:
+    - The skip-confirm is a bottom sheet.
+    - "Use a cable instead" was dropped from the network list.
+    - When the Wi-Fi join fails, the app offers "Use a cable instead".
+    - Cable errors show in amber.
+  - The analysis is written up in `docs/analysis/pulse-get-online-design-feedback-2026-11-12.md`.
+  - I reviewed what was left on [Fizzy #2995](https://app.fizzy.do/6118580/cards/2995). The real-hardware MR3020 test was confirmed done, so I posted a comment and closed the card.
+  - I reverted the mock code. Nothing was committed.
+- **Time:** 10:03–15:37
+
+### Notes
+- **Rollout:** 50% next, then 100% by tomorrow (13 Nov) afternoon. Reminders and crons are set.
+- **QA doc:** The Totals line on the Notion "Worth a dev look" page still counts the 8 struck-off findings as open, so it overstates what's left. Fix that. #27 is unchanged while we wait for Ben's reply.
+- **Cleanup:** The local branch `chore/eas-env-pull-non-interactive` still exists in `repos/ai` and can go now that #1289 is merged.
+- **Disk:** I deleted all 24 `node_modules` folders under `repos/`, which took free space from 2.8 GB to 23 GB. Each repo needs `pnpm install` before its next run. If more space is needed, the next biggest items are Docker data (11 GB), the pnpm store (8 GB) and the gradle caches (7 GB).
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-12.md
+[2026-11-12 17:01:12] pushed 2026-11-12 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-12.md
+[2026-11-12 23:50:05] skip: 2026-11-12 already logged
+[2026-11-13 09:15:39] calendar-check: gcalcli failed (1): google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
