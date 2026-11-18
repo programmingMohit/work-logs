@@ -6805,3 +6805,89 @@ Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-
 [2026-11-16 17:01:32] pushed 2026-11-16 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-16.md
 [2026-11-16 23:50:05] skip: 2026-11-16 already logged
 [2026-11-17 09:15:11] calendar-check: ok
+
+Gathering today's activity (2026-11-17)...
+  Git commits:    0
+  GitHub events:  10
+  Calendar events:3
+  Claude sessions:6
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+## Work Log — 2026-11-17
+
+> +0 / -0 lines
+
+### Summary
+Most of the day went into `assist-web`, the code behind assist.nimbly.technology. I moved it to a private GitHub repo, brought `master` in line with what was deployed, set up CI deploys, rollback and an AI reviewer, and opened two UI PRs. I also opened an `audit-lite` fix so the mock network errors behave like real dropped connections, and reviewed two Pulse PRs in `ai` for Fizzy #3314. In the afternoon I looked into the lab-blr Redmi proxy outage and a spare TP-Link router.
+
+### Tasks & Changes
+
+#### assist-web: GitHub repo setup, branch sync and CI/CD
+- **Repo:** `assist-web` · branch: n/a (no repoStats)
+- **What was done:** Pushed `assist-web` to a new private GitHub repo, made `main` the default branch and set up a deploy key for the `ben` account on the int server. Brought `master` level with `main` and with the deployed `feat/connectors` branch. Added an AI code review workflow like the other repos have, a CI job that deploys `master` to assist.nimbly.technology on every push, and a rollback workflow and script with docs.
+- **Commits:** none in the local git data
+- **PR:** [#2 — chore: add AI code review workflow](https://github.com/Nimbly-Technologies/assist-web/pull/2)
+- **PR:** [#1 — chore: sync master with main](https://github.com/Nimbly-Technologies/assist-web/pull/1)
+- **PR:** [#3 — chore: sync master with the deployed feat/connectors](https://github.com/Nimbly-Technologies/assist-web/pull/3)
+- **PR:** [#4 — ci: deploy master to assist.nimbly.technology on every push](https://github.com/Nimbly-Technologies/assist-web/pull/4)
+- **PR:** [#5 — ci: rollback workflow and script; document deploys and rollback](https://github.com/Nimbly-Technologies/assist-web/pull/5)
+
+#### assist-web: chat UI polish and connectors settings redesign
+- **Repo:** `assist-web` · branch: n/a (no repoStats)
+- **What was done:** Polished the chat layout, empty state, sidebar and composer. Redesigned the connectors settings page. The connector cards now show the real logos instead of letters: Google's "G", the HubSpot and Notion SVGs from Simple Icons, and Fizzy's 96px favicon at `public/connectors/fizzy.png`. A provider without a logo still gets the tinted letter tile. Checked it in Chrome DevTools at several viewport sizes and handled the AI reviewer's requested changes.
+- **Commits:** none in the local git data
+- **PR:** [#6 — feat(ui): polish chat layout, empty state, sidebar and composer](https://github.com/Nimbly-Technologies/assist-web/pull/6)
+- **PR:** [#7 — feat: redesign connectors settings page](https://github.com/Nimbly-Technologies/assist-web/pull/7)
+
+#### audit-lite: mock network errors now act like real dropped connections
+- **Repo:** `audit-lite` · branch: `fix/mock-network-error-axios`
+- **What was done:** "Network error" mock variants now reject with a real axios network error. The app gets `NETWORK_ERROR` instead of `UNKNOWN_ERROR`, and I confirmed `problem: "NETWORK_ERROR"` on the phone. Added two tests in `mocks/__tests__/mock-adapter.test.ts` that fail on `master`. All 14,870 unit tests pass and CI is green. The work came from triaging the submission, outbox and background attachment upload items in the "Worth a dev look" Notion doc:
+  - Item 7: the 3-try cap on restarting an upload doesn't apply when the app is force-stopped.
+  - Item 8: migration 0009 when launch wait is 0. Struck off in the doc as too rare to matter until a helpdesk bug comes in.
+  - Item 11: a second `signed-url/resumable` request goes out after Submit.
+- **Commits:** none in the local git data
+- **PR:** [#2270 — fix: make mock network error variants reject like a real dropped connection](https://github.com/Nimbly-Technologies/audit-lite/pull/2270)
+- **Tickets:** Fizzy card 1776 · [Notion](https://app.notion.com/p/nimblytechnologies/Worth-a-dev-look-consolidated-415c00148769810c82c5f4e3be119b93)
+
+#### ai: reviewed the Pulse live calibration walk events PRs
+- **Repo:** `ai` · branch: n/a (no repoStats)
+- **What was done:** Reviewed both PRs for live calibration walk progress: the router sending survey progress events and `pulse-api` receiving them. Wrote a Markdown reply to a co-dev's questions:
+  - Can the admin page find a calibration by the `surveyId` the app sends as `walk_id`?
+  - How does the app retry a failed segment? It cancels the segment and starts it again with the same segment number.
+- **Commits:** none
+- **PR:** [#1321 — feat(pulse-api): accept live calibration walk events from the router (Fizzy #3314)](https://github.com/Nimbly-Technologies/ai/pull/1321)
+- **PR:** [#1322 — feat(pulse): the router reports survey progress to pulse-api right away (Fizzy #3314)](https://github.com/Nimbly-Technologies/ai/pull/1322)
+- **Tickets:** Fizzy #3314
+
+### Meetings
+| Time | Meeting | Duration |
+|---|---|---|
+| 07:30 AM – 11:30 AM | Riyan Half Day Leave (calendar block) | 240 min |
+| 12:00 PM – 12:30 PM | AI Team DSM | 30 min |
+| 01:00 PM – 01:50 PM | Architecture Planning & Discussion | 50 min |
+
+### Investigation & Research
+
+#### lab-blr Redmi proxy outage and the router on the lab board
+- **Repo:** `handoffs`
+- **Question:** The proxy behind the Redmi's USB tunnel in lab-blr stopped answering at about 10:13 UTC. Is a TP-Link router on the lab board, and is it asking for an IP?
+- **Outcome:** The router was sending DHCP requests, but nothing on the board answered them. Wrote a single root script, `scripts/lab/pulse-dhcp.sh`, that runs a DHCP server on the board. From its MAC, the router turned out to be a different unit swapped in around 16:26 IST: the new one starts `98:03:8e`, the old one `58:d8:12`. It's a spare TL-WR802N v4, not the Pulse test unit. Wrote the handoff as a new doc in the KB docs collection and fixed it after the wrong Pulse-firmware claim was pointed out.
+- **Time:** 16:00–16:59
+
+#### Spare TL-WR802N plugged into the Mac over USB
+- **Repo:** `Nimbly` (workspace)
+- **Question:** What is on the Realtek RTL8153 USB Ethernet link, and can we tell which software the TL-WR802N is running?
+- **Outcome:** The link is up at 100 Mb, but the router doesn't answer ping or management requests. It doesn't answer ping on its Ethernet port, which OpenWrt does by default, so it probably isn't running OpenWrt. Turned on Internet Sharing so it could get an address. The next step is to listen to its DNS and NTP lookups while it restarts to identify the software. Saved a summary of what's visible at `/tmp/wr802n-view.html`.
+- **Time:** 15:40–16:19
+
+### Notes
+- **audit-lite #2270:** ready for review, not merged. It doesn't reproduce the outbox bug it was meant to; it fixes the mock. Outbox items 7 and 11 are still open.
+- **assist-web:** with #4 merged, every push to `master` deploys to prod, so merge into `master` with care. Rollback is in #5. Fold in any further AI reviewer comments on #7 before merging.
+- **lab-blr:** the Redmi's proxy depends on the DHCP fix. Check the router gets a lease after `pulse-dhcp.sh` runs, then confirm the tunnel works again.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-17.md
+[2026-11-17 17:01:29] pushed 2026-11-17 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-17.md
+[2026-11-17 23:50:05] skip: 2026-11-17 already logged
+[2026-11-18 09:15:10] calendar-check: ok
