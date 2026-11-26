@@ -8682,3 +8682,114 @@ No code changes recorded.
 Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-24.md
 [2026-11-24 23:51:35] pushed 2026-11-24 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-24.md
 [2026-11-25 09:15:09] calendar-check: ok
+
+Gathering today's activity (2026-11-25)...
+  Git commits:    0
+  GitHub events:  23
+  Calendar events:3
+  Claude sessions:8
+
+Generating log with Claude... done.
+
+────────────────────────────────────────────────────────────────
+Got the commit messages from the PRs; writing the log now.
+
+## Work Log — 2026-11-25
+
+> +1762 / -125 lines
+
+### Summary
+Shipped seven bug-fix PRs: five in `audit-lite` and one each in `api-questionnaires` and `admin-lite`. They cover four Fizzy cards (3523, 3524, 3549, 3564), a QA-blocking accessibility-label regression, and a CS-reported questionnaire save failure. The 3523 and 3524 fixes were tested on lab-blr phones using sanity builds, and the results were published to the KB. The api-questionnaires and admin-lite fixes were merged and deployed the same day.
+
+### Tasks & Changes
+
+#### Camera/mic permission denied → offer Open Settings (Fizzy 3524)
+- **Repo:** `audit-lite` · branch: `fix/camera-permission-open-settings`
+- **What was done:** When camera or mic permission is denied, the app now shows an alert with an "Open Settings" action instead of a dead-end toast. The alert now has a title so Android doesn't render an empty gap, and a failure to open Settings is reported to Sentry as a warning. Pushed to the `sanity-core-mohit` channel and tested on lab-blr iPhone and Android. QA write-ups are in `docs/qa/fizzy-3524-camera-open-settings*/` and were published to the KB. Added a "Publishing to the KB (Outline)" section to `CLAUDE.md`.
+- **Commits:**
+  - `b03762db` — fix(camera): offer Open Settings when camera or mic permission is denied (Fizzy 3524)
+  - `0246ea23` — docs(flow-atlas): mark gap #50 fixed, camera-permission-denied now handled
+  - `bc6ab4f1` — test(camera): expect Open Settings alert, not toast, on permission deny
+  - `79713e37` — fix: report open-settings failure to Sentry as a warning
+  - `7ce38fb6` — fix: give the permission-denied alert a title so Android has no empty gap
+- **PR:** [#2325 — fix(camera): offer Open Settings when camera or mic permission is denied](https://github.com/Nimbly-Technologies/audit-lite/pull/2325)
+- **Tickets:** [Fizzy 3524](https://app.fizzy.do/6118580/cards/3524)
+
+#### Stable accessibility label on the schedule card
+- **Repo:** `audit-lite` · branch: `fix/schedule-card-a11y-label`
+- **What was done:** Diagnosed a QA automation failure reported on Discord. The schedule card's accessibility label had an unstable order (status before name). It now has a deterministic label (`<name>, <status>, Scheduled`), and recommended rows also announce their reason. Iterated on review feedback. Confirmed the change is compatible with QA's own regex fix ([qa#196](https://github.com/Nimbly-Technologies/qa/pull/196)), which matches either order. Drafted the Discord reply to QA.
+- **Commits:**
+  - `4a699360` — fix(schedule): give the schedule card a stable accessibility label
+  - `99ed22bf` — fix(schedule): announce the recommended reason in the schedule card label
+- **PR:** [#2326 — fix(schedule): give the schedule card a stable accessibility label](https://github.com/Nimbly-Technologies/audit-lite/pull/2326)
+
+#### Overdue weekly/monthly inventory schedules: no dead Continue (Fizzy 3523)
+- **Repo:** `audit-lite` · branch: `fix/inventory-overdue-checkin`
+- **What was done:** Overdue weekly and monthly inventory schedules no longer show a Continue button that does nothing. A refused check-in now closes its trace span as an error, and the `has_draft_report_id` check is fixed. Tests pin that overdue drafts can't be resumed from the card. Iterated on the PR until AI review approved it, tested on the lab-blr Galaxy using a `sanity-core-mohit` build, and published the QA doc (`docs/qa/3523/`) to the KB.
+- **Commits:**
+  - `438990ae` — fix(inventory): stop overdue weekly/monthly schedules offering a Continue that does nothing (3523)
+  - `5b8683a9` — fix(inventory): finish refused check-in span as error, fix has_draft_report_id check
+  - `9b8ab003` — test(inventory): pin that overdue weekly/monthly drafts are not resumable from the card
+- **PR:** [#2327 — fix(inventory): overdue weekly/monthly schedules no longer offer a dead Continue (3523)](https://github.com/Nimbly-Technologies/audit-lite/pull/2327)
+- **Tickets:** [Fizzy 3523](https://app.fizzy.do/6118580/cards/3523)
+
+#### Second Submit says "already submitted", not "Report has no data" (Fizzy 3549)
+- **Repo:** `audit-lite` · branch: `fix/submit-already-submitted-guard`
+- **What was done:** Added an already-submitted guard to the submit controller. A second Submit on a report that was already accepted now counts as success and goes Home, with no error. Sentry data supports the fix: in about 75% of events the report had already been accepted. Users press Back during the roughly 4.5 s wait for the "Report Submitted" screen and land back on Review. This only happens on the legacy path. Device testing on lab-blr needed outbox disabled for the test org so the legacy path would run.
+- **Commits:**
+  - `9fa2f31a` — fix(questionnaire): say already submitted instead of 'Report has no data' on a second Submit (Fizzy 3549)
+- **PR:** [#2331 — fix(questionnaire): say already submitted instead of 'Report has no data' on a second Submit (Fizzy 3549)](https://github.com/Nimbly-Technologies/audit-lite/pull/2331)
+- **Tickets:** [Fizzy 3549](https://app.fizzy.do/6118580/cards/3549)
+
+#### Submission status: check the server first, clear the tray on logout (Fizzy 3564)
+- **Repo:** `audit-lite` · branch: `fix/3564-submission-status-server-check`
+- **What was done:** The app now asks the server for the report's status before saying "Not Being Sent". It never shows one report's server answer for another. On logout or user switch it clears the notification tray, so the next user can't see whether the previous user's report was sent. Status is shown only to the person who submitted the report; team audits were deliberately left out of scope.
+- **Commits:**
+  - `9b4995ca` — fix(notifications): clear the tray on logout and user switch (Fizzy 3564)
+  - `dadd7737` — fix(submission): ask the server before saying "Not Being Sent" (Fizzy 3564)
+  - `2b72f584` — fix(submission): never show one report's server answer for another (Fizzy 3564)
+  - `06048d74` — docs(submission): describe the auditor check as a display filter (Fizzy 3564)
+- **PR:** [#2332 — fix(submission): ask the server before saying "Not Being Sent", clear the tray on logout (Fizzy 3564)](https://github.com/Nimbly-Technologies/audit-lite/pull/2332)
+- **Tickets:** [Fizzy 3564](https://app.fizzy.do/6118580/cards/3564)
+
+#### Questionnaire auto-assignment: 400 instead of 404 for a department mismatch
+- **Repo:** `api-questionnaires` · branch: `fix/auto-assignment-dept-mismatch-400`
+- **What was done:** CS reported this on Discord. When the auto-assignee isn't in the questionnaire's department, the API now returns a 400 validation error instead of a misleading 404. The PR was merged and deployed; the deploy was re-run after the Pact check passed. Posted the deploy update on the Fizzy card and sent CS a message to unblock them.
+- **Commits:**
+  - `12e3350c` — fix: return 400 instead of 404 when auto-assignee is not in department
+- **PR:** [#287 — fix: return 400 instead of 404 when auto-assignee is not in department](https://github.com/Nimbly-Technologies/api-questionnaires/pull/287)
+
+#### Questionnaire save shows the server's validation message
+- **Repo:** `admin-lite` · branch: `fix/questionnaire-save-show-server-error`
+- **What was done:** Companion to #287. When a questionnaire save fails, the admin UI now shows the server's validation message instead of a generic error. Merged.
+- **Commits:**
+  - `062c39d4` — fix: show server validation message on questionnaire save failure
+- **PR:** [#405 — fix: show server validation message on questionnaire save failure](https://github.com/Nimbly-Technologies/admin-lite/pull/405)
+
+### Meetings
+- **Ben Sarmiento on Leave**: all day
+- **AI Team DSM**: 10:30–11:00 AM (30 min)
+- **AI Agent Evolution Sync**: 3:30–3:55 PM (25 min)
+
+### Investigation & Research
+#### November release-update announcement
+- **Repo:** `audit-lite`
+- **Question:** Draft the November release announcement email using `/nimbly:release-notes`.
+- **Outcome:** Drafted a reply in the "November 2026 Release Update" Gmail thread, addressed to the full distribution list and matching Andi's format. It has **not been sent**. While drafting, I found that the 20 Nov update was never announced.
+- **Time:** 11:10–11:20
+
+### Notes
+- **#2332 (3564):** I was still iterating on it for AI review when the session ended; the last step was confirming tests (81 passing). There's also related work in an `api-reports-wt-3564` worktree (a `submissionStatus` usecase test) that hasn't been pushed or opened as a PR.
+- **New security card:** the api-reports submission-status lookup isn't scoped by `organizationID` or site access. A Fizzy card (P1/P2, security) was requested in the 3564 session.
+- **#2331 (3549):** on-device testing on lab-blr (Baseline-2) was still running when the session ended. Outbox needs to be turned back on for the test org once testing is done.
+- **#2325, #2326, #2327, #2331, #2332** are open and waiting for review or merge.
+- **Cleanup:** the local branches `fix/auto-assignment-dept-mismatch-400` and `fix/questionnaire-save-show-server-error` can be deleted, since both PRs are merged; their worktrees were already removed.
+- **Outbox health (PostHog):** failure rate today was about 0.16%, against about 0.57% on legacy. The outbox now carries about 38% of submissions.
+
+---
+The activity data had no commit messages or line stats (`commits` and `repoStats` were empty), so I took them from `gh pr view` on each PR. The +1762 / -125 is the sum of the seven PRs' total diffs, not just today's pushes. `9b4995ca` is in PR #2332 but not in today's push events, so its date isn't confirmed.
+────────────────────────────────────────────────────────────────
+Pushed → https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-25.md
+[2026-11-25 17:02:12] pushed 2026-11-25 -> https://github.com/programmingMohit/work-logs/blob/main/2026/11/2026-11-25.md
+[2026-11-25 23:50:05] skip: 2026-11-25 already logged
+[2026-11-26 09:15:07] calendar-check: ok
